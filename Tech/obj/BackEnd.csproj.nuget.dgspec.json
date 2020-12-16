@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mistake22\\source\\repos\\BackEnd\\Tech\\BackEnd.csproj": {}
+    "C:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mistake22\\source\\repos\\BackEnd\\Tech\\BackEnd.csproj": {
+    "C:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mistake22\\source\\repos\\BackEnd\\Tech\\BackEnd.csproj",
+        "projectUniqueName": "C:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj",
         "projectName": "Tech",
-        "projectPath": "C:\\Users\\Mistake22\\source\\repos\\BackEnd\\Tech\\BackEnd.csproj",
+        "projectPath": "C:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj",
         "packagesPath": "C:\\Users\\Mistake22\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mistake22\\source\\repos\\BackEnd\\Tech\\obj\\",
+        "outputPath": "C:\\TechCourse\\TechCourse\\Tech\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mistake22\\AppData\\Roaming\\NuGet\\NuGet.Config",
