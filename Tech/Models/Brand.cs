@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Tech.Models
+﻿namespace BackEnd.Models
 {
     public class Brand
     {
