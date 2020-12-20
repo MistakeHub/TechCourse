@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "arSuVOI14oU0XL2fq+y6S8f0J3rt4gDND+Vd5F1I4IItmjvYs7pKl2nHxVORFf+3AtPNK2KCL95Cg5Y/k8tVRA==",
+  "dgSpecHash": "yadFbhVHpQNLy+PCYoSUZvAQqOcKMOzJKM9xEsTxbiU9PLTlmPJyS6WgAgRUUp/8tIehaNc4IoLhUBj3GD5t/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mistake22\\source\\repos\\BackEnd\\Tech\\BackEnd.csproj",
+  "projectFilePath": "C:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mistake22\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Mistake22\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

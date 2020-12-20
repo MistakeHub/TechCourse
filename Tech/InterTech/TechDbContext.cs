@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BackEnd.Models;
 using Microsoft.EntityFrameworkCore;
-using Tech.Models;
 
-namespace Tech.InterTech
+namespace BackEnd.InterTech
 {
     public class TechDbContext:DbContext
     {

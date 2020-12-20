@@ -89,6 +89,11 @@ function getAdressData() {
     });
 };
 $(function () {
+<<<<<<< HEAD
     document.getElementById("getAdressData").click(getAdressData());
 });
  */
+=======
+    getAdressData();
+});
+>>>>>>> 18ca6d7c4705eaac70915364e648077f17d672de
