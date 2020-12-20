@@ -37,29 +37,99 @@
                     <a class="nav-link" href="../doc/tables.html"><i class="fa fa-address-book" aria-hidden="true"></i> Таблицы</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="doc/applications.html"><i class="fa fa-key" aria-hidden="true"></i> Заявки</a>
+                    <a class="nav-link" href="../doc/applications.html"><i class="fa fa-key" aria-hidden="true"></i> Заявки</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="doc/requests.html"><i class="fa fa-book-open" aria-hidden="true"></i> Запросы</a>
+                    <a class="nav-link" href="../doc/requests.html"><i class="fa fa-book-open" aria-hidden="true"></i> Запросы</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="doc/report.html"><i class="fa fa-share" aria-hidden="true"></i> Отчет</a>
+                    <a class="nav-link" href="../doc/report.html"><i class="fa fa-share" aria-hidden="true"></i> Отчет</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="doc/reference.html"><i class="fa fa-terminal" aria-hidden="true"></i> Справка</a>
+                    <a class="nav-link" href="../doc/reference.html"><i class="fa fa-terminal" aria-hidden="true"></i> Справка</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="doc/aboutProgram.html"><i class="fa fa-pen" aria-hidden="true"></i> О программе</a>
+                    <a class="nav-link" href="../doc/aboutProgram.html"><i class="fa fa-pen" aria-hidden="true"></i> О программе</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container">
-    <button id="getAdressData">Получить данные</button>
+<hr>
+<div class="container mt-3">
+    <div class="col">
+        <!--Таблица клиенты -->
+     <caption><h3>Клиенты</h3></caption>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ид</th>
+                <th>Id персоны</th>
+                <th>Id адреса</th>
+                <th>Дата рождения</th>
+                <th>Номер телефона</th>
+            </tr>
+            </thead>
+            <tbody id="">
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-dark">Добавить</button>
+        <button type="button" class="btn btn-dark">Изменить</button>
+    </div>
 </div>
 
+<br>
+<br>
+<hr>
+<div class="container mt-3">
+    <div class="col">
+        <!--Таблица работники -->
+        <caption><h3>Работники</h3></caption>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ид</th>
+                <th>Id персоны</th>
+                <th>Id специальности</th>
+                <th>Id статус работника</th>
+                <th>Разряд работника</th>
+                <th>Стаж работы</th>
+            </tr>
+            </thead>
+            <tbody id="">
+            </tbody>
+        </table>
+    <button type="button" class="btn btn-dark">Добавить</button>
+    <button type="button" class="btn btn-dark">Изменить</button>
+    </div>
+</div>
+
+<br>
+<br>
+<hr>
+<div class="container mt-3">
+    <div class="col">
+        <!--Таблица машины -->
+         <caption><h3>Машины</h3></caption>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ид</th>
+                    <th>Id модели</th>
+                    <th>Id владельца (персона)</th>
+                    <th>Регистрационный номер автомобиля</th>
+                    <th>Цвет автомобиля</th>
+                    <th>Год выпуска</th>
+                </tr>
+            </thead>
+                <tbody id=""></tbody>
+        </table>
+    <button type="button" class="btn btn-dark">Добавить</button>
+    <button type="button" class="btn btn-dark">Изменить</button>
+    </div>
+</div>
+<hr>
 
 <footer class="border-top footer text-muted">
     <div class="container">&copy; 2021 - Моргащук Кирилл и Смородин Владислав. Донецк</div>

@@ -1,5 +1,6 @@
-function Adresses(data) {
-    $("#Adresses").html(
+// получить данные о клиентах
+function GetClients(data) {
+    $("#GetClients").html(
         data.reduce(
             (ans, elem) =>
                 ans +
@@ -13,20 +14,71 @@ function Adresses(data) {
 )
 );
 }
-
 $(function () {
     $.ajax({
-        url: 'http://localhost:51483/api/SubEdition',
+        url: "https://localhost:44354/api/Client",
         type: 'GET',
-        success: (response) => SubEdition(response)
+        success: (response) => GetClients(response)
 
          // success.
     }) // ajax.
 }) // jQuery.
 
 
+//получить данные о работниках
+function GetWorkers(data) {
+    $("#GetWorkers").html(
+        data.reduce(
+            (ans, elem) =>
+                ans +
+                `<tr>
+                <td>${elem.id}</td>
+                <td>${elem.title}</td>
+                <td>${elem.index}</td>
+                <td>${elem.price}</td>
+               </tr>`,
+            ""
+        )
+    );
+}
+$(function () {
+    $.ajax({
+        url: "https://localhost:44354/api/Client",
+        type: 'GET',
+        success: (response) => GetWorkers(response)
 
-//получение дынных адресса
+        // success.
+    }) // ajax.
+}) // jQuery.
+
+//получить данные о автомобилях
+function GetAutos(data) {
+    $("#GetAutos").html(
+        data.reduce(
+            (ans, elem) =>
+                ans +
+                `<tr>
+                <td>${elem.id}</td>
+                <td>${elem.title}</td>
+                <td>${elem.index}</td>
+                <td>${elem.price}</td>
+               </tr>`,
+            ""
+        )
+    );
+}
+$(function () {
+    $.ajax({
+        url: "https://localhost:44354/api/Client",
+        type: 'GET',
+        success: (response) => GetAutos(response)
+
+        // success.
+    }) // ajax.
+}) // jQuery.
+
+//получение дынных адресса в консоль
+/*
 function getAdressData() {
     $.ajax({
         type: "GET",
@@ -39,3 +91,4 @@ function getAdressData() {
 $(function () {
     document.getElementById("getAdressData").click(getAdressData());
 });
+ */
