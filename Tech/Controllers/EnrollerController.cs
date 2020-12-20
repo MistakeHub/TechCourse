@@ -12,43 +12,43 @@ namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class EnrollerController : ControllerBase
     {
-        private TechDbContext dbcontext;
+        // GET: api/<EnrollerController>
 
-        public ClientController(TechDbContext context)
+        private TechDbContext context;
+
+        public EnrollerController(TechDbContext _context)
         {
-            
-                dbcontext = context;
+            context = _context;
 
         }
-        // GET: api/<ClientController>
         [HttpGet]
-        public List<Client> Get()
+        public List<Enroller> Get()
         {
-            return dbcontext.Clients.ToList();
+            return context.Enrollers.ToList();
         }
 
-        // GET api/<ClientController>/5
+        // GET api/<EnrollerController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<ClientController>
+        // POST api/<EnrollerController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<ClientController>/5
+        // PUT api/<EnrollerController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ClientController>/5
+        // DELETE api/<EnrollerController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

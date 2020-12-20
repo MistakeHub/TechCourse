@@ -37,5 +37,5 @@ function getAdressData() {
     });
 };
 $(function () {
-    document.getElementById("getAdressData").click(getAdressData());
+    getAdressData();
 });

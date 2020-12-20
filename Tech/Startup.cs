@@ -39,7 +39,7 @@ namespace BackEnd
 
                 TechDbContext context = scope.ServiceProvider.GetRequiredService<TechDbContext>();
 
-               TechData.InizializationAddress(context);
+               TechData.Inizialization(context);
             }
             if (env.IsDevelopment())
             {

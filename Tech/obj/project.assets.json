@@ -5792,6 +5792,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.EntityFrameworkCore >= 5.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.1",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.1"
     ]
@@ -5833,6 +5834,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[5.0.1, )"
+          },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[5.0.1, )"
