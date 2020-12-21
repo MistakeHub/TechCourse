@@ -16,36 +16,37 @@ namespace BackEnd.Controllers
     {
         // GET: api/<EnrollerController>
 
-        private TechDbContext context;
+        private TechDbContext dbcontext;
 
         public EnrollerController(TechDbContext _context)
         {
-            context = _context;
+            dbcontext = _context;
 
         }
         [HttpGet]
         public List<Enroller> Get()
         {
-            return context.Enrollers.ToList();
+            return dbcontext.Enrollers.ToList();
         }
 
-        // GET api/<EnrollerController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+       
 
         // POST api/<EnrollerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromForm] int id, [FromForm] int idSpeciality, [FromForm] int idPerson, [FromForm] string level, [FromForm] string periodWork, [FromForm] int idstatus)
         {
+            Enroller newEnroller=new Enroller(){ IdPerson = idPerson, IdSpecialty = idSpeciality, Level = level, PeriodWork = periodWork, idStatus = idstatus};
+            dbcontext.Enrollers.Add(newEnroller);
+            dbcontext.SaveChanges();
+
         }
 
         // PUT api/<EnrollerController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
+
         }
 
         // DELETE api/<EnrollerController>/5

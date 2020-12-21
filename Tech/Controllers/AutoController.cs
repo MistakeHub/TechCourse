@@ -30,12 +30,7 @@ namespace BackEnd.Controllers
             return dbcontext.Autos.ToList();
         }
 
-        // GET api/<AutoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+      
 
         // POST api/<AutoController>
         [HttpPost]
