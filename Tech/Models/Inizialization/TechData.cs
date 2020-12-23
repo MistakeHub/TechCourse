@@ -14,12 +14,12 @@ namespace BackEnd.Models.Inizialization
 
             List<Address> addresses=new List<Address>()
             {
-                new Address(){  Apartament = 32,Home = "Home1", Street = "street1"},
-                new Address(){  Apartament = 33,Home = "Home2", Street = "street2"},
-                new Address(){  Apartament = 34,Home = "Home3", Street = "street3"},
-                new Address(){  Apartament = 35,Home = "Home4", Street = "street4"},
-                new Address(){  Apartament = 36,Home = "Home5", Street = "street5"},
-                new Address(){  Apartament = 37,Home = "Home6", Street = "street6"},
+                new Address(){  Apartament = 646,Home = "дом 173", Street ="ул.Хомутовский"},   
+                new Address(){  Apartament = 116,Home = "дом 70", Street = "ул.Орликов"},
+                new Address(){  Apartament = 453,Home = "дом 112", Street = "ул.Берзарина"},
+                new Address(){  Apartament = 35,Home = "дом 78", Street = "ул.Дамба"},
+                new Address(){  Apartament = 792,Home = "дом 165", Street = "ул.Люботинский"}, 
+                new Address(){  Apartament = 760,Home = "дом 53", Street = "ул.Попова,"},
 
 
             };
@@ -104,8 +104,8 @@ namespace BackEnd.Models.Inizialization
             List<Enroller> enrollers=new List<Enroller>()
             {
 
-                new Enroller(){IdPerson = context.Persons.First(p=> p.Id>=6).Id, IdSpecialty = context.Specialties.First(p=>p.TitleSpec=="Механик").Id, 
-                    idStatus = context.Statuses.FirstOrDefault(p=>p.Id>=0).Id, Level = "Высший", PeriodWork = "397"},
+                new Enroller(){IdPerson = context.Persons.First(p=> p.Passport=="RF32816").Id, IdSpecialty = context.Specialties.First(p=>p.TitleSpec=="Механик").Id, 
+                    idStatus = context.Statuses.FirstOrDefault(p=>p.status=="Свободен").Id, Level = "Высший", PeriodWork = "397"},
 
 
             };
@@ -114,7 +114,9 @@ namespace BackEnd.Models.Inizialization
             context.SaveChanges();
             List<Auto> autos=new List<Auto>()
             {
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="BMW").id, Color = "Red",DateStart = 2019, IdPerson = context.Persons.First(p=>p.Id>=0).Id, RegNumer = "AK33BM"},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="BMW").id, Color = "Red",DateStart = 2019, IdPerson = context.Persons.First(p=>p.Passport=="1432827").Id, RegNumer = "AK33BM"},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Audi").id, Color = "Blue",DateStart = 2015, IdPerson = context.Persons.First(p=>p.Passport=="B179351").Id, RegNumer = "DT43DK"},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Bugatti").id, Color = "White",DateStart = 2017, IdPerson = context.Persons.First(p=>p.Passport=="9038745").Id, RegNumer = "AM53PL"},
 
 
             };
@@ -125,7 +127,11 @@ namespace BackEnd.Models.Inizialization
             List<Client> clients=new List<Client>()
             {
 
-                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Id>=0).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Id>=0).Id, PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==453).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="FQ94951").Id, PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==35).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="RJ24476").Id, PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==792).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="8J71375").Id, PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==760).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="Z392956").Id, PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==116).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="QX32591").Id, PhoneNumber = "341231"},
 
             }; 
             context.Clients.RemoveRange(context.Clients);

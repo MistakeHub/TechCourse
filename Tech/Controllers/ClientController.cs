@@ -29,29 +29,46 @@ namespace BackEnd.Controllers
             return dbcontext.Clients.ToList();
         }
 
-        // GET api/<ClientController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        
 
         // POST api/<ClientController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromForm] int idPerson, [FromForm]int idAddress, [FromForm]int year , [FromForm]int mounth, [FromForm]int day, [FromForm]string phonenumber)
         {
+            Client newClient=new Client(){ IdPerson = idPerson, IdAddress = idAddress, DateBirth = new DateTime(year, mounth, day),PhoneNumber = phonenumber};
+            dbcontext.Clients.Add(newClient);
+            dbcontext.SaveChanges();
         }
 
         // PUT api/<ClientController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromForm] int id, [FromForm] int idperson, [FromForm] string Surname, [FromForm] int idAddress, [FromForm] string street, [FromForm] string home, [FromForm] int apartament, [FromForm] string phonenumber )
         {
+            Client changeClient = dbcontext.Clients.FirstOrDefault(p => p.Id == id);
+
+            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == idperson);
+            changeperson.SurnameNP = Surname;
+            dbcontext.Persons.Update(changeperson);
+            Address changeAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == idAddress);
+            changeAddress.Street = street;
+            changeAddress.Home = home;
+            changeAddress.Apartament = apartament;
+            dbcontext.Addresses.Update(changeAddress);
+            changeClient.PhoneNumber = phonenumber;
+            dbcontext.Clients.Update(changeClient);
+            dbcontext.SaveChanges();
+
+
+
         }
 
         // DELETE api/<ClientController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete([FromForm] int id)
         {
+            Client deleteclient = dbcontext.Clients.FirstOrDefault(p => p.Id == id);
+            dbcontext.Clients.Remove(deleteclient);
+            dbcontext.SaveChanges();
         }
     }
 }

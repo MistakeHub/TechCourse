@@ -59,8 +59,8 @@ function GetAutos(data) {
     $("#GetAutos").html(
         data.reduce(
             (ans, elem) =>
-                ans +
-                `<tr>
+            ans +
+            `<tr>
                 <td>${elem.id}</td>
                 <td>${elem.idBrand}</td>
                 <td>${elem.idPerson}</td>
@@ -73,6 +73,10 @@ function GetAutos(data) {
     );
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 308d072dfbf7d371e2228b681a575a9a2d44b602
 $(function () {
     $.ajax({
         url: "https://localhost:44354/api/Auto",
@@ -83,7 +87,10 @@ $(function () {
     }) // ajax.
 }) // jQuery.
 
+<<<<<<< HEAD
 $(function () {
     $("GetClients").
 })
 
+=======
+>>>>>>> 308d072dfbf7d371e2228b681a575a9a2d44b602
