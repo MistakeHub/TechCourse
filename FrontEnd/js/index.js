@@ -4,16 +4,16 @@ function GetClients(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-               `<tr>
+                `<tr>
                 <td>${elem.id}</td>
                 <td>${elem.idPerson}</td>
                 <td>${elem.idAddress}</td>
                 <td>${elem.dateBirth}</td>
                 <td>${elem.phoneNumber}</td>
                </tr>`,
-    ""
-)
-);
+            ""
+        )
+    );
 }
 $(function () {
     $.ajax({
@@ -21,7 +21,7 @@ $(function () {
         type: 'GET',
         success: (response) => GetClients(response)
 
-         // success.
+        // success.
     }) // ajax.
 }) // jQuery.
 
@@ -73,7 +73,10 @@ function GetAutos(data) {
     );
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 308d072dfbf7d371e2228b681a575a9a2d44b602
 $(function () {
     $.ajax({
         url: "https://localhost:44354/api/Auto",
@@ -84,3 +87,10 @@ $(function () {
     }) // ajax.
 }) // jQuery.
 
+<<<<<<< HEAD
+$(function () {
+    $("GetClients").
+})
+
+=======
+>>>>>>> 308d072dfbf7d371e2228b681a575a9a2d44b602
