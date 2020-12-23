@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BackEnd.InterTech;
 using BackEnd.Models;
+using BackEnd.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,9 +26,10 @@ namespace BackEnd.Controllers
         }
         // GET: api/<AutoController>
         [HttpGet]
-        public List<Auto> Get()
+        public List<AutoViewModel> Get()
         {
-            return dbcontext.Autos.ToList();
+            List<AutoViewModel> autoViewModel=dbcontext.Autos.Select(p=>new AutoViewModel(){Id = p.Id, Person = dbcontext.Persons.FirstOrDefault(d=>d.Id==p.IdPerson).SurnameNP, Brand = dbcontext.Brands.FirstOrDefault(d=>d.id==p.IdBrand).TitleBrand, Color = p.Color, DateStart = p.DateStart, RegNumer = p.RegNumer}).ToList();
+            return autoViewModel;
         }
 
       

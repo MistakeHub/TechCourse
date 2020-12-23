@@ -14,12 +14,12 @@ namespace BackEnd.Models.Inizialization
 
             List<Address> addresses=new List<Address>()
             {
-                new Address(){  Apartament = 646,Home = "дом 173", Street ="ул.Хомутовский"},   
-                new Address(){  Apartament = 116,Home = "дом 70", Street = "ул.Орликов"},
-                new Address(){  Apartament = 453,Home = "дом 112", Street = "ул.Берзарина"},
-                new Address(){  Apartament = 35,Home = "дом 78", Street = "ул.Дамба"},
-                new Address(){  Apartament = 792,Home = "дом 165", Street = "ул.Люботинский"}, 
-                new Address(){  Apartament = 760,Home = "дом 53", Street = "ул.Попова,"},
+                new Address(){  Apartament = 646,Home = "дом 173m", Street ="ул.Хомутовский"},   
+                new Address(){  Apartament = 116,Home = "дом 70h", Street = "ул.Орликов"},
+                new Address(){  Apartament = 453,Home = "дом 112d", Street = "ул.Берзарина"},
+                new Address(){  Apartament = 35,Home = "дом 78c", Street = "ул.Дамба"},
+                new Address(){  Apartament = 792,Home = "дом 16b", Street = "ул.Люботинский"}, 
+                new Address(){  Apartament = 760,Home = "дом 53n", Street = "ул.Попова,"},
 
 
             };

@@ -6,9 +6,9 @@ function GetClients(data) {
                 ans +
                 `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.idPerson}</td>
-                <td>${elem.idAddress}</td>
-                <td>${elem.dateBirth}</td>
+                <td>${elem.surnamePerson}</td>
+                <td>${elem.titleAddress}</td>
+                <td>${elem.date}</td>
                 <td>${elem.phoneNumber}</td>
                </tr>`,
             ""
@@ -34,11 +34,11 @@ function GetWorkers(data) {
                 ans +
                 `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.idPerson}</td>
-                <td>${elem.idSpecialty}</td>
+                <td>${elem.person}</td>
+                <td>${elem.specialty}</td>
                 <td>${elem.level}</td>
                 <td>${elem.periodWork}</td>
-                <td>${elem.idStatus}</td>
+                <td>${elem.status}</td>
                </tr>`,
             ""
         )
@@ -62,8 +62,8 @@ function GetAutos(data) {
             ans +
             `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.idBrand}</td>
-                <td>${elem.idPerson}</td>
+                <td>${elem.brand}</td>
+                <td>${elem.person}</td>
                 <td>${elem.regNumer}</td>
                 <td>${elem.color}</td>
                 <td>${elem.dateStart}</td>
@@ -73,10 +73,7 @@ function GetAutos(data) {
     );
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 308d072dfbf7d371e2228b681a575a9a2d44b602
 $(function () {
     $.ajax({
         url: "https://localhost:44354/api/Auto",
@@ -87,10 +84,30 @@ $(function () {
     }) // ajax.
 }) // jQuery.
 
-<<<<<<< HEAD
+
 $(function () {
-    $("GetClients").
+    $("#append").click(AddClient);
 })
 
-=======
->>>>>>> 308d072dfbf7d371e2228b681a575a9a2d44b602
+function AddClient() {
+
+    var surnamenp = document.getElementById("surnameNP").value;
+    var phonenumber = document.getElementById("phoneNumber").value;
+    var passport = document.getElementById("passport").value;
+    var year = document.getElementById("year").value;
+    var mounth = document.getElementById("mounth").value;
+    var day = document.getElementById("day").value;
+    var street = document.getElementById("street").value;
+    var home = document.getElementById("home").value;
+    var apartment = document.getElementById("apartment").value;
+
+    $.ajax({
+        url: "https://localhost:44354/api/Client",
+        type: 'POST',
+        data: {surname:surnamenp, passport:passport, street:street, home:home, apartament:apartment, year:+year, mounth:+mounth, day:+day, phonenumber:phonenumber},
+        success: (response) => alert("Добавлен")
+
+    })
+    
+}
+

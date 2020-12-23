@@ -24,9 +24,10 @@ namespace BackEnd.Controllers
         }
         // GET: api/<ClientController>
         [HttpGet]
-        public List<Client> Get()
+        public List<ClientViewModel> Get()
         {
-            return dbcontext.Clients.ToList();
+            List<ClientViewModel> viewModel= dbcontext.Clients.Select(p=>new ClientViewModel(){ id=p.Id, PhoneNumber = p.PhoneNumber, Date = p.DateBirth, SurnamePerson = dbcontext.Persons.FirstOrDefault(c=>c.Id==p.IdPerson).SurnameNP, TitleAddress = dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Street +" "+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Home + " кв "+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Apartament }).ToList();
+            return viewModel;
         }
 
         

@@ -5,6 +5,7 @@ using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BackEnd.InterTech;
 using BackEnd.Models;
+using BackEnd.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,9 +26,16 @@ namespace BackEnd.Controllers
 
         }
         [HttpGet]
-        public List<Enroller> Get()
+        public List<EnrollerViewModel> Get()
         {
-            return dbcontext.Enrollers.ToList();
+            List<EnrollerViewModel> enrollerViewModel = dbcontext.Enrollers.Select(p => new EnrollerViewModel()
+            {
+                Id = p.Id, Person = dbcontext.Persons.FirstOrDefault(d => d.Id == p.IdPerson).SurnameNP,
+                Specialty = dbcontext.Specialties.FirstOrDefault(d => d.Id == p.IdSpecialty).TitleSpec,
+                PeriodWork = p.PeriodWork, Level = p.Level,
+                Status = dbcontext.Statuses.FirstOrDefault(d => d.Id == p.idStatus).status
+            }).ToList();
+            return enrollerViewModel;
         }
 
        
