@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BackEnd.InterTech;
 using BackEnd.Models;
@@ -33,9 +34,12 @@ namespace BackEnd.Controllers
 
         // POST api/<EnrollerController>
         [HttpPost]
-        public void Post([FromForm] int id, [FromForm] int idSpeciality, [FromForm] int idPerson, [FromForm] string level, [FromForm] string periodWork, [FromForm] int idstatus)
+        public void Post([FromForm] int id, [FromForm] string titlespec, [FromForm] string surnameNP, [FromForm] string passport, [FromForm] int idSpeciality , [FromForm] string level, [FromForm] string periodWork, [FromForm] int idstatus)
         {
-            Enroller newEnroller=new Enroller(){ IdPerson = idPerson, IdSpecialty = idSpeciality, Level = level, PeriodWork = periodWork, idStatus = idstatus};
+            dbcontext.Persons.Add(new Person() {SurnameNP = surnameNP, Passport = passport});
+            dbcontext.SaveChanges();
+
+            Enroller newEnroller=new Enroller(){ IdPerson = dbcontext.Persons.FirstOrDefault(p=>p.Passport==passport).Id, IdSpecialty = idSpeciality, Level = level, PeriodWork = periodWork, idStatus = idstatus};
             dbcontext.Enrollers.Add(newEnroller);
             dbcontext.SaveChanges();
 

@@ -34,8 +34,22 @@ namespace BackEnd.Controllers
 
         // POST api/<AutoController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromForm] string titlebrand, [FromForm]string model, [FromForm] string passport, [FromForm] string surnameNP, [FromForm]string regNumber, [FromForm]string color, [FromForm] int dateStart  )
         {
+
+            dbcontext.Brands.Add(new Brand() {Model = model, TitleBrand = titlebrand});
+            dbcontext.Persons.Add(new Person() {Passport = passport, SurnameNP = surnameNP});
+            dbcontext.SaveChanges();
+            dbcontext.Autos.Add(new Auto()
+            {
+                IdBrand = dbcontext.Brands.FirstOrDefault(p => p.Model == model && p.TitleBrand == titlebrand).id,
+                IdPerson = dbcontext.Persons.FirstOrDefault(p => p.Passport == passport).Id, Color = color,
+                RegNumer = regNumber, DateStart = dateStart
+            });
+
+            dbcontext.SaveChanges();
+
+
         }
 
         // PUT api/<AutoController>/5

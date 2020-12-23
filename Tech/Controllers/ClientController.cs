@@ -33,9 +33,14 @@ namespace BackEnd.Controllers
 
         // POST api/<ClientController>
         [HttpPost]
-        public void Post([FromForm] int idPerson, [FromForm]int idAddress, [FromForm]int year , [FromForm]int mounth, [FromForm]int day, [FromForm]string phonenumber)
+        public void Post([FromForm] string surnameNp, [FromForm] string passport, [FromForm]string street, [FromForm] string home, [FromForm] int apartametn, [FromForm]int year , [FromForm]int mounth, [FromForm]int day, [FromForm]string phonenumber)
         {
-            Client newClient=new Client(){ IdPerson = idPerson, IdAddress = idAddress, DateBirth = new DateTime(year, mounth, day),PhoneNumber = phonenumber};
+            Person newPerson=new Person(){SurnameNP = surnameNp, Passport = passport};
+            Address newAddress= new Address() {Apartament = apartametn, Home = home, Street = street};
+            dbcontext.Persons.Add(new Person() {SurnameNP = surnameNp, Passport = passport});
+            dbcontext.Addresses.Add(new Address() {Apartament = apartametn, Home = home, Street = street});
+            dbcontext.SaveChanges();
+            Client newClient=new Client(){ IdPerson = dbcontext.Persons.FirstOrDefault(p=>p.Passport==passport).Id, IdAddress = dbcontext.Addresses.FirstOrDefault(p => p.Street== street && p.Apartament==apartametn && p.Home==home ).Id, DateBirth = new DateTime(year, mounth, day),PhoneNumber = phonenumber};
             dbcontext.Clients.Add(newClient);
             dbcontext.SaveChanges();
         }
