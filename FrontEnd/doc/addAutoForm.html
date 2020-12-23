@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>О программе</title>
+    <title>Запросы</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -56,22 +56,87 @@
     </div>
 </nav>
 
-<div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody id="SubEdition">
+<div class="row container justify-content-center">
+    <form class="form" name="myform" method="post" action="#">
+        <legend> Добавление автомобиля</legend>
 
-        </tbody>
-    </table>
+        <div class="form-group">
+            <label for="mark"
+            >Марка автомобиля:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="mark"
+                    name="mark"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="model">Модель автомобиля:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="model"
+                    name="model"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="regNumber">Гос. номер автомобиля:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="regNumber"
+                    name="regNumber"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="color">Цвет автомобиля:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="color"
+                    name="color"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="yearOfIssue">Год выпуска автомобиля:</label>
+            <input
+                    class="form-control"
+                    type="number"
+                    min="1995"
+                    max="2021"
+                    name="yearOfIssue"
+                    id="yearOfIssue"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="clients">Клиенты:</label>
+            <select
+                    class="form-control"
+                    required
+                    id="clients"
+                    name="clients"
+            >
+                <option name="pos1">Специалист по ремонту ходовой</option>
+                <option name="pos1">Механик моторист</option>
+                <option name="pos1">Автомеханик диагност</option>
+                <option name="pos1">Автоэлектрик</option>
+            </select>
+        </div>
+
+        <input type="submit" class="btn btn-success" id="append" value="Добавить"  />
+        <input type="reset" class="btn btn-danger" id="clear" value="Отмена" />
+    </form>
 </div>
-
 
 <footer class="border-top footer text-muted bg-dark">
     <div class="container">&copy; 2021 - Моргащук Кирилл и Смородин Владислав. Донецк</div>
@@ -81,6 +146,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="../lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="../lib/jquery/dist/jquery.js"></script>
+<script src="../js/index.js"></script>
 <script type="module" src="../dist/controller.js"></script>
 </body>
 </html>

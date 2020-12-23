@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>О программе</title>
+    <title>Запросы</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -56,22 +56,92 @@
     </div>
 </nav>
 
-<div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody id="SubEdition">
+<div class="row container justify-content-center">
+    <form class="form" name="myform" method="post" action="#">
+        <legend> Добавление клиента</legend>
 
-        </tbody>
-    </table>
+        <div class="form-group">
+            <label for="surnameNP"
+            >Фамилия и инициалы:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="surnameNP"
+                    name="surnameNP"
+                    pattern="[А-Я][а-я]+\s+[А-Я]\.\s+[А-Я]\."
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber">Номер телефона:</label>
+            <input
+                    class="form-control"
+                    type="tel"
+                    name="phoneNumber"
+                    id="phoneNumber"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="passport">Паспорт:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="passport"
+                    name="passport"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="dateOfBirth">Дата рождения:</label>
+            <input
+                    type="date"
+                    class="form-control1"
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="street">Улица проживания:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="street"
+                    name="street"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="home">Дом проживания:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="home"
+                    name="home"
+                    required
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="passport">Квартира проживания:</label>
+            <input
+                    type="text"
+                    class="form-control1"
+                    id="apartment"
+                    name="apartment"
+                    required
+            />
+        </div>
+        <input type="submit" class="btn btn-success" id="append" value="Добавить"  />
+        <input type="reset" class="btn btn-danger" id="clear" value="Отмена" />
+    </form>
 </div>
-
 
 <footer class="border-top footer text-muted bg-dark">
     <div class="container">&copy; 2021 - Моргащук Кирилл и Смородин Владислав. Донецк</div>
@@ -81,6 +151,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="../lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="../lib/jquery/dist/jquery.js"></script>
+<script src="../js/index.js"></script>
 <script type="module" src="../dist/controller.js"></script>
 </body>
 </html>

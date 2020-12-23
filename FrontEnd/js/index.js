@@ -4,15 +4,16 @@ function GetClients(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-               `<tr>
+                `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.title}</td>
-                <td>${elem.index}</td>
-                <td>${elem.price}</td>
+                <td>${elem.idPerson}</td>
+                <td>${elem.idAddress}</td>
+                <td>${elem.dateBirth}</td>
+                <td>${elem.phoneNumber}</td>
                </tr>`,
-    ""
-)
-);
+            ""
+        )
+    );
 }
 $(function () {
     $.ajax({
@@ -20,7 +21,7 @@ $(function () {
         type: 'GET',
         success: (response) => GetClients(response)
 
-         // success.
+        // success.
     }) // ajax.
 }) // jQuery.
 
@@ -33,9 +34,11 @@ function GetWorkers(data) {
                 ans +
                 `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.title}</td>
-                <td>${elem.index}</td>
-                <td>${elem.price}</td>
+                <td>${elem.idPerson}</td>
+                <td>${elem.idSpecialty}</td>
+                <td>${elem.level}</td>
+                <td>${elem.periodWork}</td>
+                <td>${elem.idStatus}</td>
                </tr>`,
             ""
         )
@@ -43,7 +46,7 @@ function GetWorkers(data) {
 }
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Client",
+        url: "https://localhost:44354/api/Enroller",
         type: 'GET',
         success: (response) => GetWorkers(response)
 
@@ -59,17 +62,20 @@ function GetAutos(data) {
                 ans +
                 `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.title}</td>
-                <td>${elem.index}</td>
-                <td>${elem.price}</td>
+                <td>${elem.idBrand}</td>
+                <td>${elem.idPerson}</td>
+                <td>${elem.regNumer}</td>
+                <td>${elem.color}</td>
+                <td>${elem.dateStart}</td>
                </tr>`,
             ""
         )
     );
 }
+
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Client",
+        url: "https://localhost:44354/api/Auto",
         type: 'GET',
         success: (response) => GetAutos(response)
 
@@ -77,23 +83,7 @@ $(function () {
     }) // ajax.
 }) // jQuery.
 
-//получение дынных адресса в консоль
-/*
-function getAdressData() {
-    $.ajax({
-        type: "GET",
-        url: "https://localhost:44354/api/Client",
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-
-        success: (response) => console.log(response),
-    });
-};
 $(function () {
-<<<<<<< HEAD
-    document.getElementById("getAdressData").click(getAdressData());
-});
- */
-=======
-    getAdressData();
-});
->>>>>>> 18ca6d7c4705eaac70915364e648077f17d672de
+    $("GetClients").
+})
+
