@@ -84,10 +84,13 @@ $(function () {
     }) // ajax.
 }) // jQuery.
 
-//-------------------------------------------------------------------------------------------
 
-//Добавление клиента
+$(function () {
+    $("#append").click(AddClient);
+})
+
 function AddClient() {
+
     var surnamenp = document.getElementById("surnameNP").value;
     var phonenumber = document.getElementById("phoneNumber").value;
     var passport = document.getElementById("passport").value;
@@ -101,54 +104,11 @@ function AddClient() {
     $.ajax({
         url: "https://localhost:44354/api/Client",
         type: 'POST',
-        data: {surname:surnamenp, passport:passport, street:street, home:home, apartament:apartment, year:+year, mounth:+mounth, day:+day, phonenumber:phonenumber},
-        success: (response) => alert("Клиент добавлен")
+
+        data: {surnameNp:surnamenp, passport:passport, street:street, home:home, apartament:apartment, year:+year, mounth:+mounth, day:+day, phonenumber:phonenumber},
+        success: (response) => alert("Добавлен")
 
     })
+    
 }
-$(function () {
-    $("#append").click(AddClient);
-})
 
-
-//Добавление работника
-function AddWorker() {
-    var surnamenp = document.getElementById("surnameNP").value;
-    var passport = document.getElementById("passport").value;
-    var specialty = document.getElementById("specialty").value;
-    var discharge = document.getElementById("discharge").value;
-    var experience = document.getElementById("experience").value;
-
-    $.ajax({
-        url: "https://localhost:44354/api/Worker",
-        type: 'POST',
-        data: {surname:surnamenp, passport:passport, street:street, specialty:+specialty, discharge:discharge, experience:experience},
-        success: (response) => alert("Работник добавлен")
-
-    })
-}
-$(function () {
-    $("#append").click(AddWorker);
-})
-
-
-//Добавление автомобиля
-function AddAuto() {
-    var mark = document.getElementById("mark").value;
-    var model = document.getElementById("model").value;
-    var regNumber = document.getElementById("regNumber").value;
-    var color = document.getElementById("color").value;
-    var yearOfIssue = document.getElementById("yearOfIssue").value;
-    var clients = document.getElementById("clients").value;
-
-    $.ajax({
-        url: "https://localhost:44354/api/Worker",
-        type: 'POST',
-        data: {mark:mark, model:model, street:street, regNumber:regNumber, color:color, yearOfIssue:+yearOfIssue, clients:clients},
-        success: (response) => alert("Автомобиль добавлен")
-
-    })
-}
-$(function () {
-    $("#append").click(AddAuto);
-})

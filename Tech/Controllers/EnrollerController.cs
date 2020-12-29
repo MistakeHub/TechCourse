@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using BackEnd.InterTech;
 using BackEnd.Models;
@@ -42,12 +43,22 @@ namespace BackEnd.Controllers
 
         // POST api/<EnrollerController>
         [HttpPost]
-        public void Post([FromForm] int id, [FromForm] string titlespec, [FromForm] string surnameNP, [FromForm] string passport, [FromForm] int idSpeciality , [FromForm] string level, [FromForm] string periodWork, [FromForm] int idstatus)
+        
+        public void Post( [FromForm]string surnameNP, [FromForm] string passport, [FromForm] string Speciality , [FromForm] string level, [FromForm] string periodWork)
         {
             dbcontext.Persons.Add(new Person() {SurnameNP = surnameNP, Passport = passport});
             dbcontext.SaveChanges();
-
-            Enroller newEnroller=new Enroller(){ IdPerson = dbcontext.Persons.FirstOrDefault(p=>p.Passport==passport).Id, IdSpecialty = idSpeciality, Level = level, PeriodWork = periodWork, idStatus = idstatus};
+            int IdPerson = dbcontext.Persons.FirstOrDefault(p => p.Passport == passport).Id;
+            int IdSpecialty = dbcontext.Specialties.FirstOrDefault(p => p.TitleSpec == Speciality).Id;
+            string Level = level;
+            string PeriodWork = periodWork;
+            int idStatus = dbcontext.Statuses.FirstOrDefault(p => p.status == "Свободен").Id;
+            Enroller newEnroller=new Enroller(){
+                IdPerson = IdPerson,
+                 IdSpecialty = IdSpecialty, 
+                Level = Level, PeriodWork = PeriodWork, 
+                idStatus = idStatus
+            };
             dbcontext.Enrollers.Add(newEnroller);
             dbcontext.SaveChanges();
 

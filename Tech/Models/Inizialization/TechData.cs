@@ -105,7 +105,7 @@ namespace BackEnd.Models.Inizialization
             {
 
                 new Enroller(){IdPerson = context.Persons.First(p=> p.Passport=="RF32816").Id, IdSpecialty = context.Specialties.First(p=>p.TitleSpec=="Механик").Id, 
-                    idStatus = context.Statuses.FirstOrDefault(p=>p.status=="Свободен").Id, Level = "Высший", PeriodWork = "397"},
+                    idStatus = context.Statuses.FirstOrDefault(p=>p.status=="Свободен").Id, Level = "1", PeriodWork = "397"},
 
 
             };
