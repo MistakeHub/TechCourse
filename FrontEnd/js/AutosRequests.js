@@ -1,5 +1,4 @@
 ﻿function GetClientsOption(data) {
-
     $("#clientsoptions").html(
         data.reduce(
             (ans, elem) =>
@@ -10,18 +9,17 @@
     );
 }
 
+
 $(function () {
     $.ajax({
         url: "https://localhost:44354/api/Client",
         type: 'GET',
-
         success: (response) => GetClientsOption(response)
-
     })
 })
 
 
-
+//добавление автомобиля
 function AddAuto() {
     var mark = document.getElementById("mark").value;
     var model = document.getElementById("model").value;
@@ -36,13 +34,15 @@ function AddAuto() {
         type: 'POST',
         data: { titlebrand: mark, model: model, idperson:+clients, regNumber: regNumber, color: color, dateStart: +yearOfIssue },
         success: (response) => alert("Автомобиль добавлен")
-
     })
 }
+
 $(function () {
     $("#append").click(AddAuto);
 })
 
+
+//получение автомобиля
 function GetAutos(data) {
     $("#GetAutos").html(
         data.reduce(
@@ -62,7 +62,6 @@ function GetAutos(data) {
 }
 
 $(function () {
-
     $.ajax({
         url: "https://localhost:44354/api/Client",
         type: 'GET',
@@ -70,6 +69,7 @@ $(function () {
 
         // success.
     }) // ajax.
+
     $.ajax({
         url: "https://localhost:44354/api/Auto",
         type: 'GET',
@@ -80,7 +80,6 @@ $(function () {
 }) // jQuery.
 
 function GetClients(data) {
-
     $("#clients").html(
         data.reduce(
             (ans, elem) =>
