@@ -39,7 +39,16 @@ namespace BackEnd.Controllers
             return enrollerViewModel;
         }
 
-       
+
+
+        [HttpGet]
+        [Route("Speciality")]
+        public List<Specialty> GetSpecialties()
+        {
+
+            return dbcontext.Specialties.ToList();
+
+        }
 
         // POST api/<EnrollerController>
         [HttpPost]

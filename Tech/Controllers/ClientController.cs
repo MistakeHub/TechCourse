@@ -32,6 +32,8 @@ namespace BackEnd.Controllers
 
         
 
+        
+
         // POST api/<ClientController>
         [HttpPost]
         public void Post([FromForm] string surnameNp, [FromForm] string passport, [FromForm]string street, [FromForm] string home, [FromForm] int apartametn, [FromForm]int year , [FromForm]int mounth, [FromForm]int day, [FromForm]string phonenumber)
