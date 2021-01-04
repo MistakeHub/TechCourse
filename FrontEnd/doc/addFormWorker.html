@@ -61,67 +61,54 @@
         <legend> Добавление работника</legend>
 
         <div class="form-group">
-            <label for="surnameNP"
-            >Фамилия и инициалы:</label>
-            <input
-                    type="text"
-                    class="form-control1"
-                    id="surnameNP"
-                    name="surnameNP"
-                    required
-            />
+            <label for="surnameNP">Фамилия и инициалы:</label>
+            <input type="text"
+                   class="form-control1"
+                   id="surnameNP"
+                   name="surnameNP"
+                   required />
         </div>
 
         <div class="form-group">
             <label for="passport">Паспорт:</label>
-            <input
-                    type="text"
-                    class="form-control1"
-                    id="passport"
-                    name="passport"
-                    required
-            />
+            <input type="text"
+                   class="form-control1"
+                   id="passport"
+                   name="passport"
+                   required />
         </div>
 
         <div class="form-group">
             <label for="specialty">Спeциальность:</label>
-            <select
-                    class="form-control"
+            <select class="form-control"
                     required
                     id="specialty"
-                    name="specialty"
-            >
-
+                    name="specialty">
             </select>
         </div>
 
         <div class="form-group">
             <label for="discharge">Разряд:</label>
-            <select
-                    class="form-control"
+            <select class="form-control"
                     required
                     id="discharge"
-                    name="discharge"
-            >
-
+                    name="discharge">
             </select>
         </div>
 
         <div class="form-group">
             <label for="experience">Стаж работы (в годах):</label>
-            <input
-                    class="form-control"
-                    type="number"
-                    min="0"
-                    name="experience"
-                    id="experience"
-                    required
-            />
+            <input class="form-control"
+                   type="number"
+                   min="0"
+                   name="experience"
+                   id="experience"
+                   required />
         </div>
-
+        <input type="submit" class="btn btn-success" id="appendEnroller" value="Добавить" />
         <input type="reset" class="btn btn-danger" id="clear" value="Отмена" />
     </form>
-    <input type="submit" class="btn btn-success" id="appendEnroller" value="Добавить"  />
+
 </div>
 
 <footer class="border-top footer text-muted bg-dark">

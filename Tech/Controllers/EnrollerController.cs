@@ -50,6 +50,15 @@ namespace BackEnd.Controllers
 
         }
 
+        [HttpGet]
+        [Route("Status")]
+        public List<Status> GetStatuses()
+        {
+
+            return dbcontext.Statuses.ToList();
+
+        }
+
         // POST api/<EnrollerController>
         [HttpPost]
         

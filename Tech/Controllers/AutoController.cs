@@ -39,13 +39,16 @@ namespace BackEnd.Controllers
         public void Post([FromForm] string titlebrand, [FromForm]string model, [FromForm] int idperson, [FromForm]string regNumber, [FromForm]string color, [FromForm] int dateStart  )
         {
 
-            dbcontext.Brands.Add(new Brand() {Model = model, TitleBrand = titlebrand});
+            this.dbcontext.Brands.Add(new Brand() {Model = model, TitleBrand = titlebrand});
          
             dbcontext.SaveChanges();
+            int IdBrand = dbcontext.Brands.FirstOrDefault(p => p.Model == model && p.TitleBrand == titlebrand).id;
+               int IPerson=dbcontext.Persons.FirstOrDefault(p => p.Id == idperson).Id;
+               
             dbcontext.Autos.Add(new Auto()
             {
-                IdBrand = dbcontext.Brands.FirstOrDefault(p => p.Model == model && p.TitleBrand == titlebrand).id,
-                IdPerson = dbcontext.Clients.FirstOrDefault(p => p.IdPerson == idperson).Id, Color = color,
+                IdBrand = IdBrand,
+                IdPerson = IPerson, Color = color,
                 RegNumer = regNumber, DateStart = dateStart
             });
 

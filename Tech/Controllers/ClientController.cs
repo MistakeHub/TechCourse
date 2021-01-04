@@ -30,9 +30,24 @@ namespace BackEnd.Controllers
             return viewModel;
         }
 
-        
+        [HttpGet]
+        [Route("Address")]
+        public List<Address> GeAddresses()
+        {
+            return dbcontext.Addresses.ToList();
 
-        
+        }
+
+        [HttpGet]
+        [Route("Person")]
+        public List<Person> GetPersons()
+        {
+
+            return dbcontext.Persons.ToList();
+
+        }
+
+
 
         // POST api/<ClientController>
         [HttpPost]
