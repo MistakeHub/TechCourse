@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Запросы</title>
+    <title>Таблицы</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -56,82 +56,316 @@
     </div>
 </nav>
 
-
-<hr>
-<div class="container mt-3">
-    <div class="col">
-        <!--Таблица клиенты -->
-     <caption><h3>Клиенты</h3></caption>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ид</th>
-                <th>персона</th>
-                <th>адрес</th>
-                <th>Дата рождения</th>
-                <th>Номер телефона</th>
-            </tr>
-            </thead>
-            <tbody id="GetClients">
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-dark"> <a href="../doc/addFormClient.html" class="A" style="color: white">Добавить</a></button>
-        <button type="button" class="btn btn-dark"> <a href="../doc/" class="A" style="color: white">Изменить</a></button>
+<h2>    Клиенты</h2>
+<div class="row">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary btn-lg btn-block btn-dark"> <a href="../doc/addFormClient.html" class="A" style="color: white">Добавить клиента</a></button>
+        <form class="shadow p-3" id="">
+            <div class="form-group">
+                <label for="surnameNP">Фамилия и инициалы:</label>
+                <input type="text"
+                       class="form-control1"
+                       id="surnameNP"
+                       name="surnameNP"
+                       pattern="[А-Я][а-я]+\s+[А-Я]\.\s+[А-Я]\."
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Номер телефона:</label>
+                <input class="form-control"
+                       type="tel"
+                       name="phoneNumber"
+                       id="phoneNumber"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="passport">Паспорт:</label>
+                <input type="text"
+                       class="form-control1"
+                       id="passport"
+                       name="passport"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Год Рождения:</label>
+                <input type="number"
+                       class="form-control1"
+                       id="year"
+                       name="year"
+                       required />
+            </div>
+            <div class="form-group">
+            <label for="dateOfBirth">Месяц Рождения:</label>
+            <input type="number"
+                   class="form-control1"
+                   id="mounth"
+                   name="mounth"
+                   required />
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">День Рождения:</label>
+                <input type="number"
+                       class="form-control1"
+                       id="day"
+                       name="day"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="street">Улица проживания:</label>
+                <input type="text"
+                       class="form-control1"
+                       id="street"
+                       name="street"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="home">Дом проживания:</label>
+                <input type="text"
+                       class="form-control1"
+                       id="home"
+                       name="home"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="passport">Квартира проживания:</label>
+                <input type="text"
+                       class="form-control1"
+                       id="apartment"
+                       name="apartment"
+                       required />
+            </div>
+            <button type="submit"
+                    id="bt-append"
+                    class="btn btn-success btn-block">
+                Изменить
+            </button>
+            <button type="reset"
+                    class="btn btn-secondary btn-block">
+                Отмена
+            </button>
+        </form>
+        <div class="card mt-4">
+            <div class="card-body">
+                <div
+                        id="bt-container"
+                        class="card-text"
+                ></div>
+            </div>
+        </div>
     </div>
+    <table class="table col-md-8">
+        <caption>
+            Клиенты
+        </caption>
+        <thead>
+        <tr>
+            <th>ид</th>
+            <th>персона</th>
+            <th>адрес</th>
+            <th>Дата рождения</th>
+            <th>Номер телефона</th>
+        </tr>
+        </thead>
+        <tbody id="GetClients"></tbody>
+    </table>
 </div>
 
-<br>
-<br>
-<hr>
-<div class="container mt-3">
-    <div class="col">
-        <!--Таблица работники -->
-        <caption><h3>Работники</h3></caption>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ид</th>
-                <th>персона</th>
-                <th>специальность</th>
-                <th>статус работника</th>
-                <th>Разряд работника</th>
-                <th>Стаж работы</th>
-            </tr>
-            </thead>
-            <tbody id="GetWorkers">
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-dark"> <a href="../doc/addFormWorker.html" class="A" style="color: white">Добавить</a></button>
-        <button type="button" class="btn btn-dark"> <a href="../doc/" class="A" style="color: white">Изменить</a></button>
-    </div>
-
-</div>
-
 
 <br>
 <br>
 <hr>
-<div class="container mt-3">
-    <div class="col">
-        <!--Таблица машины -->
-         <caption><h3>Машины</h3></caption>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ид</th>
-                    <th>модель</th>
-                    <th>владельц (персона)</th>
-                    <th>Регистрационный номер автомобиля</th>
-                    <th>Цвет автомобиля</th>
-                    <th>Год выпуска</th>
-                </tr>
-            </thead>
-                <tbody id="GetAutos"></tbody>
-        </table>
-        <button type="button" class="btn btn-dark"> <a href="../doc/addAutoForm.html" class="A" style="color: white">Добавить</a></button>
-        <button type="button" class="btn btn-dark"> <a href="../doc/" class="A" style="color: white">Изменить</a></button>
+<h2>Работники</h2>
+<div class="row">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary btn-lg btn-block btn-dark"> <a href="../doc/addFormWorker.html" class="A" style="color: white">Добавить работника</a></button>
+        <form class="shadow p-3" id="">
+            <div class="form-group">
+                <label for="surnameNP">Фамилия и инициалы:</label>
+                <input type="text"
+                       class="form-control1"
+                       id="surnameNP"
+                       name="surnameNP"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="passport">Паспорт:</label>
+                <input type="text"
+                       class="form-control1"
+                       id="passport"
+                       name="passport"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="specialty">Спeциальность:</label>
+                <select class="form-control"
+                        required
+                        id="specialty"
+                        name="specialty">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="discharge">Разряд:</label>
+                <select class="form-control"
+                        required
+                        id="discharge"
+                        name="discharge">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="experience">Стаж работы (в годах):</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       name="experience"
+                       id="experience"
+                       required />
+            </div>
+            <button type="submit"
+                    id="bt-append"
+                    class="btn btn-success btn-block">
+                Изменить
+            </button>
+            <button type="reset"
+                    class="btn btn-secondary btn-block">
+                Отмена
+            </button>
+        </form>
+        <div class="card mt-4">
+            <div class="card-body">
+                <div
+                        id="bt-container"
+                        class="card-text"
+                ></div>
+            </div>
+        </div>
     </div>
+    <table class="table col-md-8">
+        <caption>
+            Работники
+        </caption>
+        <thead>
+        <tr>
+            <th>ид</th>
+            <th>персона</th>
+            <th>специальность</th>
+            <th>статус работника</th>
+            <th>Разряд работника</th>
+            <th>Стаж работы</th>
+        </tr>
+        </thead>
+        <tbody id="GetWorkers"></tbody>
+    </table>
 </div>
+<br>
+<br>
+<hr>
+
+
+<h2>Машины</h2>
+<div class="row">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary btn-lg btn-block btn-dark"> <a href="../doc/addAutoForm.html" class="A" style="color: white">Добавить машины</a></button>
+        <form class="shadow p-3" id="append-worker">
+            <div class="form-group">
+                <label for="mark"
+                >Марка автомобиля:</label>
+                <input
+                        type="text"
+                        class="form-control1"
+                        id="mark"
+                        name="mark"
+                        required
+                />
+            </div>
+            <div class="form-group">
+                <label for="model">Модель автомобиля:</label>
+                <input
+                        type="text"
+                        class="form-control1"
+                        id="model"
+                        name="model"
+                        required
+                />
+            </div>
+            <div class="form-group">
+                <label for="regNumber">Гос. номер автомобиля:</label>
+                <input
+                        type="text"
+                        class="form-control1"
+                        id="regNumber"
+                        name="regNumber"
+                        required
+                />
+            </div>
+            <div class="form-group">
+                <label for="color">Цвет автомобиля:</label>
+                <input
+                        type="text"
+                        class="form-control1"
+                        id="color"
+                        name="color"
+                        required
+                />
+            </div>
+            <div class="form-group">
+                <label for="yearOfIssue">Год выпуска автомобиля:</label>
+                <input
+                        class="form-control"
+                        type="number"
+
+                        max="2021"
+                        name="yearOfIssue"
+                        id="yearOfIssue"
+                        required
+                />
+            </div>
+            <div class="form-group">
+                <label for="clients">Клиенты:</label>
+                <select
+                        class="form-control"
+                        required
+                        id="clients"
+                        name="clients"
+                >
+                </select>
+            </div>
+            <button type="submit"
+                    id="bt-append"
+                    class="btn btn-success btn-block">
+                Изменить
+            </button>
+            <button type="reset"
+                    class="btn btn-secondary btn-block">
+                Отмена
+            </button>
+        </form>
+        <div class="card mt-4">
+            <div class="card-body">
+                <div
+                        id="bt-container"
+                        class="card-text"
+                ></div>
+            </div>
+        </div>
+    </div>
+    <table class="table col-md-8">
+        <caption>
+            Машины
+        </caption>
+        <thead>
+        <tr>
+            <th>ид</th>
+            <th>модель</th>
+            <th>владельц (персона)</th>
+            <th>Регистрационный номер автомобиля</th>
+            <th>Цвет автомобиля</th>
+            <th>Год выпуска</th>
+        </tr>
+        </thead>
+        <tbody id="GetAutos"></tbody>
+    </table>
+</div>
+
 <hr>
 
 <footer class="border-top footer text-muted bg-dark">
