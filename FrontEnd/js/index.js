@@ -5,12 +5,12 @@ function GetClients(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-                `<tr>
-                <td>${elem.id}</td>
-                <td>${elem.surnamePerson}</td>
-                <td>${elem.titleAddress}</td>
-                <td>${elem.date}</td>
-                <td>${elem.phoneNumber}</td>
+                `<tr id=${elem.id}>
+                <td id="id">${elem.id}</td>
+                <td id="surnamePerson">${elem.surnamePerson}</td>
+                <td id="titleaddress">${elem.titleAddress}</td>
+                <td id="date">${elem.date}</td>
+                <td id="phoneNumber">${elem.phoneNumber}</td>
                </tr>`,
             ""
         )
@@ -25,6 +25,19 @@ $(function () {
 
         // success.
     }) // ajax.
+
+    var table = document.querySelector('table');
+
+    // listen for a click
+    $("#GetClients").on('click','tr', function(){
+        // get the event targets ID
+        var serviceID = $(this).attr('id');
+       var data=document.getElementById(serviceID);
+       var name=data.children.namedItem('surnamePerson').valueOf();
+        console.log(name)
+
+    })
+
 }) // jQuery.
 
 function GetWorkers(data) {

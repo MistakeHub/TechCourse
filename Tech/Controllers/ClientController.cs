@@ -64,8 +64,8 @@ namespace BackEnd.Controllers
         }
 
         // PUT api/<ClientController>/5
-        [HttpPut]
-        public void Put([FromForm] int id, [FromForm] int idperson, [FromForm] string Surname, [FromForm] int idAddress, [FromForm] string street, [FromForm] string home, [FromForm] int apartament, [FromForm] string phonenumber )
+        [HttpPut ("{id}")]
+        public void Put( int id, [FromForm] int idperson, [FromForm] string Surname, [FromForm] int idAddress, [FromForm] string street, [FromForm] string home, [FromForm] int apartament, [FromForm] string phonenumber )
         {
             Client changeClient = dbcontext.Clients.FirstOrDefault(p => p.Id == id);
 

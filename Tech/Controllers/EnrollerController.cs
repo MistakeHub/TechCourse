@@ -8,6 +8,7 @@ using BackEnd.InterTech;
 using BackEnd.Models;
 using BackEnd.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -84,9 +85,16 @@ namespace BackEnd.Controllers
 
         // PUT api/<EnrollerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] string speciality, [FromForm] string person , [FromForm] string level, [FromForm] string periodwork, [FromForm] string status)
         {
-
+            Enroller enroller = dbcontext.Enrollers.FirstOrDefault(p => p.Id == id);
+            enroller.IdSpecialty = dbcontext.Specialties.FirstOrDefault(p => p.TitleSpec == speciality).Id;
+            enroller.IdPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == person).Id;
+            enroller.Level =level;
+            enroller.PeriodWork = periodwork;
+            enroller.idStatus = dbcontext.Statuses.FirstOrDefault(p => p.status == status).Id;
+            dbcontext.Enrollers.Update(enroller);
+            dbcontext.SaveChanges();
 
         }
 

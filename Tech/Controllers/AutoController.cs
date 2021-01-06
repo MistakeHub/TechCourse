@@ -59,8 +59,17 @@ namespace BackEnd.Controllers
 
         // PUT api/<AutoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromForm] string brand, [FromForm] string person, [FromForm] string regnumber, [FromForm] string color, [FromForm] int datestart)
         {
+            Auto auto = dbcontext.Autos.FirstOrDefault(p => p.Id == id);
+            auto.IdBrand = dbcontext.Brands.FirstOrDefault(p => p.Model == brand).id;
+            auto.IdPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == person).Id;
+            auto.RegNumer = regnumber;
+            auto.Color = color;
+            auto.DateStart = datestart;
+            dbcontext.Autos.Update(auto);
+            dbcontext.SaveChanges();
+
         }
 
         // DELETE api/<AutoController>/5
