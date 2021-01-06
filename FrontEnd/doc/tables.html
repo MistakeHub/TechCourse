@@ -56,29 +56,6 @@
     </div>
 </nav>
 
-<<<<<<< HEAD
-
-<hr>
-<div class="container mt-3">
-    <div class="col">
-        <!--Таблица клиенты -->
-     <caption><h3>Клиенты</h3></caption>
-        <table class="table" id="Clients">
-            <thead>
-            <tr>
-                <th>ид</th>
-                <th>персона</th>
-                <th>адрес</th>
-                <th>Дата рождения</th>
-                <th>Номер телефона</th>
-            </tr>
-            </thead>
-            <tbody id="GetClients">
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-dark"> <a href="../doc/addFormClient.html" class="A" style="color: white">Добавить</a></button>
-        <button type="button" class="btn btn-dark"> <a href="../doc/" class="A" style="color: white">Изменить</a></button>
-=======
 <h2>    Клиенты</h2>
 <div class="row">
     <div class="col-md-3">
@@ -88,73 +65,72 @@
                 <label for="surnameNP">Фамилия и инициалы:</label>
                 <input type="text"
                        class="form-control1"
-                       id="surnameNP"
-                       name="surnameNP"
-                       pattern="[А-Я][а-я]+\s+[А-Я]\.\s+[А-Я]\."
+                       id="surnameNPClient"
+                       name="surnameNPClient"
                        required />
             </div>
             <div class="form-group">
                 <label for="phoneNumber">Номер телефона:</label>
                 <input class="form-control"
                        type="tel"
-                       name="phoneNumber"
-                       id="phoneNumber"
+                       name="phoneNumberClient"
+                       id="phoneNumberClient"
                        required />
             </div>
             <div class="form-group">
                 <label for="passport">Паспорт:</label>
                 <input type="text"
                        class="form-control1"
-                       id="passport"
-                       name="passport"
+                       id="passportClient"
+                       name="passportClient"
                        required />
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">Год Рождения:</label>
                 <input type="number"
                        class="form-control1"
-                       id="year"
-                       name="year"
+                       id="yearClient"
+                       name="yearClient"
                        required />
             </div>
             <div class="form-group">
             <label for="dateOfBirth">Месяц Рождения:</label>
             <input type="number"
                    class="form-control1"
-                   id="mounth"
-                   name="mounth"
+                   id="mounthClient"
+                   name="mounthClient"
                    required />
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">День Рождения:</label>
                 <input type="number"
                        class="form-control1"
-                       id="day"
-                       name="day"
+                       id="dayClient"
+                       name="dayClient"
                        required />
             </div>
             <div class="form-group">
                 <label for="street">Улица проживания:</label>
                 <input type="text"
                        class="form-control1"
-                       id="street"
-                       name="street"
+                       id="streetClient"
+                       name="streetClient"
                        required />
             </div>
             <div class="form-group">
                 <label for="home">Дом проживания:</label>
                 <input type="text"
                        class="form-control1"
-                       id="home"
-                       name="home"
+                       id="homeClient"
+                       name="homeClient"
                        required />
             </div>
             <div class="form-group">
-                <label for="passport">Квартира проживания:</label>
+                <label for="apartment">Квартира проживания:</label>
                 <input type="text"
                        class="form-control1"
-                       id="apartment"
-                       name="apartment"
+                       id="apartmentClient"
+                       name="apartmentClient"
                        required />
             </div>
             <button type="submit"
@@ -175,7 +151,7 @@
                 ></div>
             </div>
         </div>
->>>>>>> 488023160d97b4369ca4ef6b25bb69cc19eddb4a
+
     </div>
     <table class="table col-md-8">
         <caption>
@@ -207,32 +183,32 @@
                 <label for="surnameNP">Фамилия и инициалы:</label>
                 <input type="text"
                        class="form-control1"
-                       id="surnameNP"
-                       name="surnameNP"
+                       id="surnameNPWorker"
+                       name="surnameNPWorker"
                        required />
             </div>
             <div class="form-group">
                 <label for="passport">Паспорт:</label>
                 <input type="text"
                        class="form-control1"
-                       id="passport"
-                       name="passport"
+                       id="passportWorker"
+                       name="passportWorker"
                        required />
             </div>
             <div class="form-group">
                 <label for="specialty">Спeциальность:</label>
                 <select class="form-control"
                         required
-                        id="specialty"
-                        name="specialty">
+                        id="specialtyWorker"
+                        name="specialtyWorker">
                 </select>
             </div>
             <div class="form-group">
                 <label for="discharge">Разряд:</label>
                 <select class="form-control"
                         required
-                        id="discharge"
-                        name="discharge">
+                        id="dischargeWorker"
+                        name="dischargeWorker">
                 </select>
             </div>
             <div class="form-group">
@@ -240,8 +216,8 @@
                 <input class="form-control"
                        type="number"
                        min="0"
-                       name="experience"
-                       id="experience"
+                       name="experienceWorker"
+                       id="experienceWorker"
                        required />
             </div>
             <button type="submit"
@@ -296,8 +272,8 @@
                 <input
                         type="text"
                         class="form-control1"
-                        id="mark"
-                        name="mark"
+                        id="markAuto"
+                        name="markAuto"
                         required
                 />
             </div>
@@ -306,8 +282,8 @@
                 <input
                         type="text"
                         class="form-control1"
-                        id="model"
-                        name="model"
+                        id="modelAuto"
+                        name="modelAuto"
                         required
                 />
             </div>
@@ -316,8 +292,8 @@
                 <input
                         type="text"
                         class="form-control1"
-                        id="regNumber"
-                        name="regNumber"
+                        id="regNumberAuto"
+                        name="regNumberAuto"
                         required
                 />
             </div>
@@ -326,8 +302,8 @@
                 <input
                         type="text"
                         class="form-control1"
-                        id="color"
-                        name="color"
+                        id="colorAuto"
+                        name="colorAuto"
                         required
                 />
             </div>
@@ -338,8 +314,8 @@
                         type="number"
 
                         max="2021"
-                        name="yearOfIssue"
-                        id="yearOfIssue"
+                        name="yearOfIssueAuto"
+                        id="yearOfIssueAuto"
                         required
                 />
             </div>
@@ -348,8 +324,8 @@
                 <select
                         class="form-control"
                         required
-                        id="clients"
-                        name="clients"
+                        id="clientsAuto"
+                        name="clientsAuto"
                 >
                 </select>
             </div>
