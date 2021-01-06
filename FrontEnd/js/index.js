@@ -33,7 +33,8 @@ $(function () {
         // get the event targets ID
         var serviceID = $(this).attr('id');
        var data=document.getElementById(serviceID);
-       var name=data.children.namedItem('surnamePerson').valueOf();
+       var name=data.children.namedItem('phoneNumber').valueOf();
+       $('phoneNumber').value=name;
         console.log(name)
 
     })
