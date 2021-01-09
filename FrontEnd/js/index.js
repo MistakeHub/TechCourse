@@ -34,7 +34,7 @@ $(function () {
         var serviceID = $(this).attr('id');
        var data=document.getElementById(serviceID);
        var name=data.children.namedItem('phoneNumber').valueOf();
-       $('phoneNumber').value=name;
+       $('phoneNumber').innerText=name;
         console.log(name)
 
     })
@@ -97,3 +97,4 @@ $.ajax({
 
     // success.
 }) // ajax.
+
