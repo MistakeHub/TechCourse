@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="../css/index.css" />
 </head>
-<body id="MyBody">
+<body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="../index.html"><img src="../img/vlsm_garage_white.svg" alt="" width="60" height="60"></a>
+        <a class="navbar-brand" href="../index.html">Курсовой проект</a>
         <button
                 class="navbar-toggler d-lg-none"
                 type="button"
@@ -59,25 +59,19 @@
 <hr>
 
 
-<<<<<<< HEAD
-<h2>    Клиенты</h2>
-<div class="row" >
-    <div class="col-md-3">
-        <button type="button" class="btn btn-primary btn-lg btn-block btn-dark"> <a href="../doc/addFormClient.html" class="A" style="color: white">Добавить клиента</a></button>
-        <form class="shadow p-3" id="ChangeClientForm">
-=======
 <h2>Клиенты</h2>
 <div class="row">
     <div class="col-md-3">
         <form class="shadow p-3" id="">
             <legend>Форма изменения клиента:</legend>
->>>>>>> 32571f4797d6a6277a454b310fa3c8e139111501
+
+            <input
+                    type="hidden"
+                    class="form-control1"
+                    id="idClient"
+                    name="idClient"
+                    required/>
             <div class="form-group">
-                <input type="hidden"
-                       class="form-control1"
-                       id="idClient"
-                       name="idClient"
-                       required />
                 <label for="surnameNPClient">Фамилия и инициалы:</label>
                 <input type="text"
                        class="form-control1"
@@ -93,73 +87,41 @@
                        id="phoneNumberClient"
                        required />
             </div>
-
             <div class="form-group">
-<<<<<<< HEAD
-                <label for="yearClient">Дата Рождения:</label>
+                <label for="yearClient">Год Рождения:</label>
                 <input type="datetime-local"
-=======
-                <label for="dateOfBirth">Год Рождения:</label>
-                <input type="number"
->>>>>>> 32571f4797d6a6277a454b310fa3c8e139111501
                        class="form-control1"
                        id="yearClient"
                        name="yearClient"
                        required />
             </div>
 
+
             <div class="form-group">
-                <label for="streetClient">Адресс проживания:</label>
+                <label for="streetClient">Улица проживания:</label>
                 <input type="text"
                        class="form-control1"
                        id="streetClient"
                        name="streetClient"
                        required />
             </div>
-<<<<<<< HEAD
 
 
-=======
-            <div class="form-group">
-                <label for="home">Дом проживания:</label>
-                <input type="text"
-                       class="form-control1"
-                       id="homeClient"
-                       name="homeClient"
-                       required />
-            </div>
-            <div class="form-group">
-                <label for="apartment">Квартира проживания:</label>
-                <input type="text"
-                       class="form-control1"
-                       id="apartmentClient"
-                       name="apartmentClient"
-                       required />
-            </div>
 
-            <button type="submit"
-                    id="bt-append"
-                    class="btn btn-success btn-block">
-                Изменить
-            </button>
->>>>>>> 32571f4797d6a6277a454b310fa3c8e139111501
             <button type="reset"
                     class="btn btn-secondary btn-block">
                 Отмена
             </button>
+
         </form>
-<<<<<<< HEAD
-        <button
+        <button type="submit"
                 id="ChangeClient"
                 class="btn btn-success btn-block">
             Изменить
         </button>
-
-=======
         <br>
         <button type="button" class="btn btn-primary btn-block btn-success">
             <a href="../doc/addFormClient.html" class="A" style="color: white">Добавить клиента</a></button>
->>>>>>> 32571f4797d6a6277a454b310fa3c8e139111501
         <div class="card mt-4">
             <div class="card-body">
                 <div
@@ -196,14 +158,13 @@
     <div class="col-md-3">
         <legend>Форма изменения работника:</legend>
         <form class="shadow p-3" id="">
-            <div class="form-group">
 
-                <input type="hidden"
-                       class="form-control1"
-                       id="idEnroller"
-                       name="idEnroller"
-                       required />
-            </div>
+            <input
+                    type="hidden"
+                    class="form-control1"
+                    id="idEnroller"
+                    name="idEnroller"
+                    required/>
             <div class="form-group">
                 <label for="surnameNPWorker">Фамилия и инициалы:</label>
                 <input type="text"
@@ -212,14 +173,16 @@
                        name="surnameNPWorker"
                        required />
             </div>
+
             <div class="form-group">
-                <label for="statusWorker">Статус:</label>
-                <select type="text"
-                       class="form-control1"
-                       id="statusWorker"
-                       name="statusWorker"
-                       required ></select>
+                <label for="statusWorker">Спeциальность:</label>
+                <select class="form-control"
+                        required
+                        id="statusWorker"
+                        name="statusWorker">
+                </select>
             </div>
+
             <div class="form-group">
                 <label for="specialtyWorker">Спeциальность:</label>
                 <select class="form-control"
@@ -251,17 +214,14 @@
                 Отмена
             </button>
         </form>
-<<<<<<< HEAD
         <button type="submit"
                 id="ChangeEnroller"
                 class="btn btn-success btn-block">
             Изменить
         </button>
-=======
         <br>
         <button type="button" class="btn btn-primary btn-block btn-success">
             <a href="../doc/addFormWorker.html" class="A" style="color: white">Добавить работника</a></button>
->>>>>>> 32571f4797d6a6277a454b310fa3c8e139111501
         <div class="card mt-4">
             <div class="card-body">
                 <div
@@ -271,7 +231,6 @@
             </div>
         </div>
     </div>
-
     <table class="table col-md-8">
         <caption>
             Работники
@@ -298,22 +257,15 @@
 <div class="row">
     <div class="col-md-3">
         <form class="shadow p-3" id="append-worker">
-<<<<<<< HEAD
-
-=======
             <legend>Форма изменения автомобиля:</legend>
->>>>>>> 32571f4797d6a6277a454b310fa3c8e139111501
-            <div class="form-group">
-                <label for="markAuto"
-                >Марка автомобиля:</label>
+
                 <input
-                        type="text"
+                        type="hidden"
                         class="form-control1"
                         id="idAuto"
                         name="idAuto"
-                        required
-                />
-            </div>
+                        required/>
+
             <div class="form-group">
                 <label for="markAuto"
                 >Марка автомобиля:</label>
@@ -365,7 +317,7 @@
                         required
                         id="clientsAuto"
                         name="clientsAuto"
-               />
+                >
 
             </div>
 
@@ -374,18 +326,14 @@
                 Отмена
             </button>
         </form>
-<<<<<<< HEAD
-
         <button type="submit"
                 id="ChangeAuto"
                 class="btn btn-success btn-block">
             Изменить
         </button>
-=======
         <br>
         <button type="button" class="btn btn-primary btn-block btn-success">
             <a href="../doc/addAutoForm.html" class="A" style="color: white">Добавить машину</a></button>
->>>>>>> 32571f4797d6a6277a454b310fa3c8e139111501
         <div class="card mt-4">
             <div class="card-body">
                 <div

@@ -63,8 +63,12 @@ namespace BackEnd.Controllers
         {
             Auto auto = dbcontext.Autos.FirstOrDefault(p => p.Id == id);
             Brand brands = dbcontext.Brands.FirstOrDefault(p => p.id == auto.IdBrand);
+            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == auto.IdPerson);
+            changeperson.SurnameNP = person;
+
             brands.TitleBrand = brand;
             dbcontext.Brands.Update(brands);
+            dbcontext.Persons.Update(changeperson);
             dbcontext.SaveChanges();
             auto.IdBrand = dbcontext.Brands.FirstOrDefault(p => p.TitleBrand == brand).id;
             auto.IdPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == person).Id;
