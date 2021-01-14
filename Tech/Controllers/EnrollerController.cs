@@ -85,17 +85,21 @@ namespace BackEnd.Controllers
 
         // PUT api/<EnrollerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string speciality, [FromForm] string person , [FromForm] string level, [FromForm] string periodwork, [FromForm] string status)
+        public void Put(int id, [FromForm] string speciality, [FromForm] string person , [FromForm] string level, [FromForm] string periodwork, [FromForm] string status)
         {
             Enroller enroller = dbcontext.Enrollers.FirstOrDefault(p => p.Id == id);
             enroller.IdSpecialty = dbcontext.Specialties.FirstOrDefault(p => p.TitleSpec == speciality).Id;
-            enroller.IdPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == person).Id;
+            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == enroller.IdPerson);
+            changeperson.SurnameNP = person;
+            dbcontext.Persons.Update(changeperson);
+            dbcontext.SaveChanges();
+            enroller.IdPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == changeperson.SurnameNP).Id;
             enroller.Level =level;
             enroller.PeriodWork = periodwork;
             enroller.idStatus = dbcontext.Statuses.FirstOrDefault(p => p.status == status).Id;
             dbcontext.Enrollers.Update(enroller);
-            dbcontext.SaveChanges();
 
+            dbcontext.SaveChanges();
         }
 
         // DELETE api/<EnrollerController>/5

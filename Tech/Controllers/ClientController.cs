@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BackEnd.InterTech;
 using BackEnd.Models;
@@ -26,7 +27,7 @@ namespace BackEnd.Controllers
         [HttpGet]
         public List<ClientViewModel> Get()
         {
-            List<ClientViewModel> viewModel= dbcontext.Clients.Select(p=>new ClientViewModel(){ id=p.Id, PhoneNumber = p.PhoneNumber, Date = p.DateBirth, SurnamePerson = dbcontext.Persons.FirstOrDefault(c=>c.Id==p.IdPerson).SurnameNP, TitleAddress = dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Street +" "+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Home + " кв "+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Apartament }).ToList();
+            List<ClientViewModel> viewModel= dbcontext.Clients.Select(p=>new ClientViewModel(){ id=p.Id, PhoneNumber = p.PhoneNumber, Date = p.DateBirth, SurnamePerson = dbcontext.Persons.FirstOrDefault(c=>c.Id==p.IdPerson).SurnameNP, TitleAddress = dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Street +", "+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Home + ","+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Apartament }).ToList();
             return viewModel;
         }
 
@@ -65,17 +66,22 @@ namespace BackEnd.Controllers
 
         // PUT api/<ClientController>/5
         [HttpPut ("{id}")]
-        public void Put( int id, [FromForm] int idperson, [FromForm] string Surname, [FromForm] int idAddress, [FromForm] string street, [FromForm] string home, [FromForm] int apartament, [FromForm] string phonenumber )
+        public void Put( int id, [FromForm] string surname, [FromForm] string phonenumber, [FromForm] DateTime dateofbirth, [FromForm] string address )
         {
             Client changeClient = dbcontext.Clients.FirstOrDefault(p => p.Id == id);
-
-            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == idperson);
-            changeperson.SurnameNP = Surname;
+            int idPerson= dbcontext.Persons.FirstOrDefault(p => p.Id==changeClient.IdPerson).Id;
+            var a = address.Split(',').ToArray();
+            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id==idPerson);
+            changeperson.SurnameNP = surname;
             dbcontext.Persons.Update(changeperson);
+            int idAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == changeClient.IdAddress).Id;
+            
             Address changeAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == idAddress);
-            changeAddress.Street = street;
-            changeAddress.Home = home;
-            changeAddress.Apartament = apartament;
+            
+            changeAddress.Street = a[0];
+            changeAddress.Home = a[1];
+            changeAddress.Apartament = int.Parse(a[2]);
+            changeClient.DateBirth = dateofbirth;
             dbcontext.Addresses.Update(changeAddress);
             changeClient.PhoneNumber = phonenumber;
             dbcontext.Clients.Update(changeClient);

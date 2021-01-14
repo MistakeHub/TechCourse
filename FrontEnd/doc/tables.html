@@ -14,7 +14,7 @@
 <body id="MyBody">
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="../index.html">Курсовой проект</a>
+        <a class="navbar-brand" href="../index.html"><img src="../img/vlsm_garage_white.svg" alt="" width="60" height="60"></a>
         <button
                 class="navbar-toggler d-lg-none"
                 type="button"
@@ -60,12 +60,17 @@
 
 
 <h2>    Клиенты</h2>
-<div class="row">
+<div class="row" >
     <div class="col-md-3">
         <button type="button" class="btn btn-primary btn-lg btn-block btn-dark"> <a href="../doc/addFormClient.html" class="A" style="color: white">Добавить клиента</a></button>
-        <form class="shadow p-3" id="">
+        <form class="shadow p-3" id="ChangeClientForm">
             <div class="form-group">
-                <label for="surnameNP">Фамилия и инициалы:</label>
+                <input type="hidden"
+                       class="form-control1"
+                       id="idClient"
+                       name="idClient"
+                       required />
+                <label for="surnameNPClient">Фамилия и инициалы:</label>
                 <input type="text"
                        class="form-control1"
                        id="surnameNPClient"
@@ -73,79 +78,44 @@
                        required />
             </div>
             <div class="form-group">
-                <label for="phoneNumber">Номер телефона:</label>
+                <label for="phoneNumberClient">Номер телефона:</label>
                 <input class="form-control"
                        type="tel"
                        name="phoneNumberClient"
                        id="phoneNumberClient"
                        required />
             </div>
+
             <div class="form-group">
-                <label for="passport">Паспорт:</label>
-                <input type="text"
-                       class="form-control1"
-                       id="passportClient"
-                       name="passportClient"
-                       required />
-            </div>
-            <div class="form-group">
-                <label for="dateOfBirth">Год Рождения:</label>
-                <input type="number"
+                <label for="yearClient">Дата Рождения:</label>
+                <input type="datetime-local"
                        class="form-control1"
                        id="yearClient"
                        name="yearClient"
                        required />
             </div>
+
             <div class="form-group">
-            <label for="dateOfBirth">Месяц Рождения:</label>
-            <input type="number"
-                   class="form-control1"
-                   id="mounthClient"
-                   name="mounthClient"
-                   required />
-            </div>
-            <div class="form-group">
-                <label for="dateOfBirth">День Рождения:</label>
-                <input type="number"
-                       class="form-control1"
-                       id="dayClient"
-                       name="dayClient"
-                       required />
-            </div>
-            <div class="form-group">
-                <label for="street">Улица проживания:</label>
+                <label for="streetClient">Адресс проживания:</label>
                 <input type="text"
                        class="form-control1"
                        id="streetClient"
                        name="streetClient"
                        required />
             </div>
-            <div class="form-group">
-                <label for="home">Дом проживания:</label>
-                <input type="text"
-                       class="form-control1"
-                       id="homeClient"
-                       name="homeClient"
-                       required />
-            </div>
-            <div class="form-group">
-                <label for="apartment">Квартира проживания:</label>
-                <input type="text"
-                       class="form-control1"
-                       id="apartmentClient"
-                       name="apartmentClient"
-                       required />
-            </div>
-            <button type="submit"
-                    id="bt-append"
-                    class="btn btn-success btn-block">
-                Изменить
-            </button>
+
+
             <button type="reset"
                     class="btn btn-secondary btn-block">
                 Отмена
             </button>
         </form>
+        <button
+                id="ChangeClient"
+                class="btn btn-success btn-block">
+            Изменить
+        </button>
+
         <div class="card mt-4">
             <div class="card-body">
                 <div
@@ -183,7 +153,15 @@
         <button type="button" class="btn btn-primary btn-lg btn-block btn-dark"> <a href="../doc/addFormWorker.html" class="A" style="color: white">Добавить работника</a></button>
         <form class="shadow p-3" id="">
             <div class="form-group">
-                <label for="surnameNP">Фамилия и инициалы:</label>
+
+                <input type="hidden"
+                       class="form-control1"
+                       id="idEnroller"
+                       name="idEnroller"
+                       required />
+            </div>
+            <div class="form-group">
+                <label for="surnameNPWorker">Фамилия и инициалы:</label>
                 <input type="text"
                        class="form-control1"
                        id="surnameNPWorker"
@@ -191,15 +169,15 @@
                        required />
             </div>
             <div class="form-group">
-                <label for="passport">Паспорт:</label>
-                <input type="text"
+                <label for="statusWorker">Статус:</label>
+                <select type="text"
                        class="form-control1"
-                       id="passportWorker"
-                       name="passportWorker"
-                       required />
+                       id="statusWorker"
+                       name="statusWorker"
+                       required ></select>
             </div>
             <div class="form-group">
-                <label for="specialty">Спeциальность:</label>
+                <label for="specialtyWorker">Спeциальность:</label>
                 <select class="form-control"
                         required
                         id="specialtyWorker"
@@ -207,15 +185,15 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="discharge">Разряд:</label>
-                <select class="form-control"
+                <label for="dischargeWorker">Разряд:</label>
+                <input class="form-control"
                         required
                         id="dischargeWorker"
-                        name="dischargeWorker">
-                </select>
+                        name="dischargeWorker"/>
+
             </div>
             <div class="form-group">
-                <label for="experience">Стаж работы (в годах):</label>
+                <label for="experienceWorker">Стаж работы (в годах):</label>
                 <input class="form-control"
                        type="number"
                        min="0"
@@ -223,16 +201,17 @@
                        id="experienceWorker"
                        required />
             </div>
-            <button type="submit"
-                    id="bt-append"
-                    class="btn btn-success btn-block">
-                Изменить
-            </button>
+
             <button type="reset"
                     class="btn btn-secondary btn-block">
                 Отмена
             </button>
         </form>
+        <button type="submit"
+                id="ChangeEnroller"
+                class="btn btn-success btn-block">
+            Изменить
+        </button>
         <div class="card mt-4">
             <div class="card-body">
                 <div
@@ -242,6 +221,7 @@
             </div>
         </div>
     </div>
+
     <table class="table col-md-8">
         <caption>
             Работники
@@ -269,8 +249,20 @@
     <div class="col-md-3">
         <button type="button" class="btn btn-primary btn-lg btn-block btn-dark"> <a href="../doc/addAutoForm.html" class="A" style="color: white">Добавить машины</a></button>
         <form class="shadow p-3" id="append-worker">
+
             <div class="form-group">
-                <label for="mark"
+                <label for="markAuto"
+                >Марка автомобиля:</label>
+                <input
+                        type="text"
+                        class="form-control1"
+                        id="idAuto"
+                        name="idAuto"
+                        required
+                />
+            </div>
+            <div class="form-group">
+                <label for="markAuto"
                 >Марка автомобиля:</label>
                 <input
                         type="text"
@@ -280,18 +272,9 @@
                         required
                 />
             </div>
+
             <div class="form-group">
-                <label for="model">Модель автомобиля:</label>
-                <input
-                        type="text"
-                        class="form-control1"
-                        id="modelAuto"
-                        name="modelAuto"
-                        required
-                />
-            </div>
-            <div class="form-group">
-                <label for="regNumber">Гос. номер автомобиля:</label>
+                <label for="regNumberAuto">Гос. номер автомобиля:</label>
                 <input
                         type="text"
                         class="form-control1"
@@ -301,7 +284,7 @@
                 />
             </div>
             <div class="form-group">
-                <label for="color">Цвет автомобиля:</label>
+                <label for="colorAuto">Цвет автомобиля:</label>
                 <input
                         type="text"
                         class="form-control1"
@@ -311,7 +294,7 @@
                 />
             </div>
             <div class="form-group">
-                <label for="yearOfIssue">Год выпуска автомобиля:</label>
+                <label for="yearOfIssueAuto">Год выпуска автомобиля:</label>
                 <input
                         class="form-control"
                         type="number"
@@ -323,25 +306,27 @@
                 />
             </div>
             <div class="form-group">
-                <label for="clients">Клиенты:</label>
-                <select
+                <label for="clientsAuto">Клиенты:</label>
+                <input
                         class="form-control"
                         required
                         id="clientsAuto"
                         name="clientsAuto"
-                >
-                </select>
+               />
+
             </div>
-            <button type="submit"
-                    id="bt-append"
-                    class="btn btn-success btn-block">
-                Изменить
-            </button>
+
             <button type="reset"
                     class="btn btn-secondary btn-block">
                 Отмена
             </button>
         </form>
+
+        <button type="submit"
+                id="ChangeAuto"
+                class="btn btn-success btn-block">
+            Изменить
+        </button>
         <div class="card mt-4">
             <div class="card-body">
                 <div
