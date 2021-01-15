@@ -62,7 +62,15 @@ namespace BackEnd.Controllers
         public void Put(int id, [FromForm] string brand, [FromForm] string person, [FromForm] string regnumber, [FromForm] string color, [FromForm] int datestart)
         {
             Auto auto = dbcontext.Autos.FirstOrDefault(p => p.Id == id);
-            auto.IdBrand = dbcontext.Brands.FirstOrDefault(p => p.Model == brand).id;
+            Brand brands = dbcontext.Brands.FirstOrDefault(p => p.id == auto.IdBrand);
+            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == auto.IdPerson);
+            changeperson.SurnameNP = person;
+
+            brands.TitleBrand = brand;
+            dbcontext.Brands.Update(brands);
+            dbcontext.Persons.Update(changeperson);
+            dbcontext.SaveChanges();
+            auto.IdBrand = dbcontext.Brands.FirstOrDefault(p => p.TitleBrand == brand).id;
             auto.IdPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == person).Id;
             auto.RegNumer = regnumber;
             auto.Color = color;
