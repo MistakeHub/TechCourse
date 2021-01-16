@@ -1,4 +1,6 @@
-﻿namespace BackEnd.Models
+﻿using System.Collections.Generic;
+
+namespace BackEnd.Models
 {
     public class Auto
     {
@@ -8,5 +10,6 @@
         public string RegNumer { get; set; }
         public string Color { get; set; }
         public int DateStart { get; set; }
+        public List<Break> Breaks { get; set; }
     }
 }

@@ -14,5 +14,7 @@ namespace BackEnd.Models.ViewModels
         public string RegNumer { get; set; }
         public string Color { get; set; }
         public int DateStart { get; set; }
+        public string Breaks { get; set; }
+
     }
 }

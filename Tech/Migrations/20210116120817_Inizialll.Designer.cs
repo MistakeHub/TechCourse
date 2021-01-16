@@ -4,14 +4,16 @@ using BackEnd.InterTech;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    partial class TechDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210116120817_Inizialll")]
+    partial class Inizialll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,9 +94,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("AutoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("BreakName")
                         .HasColumnType("nvarchar(max)");
 
@@ -104,9 +103,12 @@ namespace BackEnd.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int?>("RequestForFixId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AutoId");
+                    b.HasIndex("RequestForFixId");
 
                     b.ToTable("Breaks");
                 });
@@ -193,13 +195,13 @@ namespace BackEnd.Migrations
                     b.Property<DateTime>("Daterequest")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdAuto")
+                    b.Property<int?>("IdAutoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdClient")
+                    b.Property<int?>("IdClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdEnroller")
+                    b.Property<int?>("IdEnrollerId")
                         .HasColumnType("int");
 
                     b.Property<double>("PriceBreak")
@@ -209,6 +211,12 @@ namespace BackEnd.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdAutoId");
+
+                    b.HasIndex("IdClientId");
+
+                    b.HasIndex("IdEnrollerId");
 
                     b.ToTable("Requests");
                 });
@@ -245,12 +253,33 @@ namespace BackEnd.Migrations
 
             modelBuilder.Entity("BackEnd.Models.Break", b =>
                 {
-                    b.HasOne("BackEnd.Models.Auto", null)
+                    b.HasOne("BackEnd.Models.RequestForFix", null)
                         .WithMany("Breaks")
-                        .HasForeignKey("AutoId");
+                        .HasForeignKey("RequestForFixId");
                 });
 
-            modelBuilder.Entity("BackEnd.Models.Auto", b =>
+            modelBuilder.Entity("BackEnd.Models.RequestForFix", b =>
+                {
+                    b.HasOne("BackEnd.Models.Auto", "IdAuto")
+                        .WithMany()
+                        .HasForeignKey("IdAutoId");
+
+                    b.HasOne("BackEnd.Models.Client", "IdClient")
+                        .WithMany()
+                        .HasForeignKey("IdClientId");
+
+                    b.HasOne("BackEnd.Models.Enroller", "IdEnroller")
+                        .WithMany()
+                        .HasForeignKey("IdEnrollerId");
+
+                    b.Navigation("IdAuto");
+
+                    b.Navigation("IdClient");
+
+                    b.Navigation("IdEnroller");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.RequestForFix", b =>
                 {
                     b.Navigation("Breaks");
                 });

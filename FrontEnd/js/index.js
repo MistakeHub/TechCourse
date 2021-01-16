@@ -192,6 +192,7 @@ function GetAutos(data) {
                 <td id="regnumber">${elem.regNumer}</td>
                 <td id="colorAuto">${elem.color}</td>
                 <td id="DateStart">${elem.dateStart}</td>
+                <td id="Breaks">${elem.breaks}</td>
                </tr>`,
             ""
         )
@@ -217,6 +218,7 @@ function clickAutosTable() {
         $("#clientsAuto").val(tds.getElementsByTagName('td').namedItem('person').innerHTML)
 
 
+
     })
 }
 
@@ -230,16 +232,29 @@ function ChangeAuto() {
     var Color=document.getElementById('colorAuto').value;
     var DateStart=document.getElementById('yearOfIssueAuto').value;
     var Client=document.getElementById('clientsAuto').value;
+    var breaks = $('#breaksAuto option:selected').val();
+
 
 
     $.ajax({
         url:"https://localhost:44354/api/Auto/"+id,
         type:'PUT',
-        data:{brand:mark, person:Client,regnumber:regnumber,color:Color, datestart:+DateStart },
+        data:{brand:mark, person:Client,regnumber:regnumber,color:Color, datestart:+DateStart,breaks:breaks },
         success:(response)=> open('http://localhost:63342/FrontEnd/doc/tables.html')
 
 
     })
+}
+
+function GetBreaks(data) {
+    $("#breaksAuto").html(
+        data.reduce(
+            (ans, elem) =>
+                ans +
+                `<option name=${elem.id}>${elem.breakName}</option>`,
+            ""
+        )
+    );
 }
 
 $(function () {
@@ -253,6 +268,12 @@ $(function () {
 
         // success.
     }) // ajax.
+
+    $.ajax({
+        url: "https://localhost:44354/api/Auto/Break",
+        type: 'GET',
+        success: (response) => GetBreaks(response)
+    })
 
     clickAutosTable();
     $("#ChangeAuto").click(ChangeAuto)

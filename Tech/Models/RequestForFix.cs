@@ -7,10 +7,10 @@ namespace BackEnd.Models
     {
 
       public int Id { get; set; }
-      public Client IdClient { get; set; }
-      public  Enroller IdEnroller { get; set; }
-      public Auto IdAuto { get; set; }
-      public List<Break> Breaks { get; set; }
+      public int IdClient { get; set; }
+      public int IdEnroller { get; set; }
+      public int IdAuto { get; set; }
+  
       public DateTime Daterequest { get; set; }
       public bool StatusReady { get; set; }
       public double PriceBreak { get; set; }

@@ -121,6 +121,6 @@ C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\staticwebassets\Tech.Stati
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\Tech.dll
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\Tech.pdb
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\BackEnd.genruntimeconfig.cache
-C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\BackEnd.csprojAssemblyReference.cache
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\BackEnd.csproj.CoreCompileInputs.cache
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\Tech.MvcApplicationPartsAssemblyInfo.cache
+C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\BackEnd.csprojAssemblyReference.cache

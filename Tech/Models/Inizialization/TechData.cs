@@ -98,7 +98,7 @@ namespace BackEnd.Models.Inizialization
 
             };
             context.Breaks.RemoveRange(context.Breaks);
-            context.Breaks.AddRange(context.Breaks);
+            context.Breaks.AddRange(breaks);
             context.SaveChanges();
 
             List<Enroller> enrollers=new List<Enroller>()
@@ -114,9 +114,9 @@ namespace BackEnd.Models.Inizialization
             context.SaveChanges();
             List<Auto> autos=new List<Auto>()
             {
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="BMW").id, Color = "Red",DateStart = 2019, IdPerson = context.Persons.First(p=>p.Passport=="1432827").Id, RegNumer = "AK33BM"},
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Audi").id, Color = "Blue",DateStart = 2015, IdPerson = context.Persons.First(p=>p.Passport=="B179351").Id, RegNumer = "DT43DK"},
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Bugatti").id, Color = "White",DateStart = 2017, IdPerson = context.Persons.First(p=>p.Passport=="9038745").Id, RegNumer = "AM53PL"},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="BMW").id, Color = "Red",DateStart = 2019, IdPerson = context.Persons.First(p=>p.Passport=="1432827").Id, RegNumer = "AK33BM", Breaks = new List<Break>(context.Breaks.Where(p=>p.BreakName=="Поломан Двигатель").ToList())},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Audi").id, Color = "Blue",DateStart = 2015, IdPerson = context.Persons.First(p=>p.Passport=="B179351").Id, RegNumer = "DT43DK", Breaks = new List<Break>(context.Breaks.Where(p=>p.BreakName=="Пробито колесо").ToList())},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Bugatti").id, Color = "White",DateStart = 2017, IdPerson = context.Persons.First(p=>p.Passport=="9038745").Id, RegNumer = "AM53PL", Breaks = new List<Break>(context.Breaks.Where(p=>p.BreakName=="Поломка Руля").ToList())},
 
 
             };

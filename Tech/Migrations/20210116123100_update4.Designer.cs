@@ -4,14 +4,16 @@ using BackEnd.InterTech;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    partial class TechDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210116123100_update4")]
+    partial class update4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,6 +58,9 @@ namespace BackEnd.Migrations
                     b.Property<int>("IdBrand")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdBreak")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdPerson")
                         .HasColumnType("int");
 
@@ -92,9 +97,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("AutoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("BreakName")
                         .HasColumnType("nvarchar(max)");
 
@@ -105,8 +107,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AutoId");
 
                     b.ToTable("Breaks");
                 });
@@ -241,18 +241,6 @@ namespace BackEnd.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
-                });
-
-            modelBuilder.Entity("BackEnd.Models.Break", b =>
-                {
-                    b.HasOne("BackEnd.Models.Auto", null)
-                        .WithMany("Breaks")
-                        .HasForeignKey("AutoId");
-                });
-
-            modelBuilder.Entity("BackEnd.Models.Auto", b =>
-                {
-                    b.Navigation("Breaks");
                 });
 #pragma warning restore 612, 618
         }
