@@ -33,8 +33,8 @@ namespace BackEnd.Controllers
 
             return dbContext.Requests.Select(p=> new FixRequestViewModel(){Id = p.Id,Client =dbContext.Persons.FirstOrDefault(d=>d.Id==p.IdClient).SurnameNP, Enroller 
                 = string.Join(",",dbContext.Enrollers.Select(d=> new EnrollerViewModel(){ Person = dbContext.Persons.FirstOrDefault(c=>c.Id==d.IdPerson).SurnameNP, }.Person).ToList()).ToString(),
-                Auto  =string.Join("",dbContext.Autos.Select(d=>new AutoViewModel(){Brand =dbContext.Brands.FirstOrDefault(c=>c.id==d.IdBrand+3).TitleBrand }.Brand).ToList()).ToString(), 
-                DateEnd = p.Daterequest,Daterequest = p.Daterequest, StatusReady = p.StatusReady, PriceBreak = p.PriceBreak}).ToList();
+                Auto  =string.Join("",dbContext.Autos.Select(d=>new AutoViewModel(){Brand =dbContext.Brands.FirstOrDefault(c=>c.id==d.IdBrand+3).TitleBrand+", "+ dbContext.Brands.FirstOrDefault(c => c.id == d.IdBrand + 3).Model}.Brand).ToList()).ToString(), 
+                DateEnd = p.DateEnd,Daterequest = p.Daterequest, StatusReady = p.StatusReady, PriceBreak = p.PriceBreak}).ToList();
         }
 
 
@@ -56,11 +56,8 @@ namespace BackEnd.Controllers
 
         }
 
-        // PUT api/<FixRequestController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        
+        
 
         // DELETE api/<FixRequestController>/5
         [HttpDelete("{id}")]
