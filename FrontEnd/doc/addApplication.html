@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Заявки</title>
+    <title>Добавление заявки</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -58,28 +58,66 @@
     </div>
 </nav>
 
-<div class="container">
-    <button type="button" class="btn btn-primary btn-lg btn-block">
-        <a href="../doc/addApplication.html" class="A" style="color: white">Добавить заявку</a></button>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Номер заказа</th>
-            <th>Дата обращения</th>
-            <th>Дата окончания работ</th>
-            <th>ФИО клиента</th>
-            <th>ФИО работника</th>
-            <th>Автомобиль</th>
-            <th>Цена ремонта</th>
-            <th>Статус готовности</th>
-        </tr>
-        </thead>
-        <tbody id="SubEdition">
+<div class="row container justify-content-center">
+    <form class="form" name="myform" method="post" action="#">
+        <legend> Добавление заявки</legend>
 
-        </tbody>
-    </table>
+        <div class="form-group">
+            <label for="clients">Клиент:</label>
+            <select
+                    class="form-control"
+                    required
+                    id="clients"
+                    name="clients"
+            >
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="worker">Работник:</label>
+            <select
+                    class="form-control"
+                    required
+                    id="worker"
+                    name="worker"
+            >
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="auto">Автомобиль:</label>
+            <select
+                    class="form-control"
+                    required
+                    id="auto"
+                    name="auto"
+            >
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dateOfApplication">Дата обращения:</label>
+            <input type="datetime-local"
+                   class="form-control"
+                   id="dateOfApplication"
+                   name="dateOfApplication"
+                   required />
+        </div>
+
+        <div class="form-group">
+            <label for="completionDate">Дата окончания работ:</label>
+            <input type="datetime-local"
+                   class="form-control"
+                   id="completionDate"
+                   name="completionDate"
+                   required />
+        </div>
+
+        <input type="submit" class="btn btn-success" id="append" value="Добавить"  />
+        <input type="reset" class="btn btn-danger" id="clear" value="Отмена" />
+    </form>
+
 </div>
-
 
 <footer class="border-top footer text-muted bg-dark">
     <div class="container">&copy; 2021 - Моргащук Кирилл и Смородин Владислав. Донецк</div>
@@ -89,6 +127,7 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="../lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="../lib/jquery/dist/jquery.js"></script>
+<script src="../js/AutosRequests.js"></script>
 <script type="module" src="../dist/controller.js"></script>
 </body>
 </html>
