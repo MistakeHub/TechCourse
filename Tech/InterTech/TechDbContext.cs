@@ -17,6 +17,7 @@ namespace BackEnd.InterTech
         public DbSet<RequestForFix> Requests { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Status> Statuses { get; set; }
+        public DbSet<RequestForFixArchive> RequestForFixArchives { get; set; }
 
     }
 }

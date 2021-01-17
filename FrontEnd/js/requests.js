@@ -32,8 +32,8 @@ function GetQuery2(data) {
                 ans +
                 `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.mark}</td>
-                <td>${elem.yearOfIssueAuto}</td>
+                <td>${elem.brand}</td>
+                <td>${elem.dateStart}</td>
                </tr>`,
             ""
         )
@@ -42,7 +42,7 @@ function GetQuery2(data) {
 
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Query/Query2/",
+        url: "https://localhost:44354/api/Query/Query2/Стеблева Агафья Юлиевна",
         type: 'GET',
         success: (response) => GetQuery2(response)
     })

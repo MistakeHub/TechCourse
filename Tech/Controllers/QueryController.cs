@@ -40,7 +40,7 @@ namespace BackEnd.Controllers
         {
 
             int idPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == surname).Id;
-            List<AutoViewModel> viewModel = dbcontext.Autos.Where(d => d.IdPerson == idPerson).Select(p => new AutoViewModel(){Brand = dbcontext.Brands.FirstOrDefault(d=>d.id==p.IdBrand).TitleBrand,  DateStart = p.DateStart}).ToList();
+            List<AutoViewModel> viewModel = dbcontext.Autos.Where(d => d.IdPerson == idPerson).Select(p => new AutoViewModel(){Id=p.Id,Brand = dbcontext.Brands.FirstOrDefault(d=>d.id==p.IdBrand).TitleBrand,  DateStart = p.DateStart}).ToList();
             return viewModel;
         }
 

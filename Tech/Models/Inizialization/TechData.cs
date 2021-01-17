@@ -120,6 +120,8 @@ namespace BackEnd.Models.Inizialization
 
 
             };
+
+            
             context.Autos.RemoveRange(context.Autos);
             context.Autos.AddRange(autos);
             context.SaveChanges();
@@ -136,6 +138,16 @@ namespace BackEnd.Models.Inizialization
             }; 
             context.Clients.RemoveRange(context.Clients);
             context.Clients.AddRange(clients);
+            context.SaveChanges();
+
+            List<RequestForFix> requests=new List<RequestForFix>()
+            {
+
+                new RequestForFix(){Daterequest = new DateTime(2019,11,11), DateEnd = new DateTime(2020,01,11), IdAuto = autos.FirstOrDefault(p=>p.RegNumer=="DT43DK").Id, IdClient = persons.FirstOrDefault(p=>p.SurnameNP=="Венедиктов Артём Леонидович").Id, IdEnroller = persons.FirstOrDefault(p=>p.Passport=="RF32816").Id, PriceBreak =autos.FirstOrDefault(p=>p.RegNumer=="AK33BM").Breaks.Sum(d=>d.Price), StatusReady = false}
+            };
+
+            context.Requests.RemoveRange(context.Requests);
+            context.Requests.AddRange(requests);
             context.SaveChanges();
 
 
