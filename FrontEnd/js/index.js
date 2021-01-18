@@ -77,6 +77,7 @@ function ChangeClient() {
     })
 }
 
+//получение работника
 function GetWorkers(data) {
     $("#GetWorkers").html(
         data.reduce(
@@ -180,6 +181,7 @@ clickEnrollersTable();
 
 })
 
+//получение автомобиля
 function GetAutos(data) {
     $("#GetAutos").html(
         data.reduce(

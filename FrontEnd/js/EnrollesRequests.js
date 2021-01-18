@@ -8,7 +8,7 @@
     }) // ajax.
 }) // jQuery.
 
-//получение работника
+
 function GetSpeciality(data) {
     $("#specialty").html(
         data.reduce(
