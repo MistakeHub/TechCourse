@@ -44,5 +44,13 @@ namespace BackEnd.Controllers
             return viewModel;
         }
 
+        [HttpGet("Query7")]
+        public List<Enroller> Get7()
+        {
+
+            return new List<Enroller>();
+
+        }
+
     }
 }

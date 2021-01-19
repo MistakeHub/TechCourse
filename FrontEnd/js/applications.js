@@ -4,8 +4,8 @@ function GetApplications(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-                `<tr>
-                <td id="${elem.id}">${elem.id}</td>
+                `<tr id="${elem.id}">
+                <td id="idRequest">${elem.id}</td>
                 <td>${elem.client}</td>
                 <td>${elem.enroller}</td>
                 <td>${elem.auto}</td>
@@ -33,7 +33,7 @@ function GetClientOption(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-                `<option name=${elem.id}>${elem.client}</option>`,
+                `<option name=${elem.id}>${elem.surnameNP}</option>`,
             ""
         )
     );
@@ -44,7 +44,7 @@ function GetWorkerOption(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-                `<option name=${elem.id}>${elem.enroller}</option>`,
+                `<option name=${elem.id}>${elem.person}</option>`,
             ""
         )
     );
@@ -55,7 +55,7 @@ function GetAutoOption(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-                `<option name=${elem.id}>${elem.auto}</option>`,
+                `<option name=${elem.id}>${elem.brand}</option>`,
             ""
         )
     );
@@ -63,7 +63,7 @@ function GetAutoOption(data) {
 
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Client",
+        url: "https://localhost:44354/api/Client/Person",
         type: 'GET',
         success: (response) => GetClientOption(response)
     })
@@ -92,21 +92,22 @@ $(function () {
     // listen for a click
     clickApplicationsTable();
 
-    $("#butonApplication").click(confirmationApplication)
+    $("#buttonApplication").click(confirmationApplication)
 }) // jQuery.
 
 function clickApplicationsTable() {
     $("#GetApplications").on('click','tr', function(){
         // get the event targets ID
         var tds = document.getElementById(this.id);
+         console.log(this.id)
 
-        $("#butonApplication").val(tds.getElementsByTagName('td').namedItem('id').innerHTML);
+        $("#idReq").val(tds.getElementsByTagName('td').namedItem('idRequest').innerHTML);
     })
 }
 
 function confirmationApplication() {
 
-    var id=document.getElementById('butonApplication').value;
+    var id=document.getElementById('idReq').value;
 
     $.ajax({
         url:"https://localhost:44354/api/FixRequest/"+id,

@@ -45,12 +45,18 @@ namespace BackEnd.Controllers
         {
 
             Auto newAuto = dbContext.Autos.FirstOrDefault(p => p.Id == auto);
+            Enroller newEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == enroller);
+            newEnroller.idStatus = dbContext.Statuses.FirstOrDefault(p => p.status == "Занят").Id;
+           
+            
+            dbContext.Enrollers.Update(newEnroller);
             dbContext.Requests.Add(new RequestForFix()
             {
                 IdAuto = newAuto.Id, IdClient = dbContext.Clients.FirstOrDefault(p => p.Id == client).Id,
-                IdEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == enroller).Id, Daterequest = datestart,
+                IdEnroller = newEnroller.Id, Daterequest = datestart,
                 DateEnd = dateEnd, PriceBreak = newAuto.Breaks.Sum(p => p.Price),StatusReady = false,
             });
+          
             dbContext.SaveChanges();
 
 
@@ -67,6 +73,9 @@ namespace BackEnd.Controllers
             RequestForFix request = dbContext.Requests.FirstOrDefault(p => p.Id == id);
 
             request.StatusReady = true;
+            Enroller newEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == request.IdEnroller);
+            newEnroller.idStatus = dbContext.Statuses.FirstOrDefault(p => p.status =="Свободен").Id;
+            dbContext.Enrollers.Update(newEnroller);
 
             dbContext.RequestForFixArchives.Add(new RequestForFixArchive()
             {

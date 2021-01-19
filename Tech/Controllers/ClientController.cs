@@ -24,6 +24,10 @@ namespace BackEnd.Controllers
 
         }
         // GET: api/<ClientController>
+
+
+        
+
         [HttpGet]
         public List<ClientViewModel> Get()
         {
