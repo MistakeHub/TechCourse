@@ -44,6 +44,16 @@ namespace BackEnd.Controllers
             return viewModel;
         }
 
+        [HttpGet("Query3/{id}")]
+        public string Get3(int id)
+        {
+
+            string breaks = dbcontext.RequestForFixArchives.FirstOrDefault(p => p.IdClient == id).Breaks;
+
+
+            return breaks;
+        }
+
         [HttpGet("Query7")]
         public List<Enroller> Get7()
         {

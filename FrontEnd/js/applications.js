@@ -33,7 +33,7 @@ function GetClientOption(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-                `<option name=${elem.id}>${elem.surnameNP}</option>`,
+                `<option name=${elem.id}>${elem.surnamePerson}</option>`,
             ""
         )
     );
@@ -63,7 +63,7 @@ function GetAutoOption(data) {
 
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Client/Person",
+        url: "https://localhost:44354/api/Client",
         type: 'GET',
         success: (response) => GetClientOption(response)
     })

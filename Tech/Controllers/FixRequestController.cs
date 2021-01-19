@@ -81,7 +81,7 @@ namespace BackEnd.Controllers
             {
                 idRequest = request.Id, Daterequest = request.Daterequest, DateEnd = request.DateEnd,
                 IdAuto = request.IdAuto, IdClient = request.IdClient, IdEnroller = request.IdEnroller,
-                PriceBreak = request.PriceBreak, StatusReady = request.StatusReady
+                PriceBreak = request.PriceBreak, StatusReady = request.StatusReady, Breaks = request.Breaks
             });
 
             dbContext.Requests.Remove(request);

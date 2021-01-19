@@ -143,7 +143,7 @@ namespace BackEnd.Models.Inizialization
             List<RequestForFix> requests=new List<RequestForFix>()
             {
 
-                new RequestForFix(){Daterequest = new DateTime(2019,11,11), DateEnd = new DateTime(2020,01,11), IdAuto = autos.FirstOrDefault(p=>p.RegNumer=="DT43DK").Id, IdClient = persons.FirstOrDefault(p=>p.SurnameNP=="Венедиктов Артём Леонидович").Id, IdEnroller = enrollers.FirstOrDefault(p=>p.idStatus== statuses.FirstOrDefault(d=>d.status=="Свободен").Id).Id, PriceBreak =autos.FirstOrDefault(p=>p.RegNumer=="AK33BM").Breaks.Sum(d=>d.Price), StatusReady = false}
+                new RequestForFix(){Daterequest = new DateTime(2019,11,11), DateEnd = new DateTime(2020,01,11), IdAuto = autos.FirstOrDefault(p=>p.RegNumer=="DT43DK").Id, IdClient = persons.FirstOrDefault(p=>p.SurnameNP=="Венедиктов Артём Леонидович").Id, IdEnroller = enrollers.FirstOrDefault(p=>p.idStatus== statuses.FirstOrDefault(d=>d.status=="Свободен").Id).Id, PriceBreak =autos.FirstOrDefault(p=>p.RegNumer=="AK33BM").Breaks.Sum(d=>d.Price), StatusReady = false, Breaks = string.Join(',',autos.FirstOrDefault(p=>p.RegNumer=="AK33BM").Breaks.ToList() )}
             };
 
             context.Requests.RemoveRange(context.Requests);
