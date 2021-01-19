@@ -117,3 +117,25 @@ function confirmationApplication() {
 
     })
 }
+
+//добавление заявки
+function AddApplication() {
+
+    var clients = $('#clients option:selected').val();
+    var enroller = $('#enroller option:selected').val();
+    var auto = $('#auto option:selected').val();
+
+    var datestart = document.getElementById("datestart").value;
+    var dateEnd = document.getElementById("dateEnd").value;
+
+    $.ajax({
+        url: "https://localhost:44354/api/Auto",
+        type: 'POST',
+        data: { client: client, enroller: enroller, auto: auto, datestart : datestart, dateEnd: dateEnd },
+        success: (response) => alert("Заявка добавлена")
+    })
+}
+
+$(function () {
+    $("#append").click(AddApplication);
+})
