@@ -129,7 +129,7 @@ function AddApplication() {
     var dateEnd = document.getElementById("dateEnd").value;
 
     $.ajax({
-        url: "https://localhost:44354/api/Auto",
+        url: "https://localhost:44354/api/FixRequest",
         type: 'POST',
         data: { client: client, enroller: enroller, auto: auto, datestart : datestart, dateEnd: dateEnd },
         success: (response) => alert("Заявка добавлена")
