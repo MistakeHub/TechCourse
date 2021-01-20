@@ -44,6 +44,17 @@ namespace BackEnd.Controllers
             return viewModel;
         }
 
+        [HttpGet("Query3/{id}")]
+        public AutoViewModel Get3(int id)
+        {
+
+
+
+            string client = dbcontext.Persons.FirstOrDefault(p=>p.Id==id).SurnameNP;
+
+            return new AutoViewModel(){ Person = client, Breaks = dbcontext.RequestForFixArchives.FirstOrDefault(p => p.IdClient == id).Breaks };
+        }
+
         [HttpGet("Query7")]
         public List<Enroller> Get7()
         {

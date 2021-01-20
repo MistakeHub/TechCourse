@@ -40,7 +40,7 @@ function GetClientOption(data) {
 }
 
 function GetWorkerOption(data) {
-    $("#worker").html(
+    $("#enroller").html(
         data.reduce(
             (ans, elem) =>
                 ans +
@@ -112,7 +112,7 @@ function confirmationApplication() {
     $.ajax({
         url:"https://localhost:44354/api/FixRequest/"+id,
         type:'DELETE',
-        success:(response)=> open('http://localhost:63342/FrontEnd/doc/application.html')
+        success:(response)=> open('http://localhost:63342/FrontEnd/doc/applications.html')
 
 
     })
@@ -121,9 +121,9 @@ function confirmationApplication() {
 //добавление заявки
 function AddApplication() {
 
-    var clients = $('#clients option:selected').val();
-    var enroller = $('#enroller option:selected').val();
-    var auto = $('#auto option:selected').val();
+    var clients = $('#clients option:selected').attr('name');
+    var enroller = $('#enroller option:selected').attr('name');
+    var auto = $('#auto option:selected').attr('name');
 
     var datestart = document.getElementById("datestart").value;
     var dateEnd = document.getElementById("dateEnd").value;
@@ -131,7 +131,7 @@ function AddApplication() {
     $.ajax({
         url: "https://localhost:44354/api/FixRequest",
         type: 'POST',
-        data: { client: client, enroller: enroller, auto: auto, datestart : datestart, dateEnd: dateEnd },
+        data: { client: clients, enroller: enroller, auto: auto, datestart : datestart, dateEnd: dateEnd },
         success: (response) => alert("Заявка добавлена")
     })
 }

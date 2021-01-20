@@ -31,9 +31,9 @@ namespace BackEnd.Controllers
 
             
 
-            return dbContext.Requests.Select(p=> new FixRequestViewModel(){Id = p.Id,Client =dbContext.Persons.FirstOrDefault(d=>d.Id==p.IdClient).SurnameNP, Enroller 
-                = string.Join(",",dbContext.Enrollers.Select(d=> new EnrollerViewModel(){ Person = dbContext.Persons.FirstOrDefault(c=>c.Id==d.IdPerson).SurnameNP, }.Person).ToList()).ToString(),
-                Auto  =string.Join("",dbContext.Autos.Select(d=>new AutoViewModel(){Brand =dbContext.Brands.FirstOrDefault(c=>c.id==d.IdBrand+3).TitleBrand+", "+ dbContext.Brands.FirstOrDefault(c => c.id == d.IdBrand + 3).Model}.Brand).ToList()).ToString(), 
+            return dbContext.Requests.Select(p=> new FixRequestViewModel(){Id = p.Id,Client =dbContext.Persons.FirstOrDefault(d=>d.Id==dbContext.Clients.FirstOrDefault(c=>c.Id==p.IdClient).IdPerson).SurnameNP , Enroller 
+                = dbContext.Persons.FirstOrDefault(d => d.Id == dbContext.Enrollers.FirstOrDefault(c => c.Id == p.IdEnroller).IdPerson).SurnameNP,
+                Auto = dbContext.Brands.FirstOrDefault(d => d.id == dbContext.Autos.FirstOrDefault(c => c.Id == p.IdAuto).IdBrand).TitleBrand+", "+ dbContext.Brands.FirstOrDefault(d => d.id == dbContext.Autos.FirstOrDefault(c => c.Id == p.IdAuto).IdBrand).Model, 
                 DateEnd = p.DateEnd,Daterequest = p.Daterequest, StatusReady = p.StatusReady, PriceBreak = p.PriceBreak}).ToList();
         }
 
@@ -41,22 +41,30 @@ namespace BackEnd.Controllers
 
         // POST api/<FixRequestController>
         [HttpPost]
-        public void Post([FromForm] int client, [FromForm] int enroller, [FromForm] int auto, [FromForm] DateTime datestart, [FromForm] DateTime dateEnd)
+        public void Post([FromForm] int client, [FromForm] int enroller, [FromForm] int auto, [FromForm] DateTime datestart, [FromForm] DateTime dateEnd )
         {
 
-            Auto newAuto = dbContext.Autos.FirstOrDefault(p => p.Id == auto);
+            Auto newAuto = dbContext.Autos.Include(p=>p.Breaks).FirstOrDefault(p => p.Id == auto);
             Enroller newEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == enroller);
             newEnroller.idStatus = dbContext.Statuses.FirstOrDefault(p => p.status == "Занят").Id;
            
             
             dbContext.Enrollers.Update(newEnroller);
-            dbContext.Requests.Add(new RequestForFix()
-            {
-                IdAuto = newAuto.Id, IdClient = dbContext.Clients.FirstOrDefault(p => p.Id == client).Id,
-                IdEnroller = newEnroller.Id, Daterequest = datestart,
-                DateEnd = dateEnd, PriceBreak = newAuto.Breaks.Sum(p => p.Price),StatusReady = false,
-            });
-          
+            dbContext.SaveChanges();
+
+            RequestForFix newRequestForFix = new RequestForFix();
+            
+
+           newRequestForFix.IdAuto = newAuto.Id;
+           newRequestForFix.IdClient = dbContext.Clients.FirstOrDefault(p => p.Id == client).Id;
+           newRequestForFix.IdEnroller = newEnroller.Id;
+           newRequestForFix.Daterequest = datestart;
+           newRequestForFix.DateEnd = dateEnd;
+           newRequestForFix.PriceBreak = newAuto.Breaks.Sum(p => p.Price);
+           newRequestForFix.StatusReady = false;
+           newRequestForFix.Breaks = string.Join(',', dbContext.Autos.FirstOrDefault(p => p.Id == auto).Breaks);
+           dbContext.Requests.Add(newRequestForFix);
+
             dbContext.SaveChanges();
 
 
@@ -75,16 +83,22 @@ namespace BackEnd.Controllers
             request.StatusReady = true;
             Enroller newEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == request.IdEnroller);
             newEnroller.idStatus = dbContext.Statuses.FirstOrDefault(p => p.status =="Свободен").Id;
+           
+
             dbContext.Enrollers.Update(newEnroller);
-
+         
             dbContext.RequestForFixArchives.Add(new RequestForFixArchive()
-            {
-                idRequest = request.Id, Daterequest = request.Daterequest, DateEnd = request.DateEnd,
-                IdAuto = request.IdAuto, IdClient = request.IdClient, IdEnroller = request.IdEnroller,
-                PriceBreak = request.PriceBreak, StatusReady = request.StatusReady
-            });
+                {
+                    idRequest = request.Id, Daterequest = request.Daterequest, DateEnd = request.DateEnd,
+                    IdAuto = request.IdAuto, IdClient = request.IdClient, IdEnroller = request.IdEnroller,
+                    PriceBreak = request.PriceBreak, StatusReady = request.StatusReady, Breaks = request.Breaks
+                }
+            );
 
+            Auto auto = dbContext.Autos.FirstOrDefault(p => p.Id == request.IdAuto);
+            dbContext.Autos.Remove(auto);
             dbContext.Requests.Remove(request);
+            dbContext.Breaks.UpdateRange(dbContext.Breaks);
             dbContext.SaveChanges();
 
         }
