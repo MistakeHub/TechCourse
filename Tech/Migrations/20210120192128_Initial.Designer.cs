@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    [Migration("20210119163854_Update10")]
-    partial class Update10
+    [Migration("20210120192128_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,9 +90,7 @@ namespace BackEnd.Migrations
             modelBuilder.Entity("BackEnd.Models.Break", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
 
                     b.Property<int?>("AutoId")
                         .HasColumnType("int");

@@ -2,7 +2,7 @@
 
 namespace BackEnd.Migrations
 {
-    public partial class update6 : Migration
+    public partial class Update3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,17 +18,38 @@ namespace BackEnd.Migrations
                 name: "AutoId",
                 table: "Breaks");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Breaks",
+            migrationBuilder.AddColumn<int>(
+                name: "BreaksId",
                 table: "Autos",
-                type: "nvarchar(max)",
+                type: "int",
                 nullable: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Autos_BreaksId",
+                table: "Autos",
+                column: "BreaksId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Autos_Breaks_BreaksId",
+                table: "Autos",
+                column: "BreaksId",
+                principalTable: "Breaks",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Autos_Breaks_BreaksId",
+                table: "Autos");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Autos_BreaksId",
+                table: "Autos");
+
             migrationBuilder.DropColumn(
-                name: "Breaks",
+                name: "BreaksId",
                 table: "Autos");
 
             migrationBuilder.AddColumn<int>(

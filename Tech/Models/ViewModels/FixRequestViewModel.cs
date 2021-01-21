@@ -12,7 +12,7 @@ namespace BackEnd.Models.ViewModels
         public string Client { get; set; }
         public string Enroller { get; set; }
         public string Auto { get; set; }
-
+        public string Breaks { get; set; }
         public DateTime Daterequest { get; set; }
         public bool StatusReady { get; set; }
         public double PriceBreak { get; set; }

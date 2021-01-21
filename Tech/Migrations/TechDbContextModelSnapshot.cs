@@ -47,6 +47,9 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("BreaksId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -63,6 +66,8 @@ namespace BackEnd.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BreaksId");
 
                     b.ToTable("Autos");
                 });
@@ -88,11 +93,6 @@ namespace BackEnd.Migrations
             modelBuilder.Entity("BackEnd.Models.Break", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AutoId")
                         .HasColumnType("int");
 
                     b.Property<string>("BreakName")
@@ -105,8 +105,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AutoId");
 
                     b.ToTable("Breaks");
                 });
@@ -285,15 +283,12 @@ namespace BackEnd.Migrations
                     b.ToTable("Statuses");
                 });
 
-            modelBuilder.Entity("BackEnd.Models.Break", b =>
-                {
-                    b.HasOne("BackEnd.Models.Auto", null)
-                        .WithMany("Breaks")
-                        .HasForeignKey("AutoId");
-                });
-
             modelBuilder.Entity("BackEnd.Models.Auto", b =>
                 {
+                    b.HasOne("BackEnd.Models.Break", "Breaks")
+                        .WithMany()
+                        .HasForeignKey("BreaksId");
+
                     b.Navigation("Breaks");
                 });
 #pragma warning restore 612, 618

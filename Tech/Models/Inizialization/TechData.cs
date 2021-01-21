@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using BackEnd.InterTech;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd.Models.Inizialization
 {
@@ -91,10 +92,10 @@ namespace BackEnd.Models.Inizialization
             List<Break> breaks=new List<Break>()
             {
 
-                new Break(){BreakName = "Поломан Двигатель", PeriodBreak = 37, Price = 1900},
-                new Break(){BreakName = "Поврежден бампер", PeriodBreak = 11, Price = 1000},
-                new Break(){BreakName = "Поломка Руля", PeriodBreak = 5, Price = 800},
-                new Break(){BreakName = "Пробито колесо", PeriodBreak = 1, Price = 500},
+                new Break(){Id = 0,BreakName = "Поломан Двигатель", PeriodBreak = 37, Price = 1900},
+                new Break(){Id = 1,BreakName = "Поврежден бампер", PeriodBreak = 11, Price = 1000},
+                new Break(){Id=2,BreakName = "Поломка Руля", PeriodBreak = 5, Price = 800},
+                new Break(){Id=3,BreakName = "Пробито колесо", PeriodBreak = 1, Price = 500},
 
             };
             context.Breaks.RemoveRange(context.Breaks);
@@ -112,18 +113,18 @@ namespace BackEnd.Models.Inizialization
             context.Enrollers.RemoveRange(context.Enrollers);
             context.Enrollers.AddRange(enrollers);
             context.SaveChanges();
-            List<Auto> autos=new List<Auto>()
+
+
+            List<Auto> autos = new List<Auto>()
             {
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="BMW").id, Color = "Red",DateStart = 2019, IdPerson = context.Persons.First(p=>p.Passport=="1432827").Id, RegNumer = "AK33BM", Breaks = new List<Break>(context.Breaks.Where(p=>p.BreakName=="Поломан Двигатель").ToList())},
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Audi").id, Color = "Blue",DateStart = 2015, IdPerson = context.Persons.First(p=>p.Passport=="B179351").Id, RegNumer = "DT43DK", Breaks = new List<Break>(context.Breaks.Where(p=>p.BreakName=="Пробито колесо").ToList())},
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Bugatti").id, Color = "White",DateStart = 2017, IdPerson = context.Persons.First(p=>p.Passport=="9038745").Id, RegNumer = "AM53PL", Breaks = new List<Break>(context.Breaks.Where(p=>p.BreakName=="Поломка Руля").ToList())},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="BMW").id, Color = "Red",DateStart = 2019, IdPerson = context.Persons.First(p=>p.Passport=="1432827").Id, RegNumer = "AK33BM", Breaks = context.Breaks.FirstOrDefault(p=>p.BreakName=="Поломан Двигатель")},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Audi").id, Color = "Blue",DateStart = 2015, IdPerson = context.Persons.First(p=>p.Passport=="B179351").Id, RegNumer = "DT43DK", Breaks = context.Breaks.FirstOrDefault(p=>p.BreakName=="Пробито колесо")},
+                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Bugatti").id, Color = "White",DateStart = 2017, IdPerson = context.Persons.First(p=>p.Passport=="9038745").Id, RegNumer = "AM53PL", Breaks = context.Breaks.FirstOrDefault(p=>p.BreakName=="Поломка Руля")},
 
 
             };
-
-            
             context.Autos.RemoveRange(context.Autos);
-            context.Autos.AddRange(autos);
+       context.Autos.AddRange(autos);
             context.SaveChanges();
             
             List<Client> clients=new List<Client>()

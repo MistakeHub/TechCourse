@@ -29,7 +29,7 @@ namespace BackEnd.Controllers
         [HttpGet]
         public List<AutoViewModel> Get()
         {
-            List<AutoViewModel> autoViewModel=dbcontext.Autos.Include(p=>p.Breaks).Select(p=>new AutoViewModel(){Id = p.Id, Person = dbcontext.Persons.FirstOrDefault(d=>d.Id==p.IdPerson).SurnameNP, Brand = dbcontext.Brands.FirstOrDefault(d=>d.id==p.IdBrand).TitleBrand, Color = p.Color, DateStart = p.DateStart, RegNumer = p.RegNumer, Breaks =string.Join(',', p.Breaks.Select(d=>d.BreakName))}).ToList();
+            List<AutoViewModel> autoViewModel=dbcontext.Autos.Include(p=>p.Breaks).Select(p=>new AutoViewModel(){Id = p.Id, Person = dbcontext.Persons.FirstOrDefault(d=>d.Id==p.IdPerson).SurnameNP, Brand = dbcontext.Brands.FirstOrDefault(d=>d.id==p.IdBrand).TitleBrand, Color = p.Color, DateStart = p.DateStart, RegNumer = p.RegNumer, Breaks =string.Join(',', p.Breaks.BreakName)}).ToList();
            
             return autoViewModel;
         }
@@ -48,22 +48,29 @@ namespace BackEnd.Controllers
         [HttpPost]
         public void Post([FromForm] string titlebrand, [FromForm]string model, [FromForm] int idperson, [FromForm]string regNumber, [FromForm]string color, [FromForm] int dateStart, [FromForm] string Breaks  )
         {
-
+         
             dbcontext.Brands.Add(new Brand() {Model = model, TitleBrand = titlebrand});
          
             dbcontext.SaveChanges();
             int IdBrand = dbcontext.Brands.FirstOrDefault(p => p.Model == model && p.TitleBrand == titlebrand).id;
                int IPerson=dbcontext.Persons.FirstOrDefault(p => p.Id == idperson).Id;
                
-            dbcontext.Autos.Add(new Auto()
-            {
-                IdBrand = IdBrand,
-                IdPerson = IPerson, Color = color,
-                RegNumer = regNumber, DateStart = dateStart, Breaks = dbcontext.Breaks.Where(p=> p.BreakName==Breaks).ToList()
-            });
             
             
+            Auto auto =new Auto(){};
 
+            auto.IdBrand = IdBrand;
+            auto.IdPerson = IPerson;
+            auto.Color = color;
+            auto.RegNumer = regNumber;
+            auto.DateStart = dateStart;
+            auto.Breaks = dbcontext.Breaks.FirstOrDefault(p => p.BreakName == Breaks);
+           
+           
+         
+           dbcontext.Breaks.UpdateRange(dbcontext.Breaks);
+            dbcontext.Autos.Add(auto);
+           
             dbcontext.SaveChanges();
 
 
@@ -89,8 +96,7 @@ namespace BackEnd.Controllers
             auto.Color = color;
             auto.DateStart = datestart;
             
-            
-                auto.Breaks.Add(dbcontext.Breaks.FirstOrDefault(p=>p.BreakName==breaks));
+                auto.Breaks= dbcontext.Breaks.FirstOrDefault(p => p.BreakName == breaks);
 
             
             dbcontext.Autos.Update(auto);

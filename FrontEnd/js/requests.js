@@ -53,22 +53,22 @@ $(function () {
 // 3.Перечень устраненных неисправностей в автомобиле данного владельца?
 function GetQuery3(data) {
     $("#GetQuery3").html(
-        data.reduce(
-            (ans, elem) =>
-                ans +
+
+
+
                 `<tr>
-                <td>${elem.id}</td>
-                <td>${elem.person}</td>
-                <td>${elem.breaks}</td>
+                <td>${data.id}</td>
+                <td>${data.person}</td>
+                <td>${data.breaks}</td>
                </tr>`,
             ""
-        )
+
     );
 }
 
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Query/Query3/Венедиктов Артём Леонидович",
+        url: "https://localhost:44354/api/Query/Query3/Клюкин Кирилл Глебович",
         type: 'GET',
         success: (response) => GetQuery3(response)
     })
@@ -78,23 +78,22 @@ $(function () {
 // 4.Фамилия, имя, отчество работника станции, устранявшего данную неисправность в автомобиле данного клиента, и время ее устранения?
 function GetQuery4(data) {
     $("#GetQuery4").html(
-        data.reduce(
-            (ans, elem) =>
-                ans +
+
+
                 `<tr>
-                <td>${elem.id}</td>
-                <td>${elem.enroller}</td>
-                <td>${elem.dateStart}</td>
-                <td>${elem.dateEnd}</td>
+                <td>${data.id}</td>
+                <td>${data.enroller}</td>
+                <td>${data.daterequest}</td>
+                <td>${data.dateEnd}</td>
                </tr>`,
             ""
-        )
+
     );
 }
 
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Query/Query4/Пробито колесо",
+        url: "https://localhost:44354/api/Query/Query4/Углицкий Вацлав Прохорович/Пробито колесо",
         type: 'GET',
         success: (response) => GetQuery4(response)
     })
@@ -109,8 +108,8 @@ function GetQuery5(data) {
                 ans +
                 `<tr>
                 <td>${elem.id}</td>
-                <td>${elem.client}</td>
-                <td>${elem.breaks}</td>
+                <td>${elem.surnamePerson}</td>
+               
                </tr>`,
             ""
         )
@@ -133,9 +132,9 @@ function GetQuery6(data) {
             (ans, elem) =>
                 ans +
                 `<tr>
-                <td>${elem.id}</td>
-                <td>${elem.brand}</td>
+               
                 <td>${elem.breaks}</td>
+                <td>${elem.count}</td>
                </tr>`,
             ""
         )
@@ -144,7 +143,7 @@ function GetQuery6(data) {
 
 $(function () {
     $.ajax({
-        url: "https://localhost:44354/api/Query/Query6/Поломан Двигатель",
+        url: "https://localhost:44354/api/Query/Query6/Audi",
         type: 'GET',
         success: (response) => GetQuery6(response)
     })
@@ -158,8 +157,8 @@ function GetQuery7(data) {
             (ans, elem) =>
                 ans +
                 `<tr>
-                <td>${elem.id}</td>
-                <td>${elem.enroller}</td>
+                <td>${elem.titleSpec}</td>
+                <td>${elem.count}</td>
                </tr>`,
             ""
         )

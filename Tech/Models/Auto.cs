@@ -10,6 +10,7 @@ namespace BackEnd.Models
         public string RegNumer { get; set; }
         public string Color { get; set; }
         public int DateStart { get; set; }
-        public List<Break> Breaks { get; set; }
+        public Break Breaks { get; set; }
+
     }
 }

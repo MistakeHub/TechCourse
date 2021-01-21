@@ -55,7 +55,7 @@ function GetAutoOption(data) {
         data.reduce(
             (ans, elem) =>
                 ans +
-                `<option name=${elem.id}>${elem.brand}</option>`,
+                `<option name=${elem.regNumer}>${elem.brand}</option>`,
             ""
         )
     );
@@ -106,7 +106,7 @@ function clickApplicationsTable() {
 }
 
 function confirmationApplication() {
-
+  
     var id=document.getElementById('idReq').value;
 
     $.ajax({
@@ -131,7 +131,7 @@ function AddApplication() {
     $.ajax({
         url: "https://localhost:44354/api/FixRequest",
         type: 'POST',
-        data: { client: clients, enroller: enroller, auto: auto, datestart : datestart, dateEnd: dateEnd },
+        data: { client: clients, enroller: enroller, regnumber: auto, datestart : datestart, dateEnd: dateEnd },
         success: (response) => alert("Заявка добавлена")
     })
 }

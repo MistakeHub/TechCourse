@@ -41,10 +41,10 @@ namespace BackEnd.Controllers
 
         // POST api/<FixRequestController>
         [HttpPost]
-        public void Post([FromForm] int client, [FromForm] int enroller, [FromForm] int auto, [FromForm] DateTime datestart, [FromForm] DateTime dateEnd )
+        public void Post([FromForm] int client, [FromForm] int enroller, [FromForm] string regnumber, [FromForm] DateTime datestart, [FromForm] DateTime dateEnd )
         {
 
-            Auto newAuto = dbContext.Autos.Include(p=>p.Breaks).FirstOrDefault(p => p.Id == auto);
+            Auto newAuto = dbContext.Autos.Include(p=>p.Breaks).FirstOrDefault(p => p.RegNumer == regnumber);
             Enroller newEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == enroller);
             newEnroller.idStatus = dbContext.Statuses.FirstOrDefault(p => p.status == "Занят").Id;
            
@@ -60,9 +60,9 @@ namespace BackEnd.Controllers
            newRequestForFix.IdEnroller = newEnroller.Id;
            newRequestForFix.Daterequest = datestart;
            newRequestForFix.DateEnd = dateEnd;
-           newRequestForFix.PriceBreak = newAuto.Breaks.Sum(p => p.Price);
+           newRequestForFix.PriceBreak += newAuto.Breaks.Price;
            newRequestForFix.StatusReady = false;
-           newRequestForFix.Breaks = string.Join(',', dbContext.Autos.FirstOrDefault(p => p.Id == auto).Breaks);
+           newRequestForFix.Breaks = string.Join(',', dbContext.Autos.FirstOrDefault(p => p.RegNumer == regnumber).Breaks.BreakName);
            dbContext.Requests.Add(newRequestForFix);
 
             dbContext.SaveChanges();

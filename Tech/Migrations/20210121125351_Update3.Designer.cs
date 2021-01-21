@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    [Migration("20210116123904_update6")]
-    partial class update6
+    [Migration("20210121125351_Update3")]
+    partial class Update3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,8 +49,8 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Breaks")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("BreaksId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -68,6 +68,8 @@ namespace BackEnd.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BreaksId");
 
                     b.ToTable("Autos");
                 });
@@ -93,9 +95,7 @@ namespace BackEnd.Migrations
             modelBuilder.Entity("BackEnd.Models.Break", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
 
                     b.Property<string>("BreakName")
                         .HasColumnType("nvarchar(max)");
@@ -187,6 +187,9 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("Breaks")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateEnd")
                         .HasColumnType("datetime2");
 
@@ -211,6 +214,45 @@ namespace BackEnd.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.RequestForFixArchive", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Breaks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Daterequest")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdAuto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdClient")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEnroller")
+                        .HasColumnType("int");
+
+                    b.Property<double>("PriceBreak")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("StatusReady")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("idRequest")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RequestForFixArchives");
                 });
 
             modelBuilder.Entity("BackEnd.Models.Specialty", b =>
@@ -241,6 +283,15 @@ namespace BackEnd.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.Auto", b =>
+                {
+                    b.HasOne("BackEnd.Models.Break", "Breaks")
+                        .WithMany()
+                        .HasForeignKey("BreaksId");
+
+                    b.Navigation("Breaks");
                 });
 #pragma warning restore 612, 618
         }
