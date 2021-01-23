@@ -91,8 +91,8 @@ namespace BackEnd.Controllers
                 {
                     idRequest = request.Id, Daterequest = request.Daterequest, DateEnd = request.DateEnd,
                     IdAuto = request.IdAuto, IdClient = request.IdClient, IdEnroller = request.IdEnroller,
-                    PriceBreak = request.PriceBreak, StatusReady = request.StatusReady, Breaks = request.Breaks
-                }
+                    PriceBreak = request.PriceBreak, StatusReady = request.StatusReady, Breaks = request.Breaks,Auto = string.Join(',',dbContext.Brands.FirstOrDefault(c=>dbContext.Autos.FirstOrDefault(d => d.Id == request.IdAuto).IdBrand==c.id).Model), Client =  string.Join(',', dbContext.Persons.FirstOrDefault(c => dbContext.Clients.FirstOrDefault(d => d.Id == request.IdClient).IdPerson == c.Id).SurnameNP), Enroller = string.Join(',', dbContext.Persons.FirstOrDefault(c => dbContext.Enrollers.FirstOrDefault(d => d.Id == request.IdEnroller).IdPerson == c.Id).SurnameNP), 
+            }
             );
 
             Auto auto = dbContext.Autos.FirstOrDefault(p => p.Id == request.IdAuto);
@@ -100,6 +100,13 @@ namespace BackEnd.Controllers
             dbContext.Requests.Remove(request);
             dbContext.Breaks.UpdateRange(dbContext.Breaks);
             dbContext.SaveChanges();
+
+        }
+
+        [HttpGet("Archive")]
+        public List<RequestForFixArchive> Get2()
+        {
+            return dbContext.RequestForFixArchives.ToList();
 
         }
     }

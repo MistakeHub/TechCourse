@@ -13,6 +13,9 @@ namespace BackEnd.Models
         public int IdClient { get; set; }
         public int IdEnroller { get; set; }
         public int IdAuto { get; set; }
+        public string Client { get; set; }
+        public string Enroller { get; set; }
+        public string Auto { get; set; }
         public string Breaks { get; set; }
         public DateTime Daterequest { get; set; }
         public bool StatusReady { get; set; }

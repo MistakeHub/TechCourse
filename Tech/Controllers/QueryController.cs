@@ -85,5 +85,36 @@ namespace BackEnd.Controllers
             return groups;
         }
 
+        [HttpGet("Reference")]
+        public Reference Get8()
+        {
+            return new Reference(){Countauto = dbcontext.Autos.Count(), NotBusyEnroller = dbcontext.Enrollers.Count(x=>dbcontext.Statuses.FirstOrDefault(d=>x.idStatus==d.Id).status=="Свободен")};
+
+        }
+
+        [HttpGet("Receipt")]
+        public Receipt Get9()
+        {
+          
+        
+
+
+            return new Receipt()
+            {
+                CountCompleted = dbcontext.RequestForFixArchives.Count(),
+                Sum = dbcontext.RequestForFixArchives.Sum(p => p.PriceBreak),
+                AutoCompleted = string.Join(',', dbcontext.Requests.Select(d => new { auto = dbcontext.Brands.FirstOrDefault(c => c.id == dbcontext.Autos.FirstOrDefault(p => p.Id == d.IdAuto).IdBrand).Model, })),
+                AutoNotCompleted = string.Join(',',
+                    dbcontext.RequestForFixArchives.Select(d => new
+                    {
+                        auto = dbcontext.Brands.FirstOrDefault(c =>
+                            c.id == dbcontext.Autos.FirstOrDefault(p => dbcontext.Brands.FirstOrDefault(a => a.id == p.IdBrand).Model == d.Auto).IdBrand).Model,
+                        time = d.DateEnd - d.Daterequest,
+                        breaks = d.Breaks
+                    }))
+
+            }; 
+        }
+
     }
 }
