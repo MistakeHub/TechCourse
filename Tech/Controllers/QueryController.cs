@@ -103,13 +103,12 @@ namespace BackEnd.Controllers
             {
                 CountCompleted = dbcontext.RequestForFixArchives.Count(),
                 Sum = dbcontext.RequestForFixArchives.Sum(p => p.PriceBreak),
-                AutoCompleted = string.Join(',', dbcontext.Requests.Select(d => new { auto = dbcontext.Brands.FirstOrDefault(c => c.id == dbcontext.Autos.FirstOrDefault(p => p.Id == d.IdAuto).IdBrand).Model, })),
-                AutoNotCompleted = string.Join(',',
+                AutoNotCompleted = string.Join(',', dbcontext.Requests.Select(d => new { auto = dbcontext.Brands.FirstOrDefault(c => c.id == dbcontext.Autos.FirstOrDefault(p => p.Id == d.IdAuto).IdBrand).Model, })),
+                AutoCompleted = string.Join(',',
                     dbcontext.RequestForFixArchives.Select(d => new
                     {
-                        auto = dbcontext.Brands.FirstOrDefault(c =>
-                            c.id == dbcontext.Autos.FirstOrDefault(p => dbcontext.Brands.FirstOrDefault(a => a.id == p.IdBrand).Model == d.Auto).IdBrand).Model,
-                        time = d.DateEnd - d.Daterequest,
+                        auto = d.Auto,
+                        time = d.DateEnd.Subtract(d.Daterequest).Days+"(в днях)",
                         breaks = d.Breaks
                     }))
 

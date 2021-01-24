@@ -5798,19 +5798,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vlad\\.nuget\\packages\\": {}
+    "C:\\Users\\Mistake22\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj",
+      "projectUniqueName": "C:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj",
       "projectName": "Tech",
-      "projectPath": "D:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj",
-      "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-      "outputPath": "D:\\TechCourse\\TechCourse\\Tech\\obj\\",
+      "projectPath": "C:\\TechCourse\\TechCourse\\Tech\\BackEnd.csproj",
+      "packagesPath": "C:\\Users\\Mistake22\\.nuget\\packages\\",
+      "outputPath": "C:\\TechCourse\\TechCourse\\Tech\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mistake22\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5859,12 +5859,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5873,7 +5867,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

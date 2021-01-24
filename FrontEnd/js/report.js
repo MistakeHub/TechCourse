@@ -2,17 +2,15 @@
 // Получение отчета
 function GetReport(data) {
     $("#GetReport").html(
-        data.reduce(
-            (ans, elem) =>
-                ans +
+       
                 `<tr>
-                <td>${elem.countCompleted}</td>
-                <td>${elem.sum}</td>
-                <td>${elem.autoCompleted}</td>
-                <td>${elem.autoNotCompleted}</td>
+                <td>${data.countCompleted}</td>
+                <td>${data.sum}</td>
+                <td>${data.autoCompleted}</td>
+                <td>${data.autoNotCompleted}</td>
                </tr>`,
             ""
-        )
+        
     );
 }
 

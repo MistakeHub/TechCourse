@@ -2,16 +2,14 @@
 // Получение справки
 function GetReference(data) {
     $("#GetReference").html(
-        data.reduce(
-            (ans, elem) =>
-                ans +
+       
                 `<tr>
-                <td>${elem.countauto}</td>
-                <td>${elem.notBusyEnroller}</td>
+                <td>${data.countauto}</td>
+                <td>${data.notBusyEnroller}</td>
                </tr>`,
             ""
         )
-    );
+    
 }
 
 $(function () {
