@@ -177,6 +177,7 @@ clickEnrollersTable();
     })
 
     $("#ChangeEnroller").click(ChangeEnroller)
+    $("#DeleteEnroller").click(DeleteEnroller)
 
 
 })
@@ -282,5 +283,15 @@ $(function () {
 })
 
 
+function ChangeEnroller() {
+
+    var id=document.getElementById('idEnroller').value;
+
+    $.ajax({
+        url:"https://localhost:44354/api/Enroller/"+id,
+        type:'DElETE',
+        success:(response)=> open('http://localhost:63342/FrontEnd/doc/tables.html')
+    })
+}
 
 
