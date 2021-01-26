@@ -283,7 +283,7 @@ $(function () {
 })
 
 
-function ChangeEnroller() {
+function DeleteEnroller() {
 
     var id=document.getElementById('idEnroller').value;
 
