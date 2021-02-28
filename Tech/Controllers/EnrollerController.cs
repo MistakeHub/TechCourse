@@ -106,6 +106,24 @@ namespace BackEnd.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Enroller enroller = dbcontext.Enrollers.FirstOrDefault(p => p.Id == id);
+
+            RequestForFix request =dbcontext.Requests.FirstOrDefault(p=>p.IdEnroller==id);
+            if (request != null)
+            {
+
+                request.IdEnroller = dbcontext.Enrollers.FirstOrDefault(p => p.Id >0).Id;
+                Enroller newenroller = dbcontext.Enrollers.FirstOrDefault(p => p.Id > request.IdEnroller);
+                newenroller.idStatus = dbcontext.Statuses.FirstOrDefault(p => p.status == "Занят").Id;
+                dbcontext.Enrollers.Update(newenroller);
+                dbcontext.Requests.Update(request);
+            }
+
+            dbcontext.Enrollers.Remove(enroller);
+            dbcontext.SaveChanges();
+            
+           
+
         }
     }
 }
