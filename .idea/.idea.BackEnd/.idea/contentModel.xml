@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\TechCourse\TechCourse" t="IncludeFlat">
+      <e p="BackEnd.sln" t="IncludeFlat" />
+      <e p="FrontEnd" t="IncludeRecursive">
+        <e p=".vscode" t="Include">
+          <e p="launch.json" t="Include" />
+        </e>
+        <e p="css" t="Include">
+          <e p="index.css" t="Include" />
+          <e p="main.css" t="Include" />
+          <e p="normalize.css" t="Include" />
+        </e>
+        <e p="doc" t="Include">
+          <e p="aboutProgram.html" t="Include" />
+          <e p="addApplication.html" t="Include" />
+          <e p="addAutoForm.html" t="Include" />
+          <e p="addFormClient.html" t="Include" />
+          <e p="addFormWorker.html" t="Include" />
+          <e p="applications.html" t="Include" />
+          <e p="queries" t="Include">
+            <e p="query1.html" t="Include" />
+            <e p="query2.html" t="Include" />
+            <e p="query3.html" t="Include" />
+            <e p="query4.html" t="Include" />
+            <e p="query5.html" t="Include" />
+            <e p="query6.html" t="Include" />
+            <e p="query7.html" t="Include" />
+          </e>
+          <e p="reference.html" t="Include" />
+          <e p="report.html" t="Include" />
+          <e p="tables.html" t="Include" />
+        </e>
+        <e p="img" t="Include">
+          <e p=".gitignore" t="Include" />
+          <e p="garage.svg" t="Include" />
+        </e>
+        <e p="index.html" t="Include" />
+        <e p="js" t="Include">
+          <e p="applications.js" t="Include" />
+          <e p="AutosRequests.js" t="Include" />
+          <e p="ClientRequests.js" t="Include" />
+          <e p="EnrollesRequests.js" t="Include" />
+          <e p="index.js" t="Include" />
+          <e p="reference.js" t="Include" />
+          <e p="report.js" t="Include" />
+          <e p="requests" t="Include">
+            <e p="query1.js" t="Include" />
+            <e p="query2.js" t="Include" />
+            <e p="query3.js" t="Include" />
+            <e p="query4.js" t="Include" />
+            <e p="query5.js" t="Include" />
+            <e p="query6.js" t="Include" />
+            <e p="query7.js" t="Include" />
+          </e>
+        </e>
+        <e p="lib" t="Include">
+          <e p="bootstrap" t="Include">
+            <e p="dist" t="Include">
+              <e p="css" t="Include">
+                <e p="bootstrap-grid.css" t="Include" />
+                <e p="bootstrap-grid.css.map" t="Include" />
+                <e p="bootstrap-grid.min.css" t="Include" />
+                <e p="bootstrap-grid.min.css.map" t="Include" />
+                <e p="bootstrap-reboot.css" t="Include" />
+                <e p="bootstrap-reboot.css.map" t="Include" />
+                <e p="bootstrap-reboot.min.css" t="Include" />
+                <e p="bootstrap-reboot.min.css.map" t="Include" />
+                <e p="bootstrap.css" t="Include" />
+                <e p="bootstrap.css.map" t="Include" />
+                <e p="bootstrap.min.css" t="Include" />
+                <e p="bootstrap.min.css.map" t="Include" />
+              </e>
+              <e p="js" t="Include">
+                <e p="bootstrap.bundle.js" t="Include" />
+                <e p="bootstrap.bundle.js.map" t="Include" />
+                <e p="bootstrap.bundle.min.js" t="Include" />
+                <e p="bootstrap.bundle.min.js.map" t="Include" />
+                <e p="bootstrap.js" t="Include" />
+                <e p="bootstrap.js.map" t="Include" />
+                <e p="bootstrap.min.js" t="Include" />
+                <e p="bootstrap.min.js.map" t="Include" />
+              </e>
+            </e>
+            <e p="LICENSE" t="Include" />
+          </e>
+          <e p="font-awesome" t="Include">
+            <e p="css" t="Include">
+              <e p="all.css" t="Include" />
+            </e>
+            <e p="webfonts" t="Include">
+              <e p="fa-brands-400.eot" t="Include" />
+              <e p="fa-brands-400.svg" t="Include" />
+              <e p="fa-brands-400.ttf" t="Include" />
+              <e p="fa-brands-400.woff" t="Include" />
+              <e p="fa-brands-400.woff2" t="Include" />
+              <e p="fa-regular-400.eot" t="Include" />
+              <e p="fa-regular-400.svg" t="Include" />
+              <e p="fa-regular-400.ttf" t="Include" />
+              <e p="fa-regular-400.woff" t="Include" />
+              <e p="fa-regular-400.woff2" t="Include" />
+              <e p="fa-solid-900.eot" t="Include" />
+              <e p="fa-solid-900.svg" t="Include" />
+              <e p="fa-solid-900.ttf" t="Include" />
+              <e p="fa-solid-900.woff" t="Include" />
+              <e p="fa-solid-900.woff2" t="Include" />
+            </e>
+          </e>
+          <e p="jquery" t="Include">
+            <e p="dist" t="Include">
+              <e p="jquery.js" t="Include" />
+              <e p="jquery.min.js" t="Include" />
+              <e p="jquery.min.map" t="Include" />
+            </e>
+            <e p="LICENSE.txt" t="Include" />
+          </e>
+        </e>
+        <e p="node_modules\@types" t="IncludeRecursive" />
+        <e p="node_modules\chalk" t="IncludeRecursive" />
+        <e p="node_modules\parcel-bundler" t="IncludeRecursive" />
+        <e p="node_modules\smooth-scrollbar" t="IncludeRecursive" />
+        <e p="node_modules\tslib" t="IncludeRecursive" />
+        <e p="package-lock.json" t="Include" />
+        <e p="package.json" t="Include" />
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Tech" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="BackEnd.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="AutoController.cs" t="Include" />
+          <e p="ClientController.cs" t="Include" />
+          <e p="EnrollerController.cs" t="Include" />
+          <e p="FixRequestController.cs" t="Include" />
+          <e p="QueryController.cs" t="Include" />
+        </e>
+        <e p="InterTech" t="Include">
+          <e p="TechDbContext.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20210120192128_Initial.cs" t="Include" />
+          <e p="20210120192128_Initial.Designer.cs" t="Include" />
+          <e p="20210121125351_Update3.cs" t="Include" />
+          <e p="20210121125351_Update3.Designer.cs" t="Include" />
+          <e p="20210123185908_Update4.cs" t="Include" />
+          <e p="20210123185908_Update4.Designer.cs" t="Include" />
+          <e p="TechDbContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="Address.cs" t="Include" />
+          <e p="Auto.cs" t="Include" />
+          <e p="Brand.cs" t="Include" />
+          <e p="Break.cs" t="Include" />
+          <e p="Client.cs" t="Include" />
+          <e p="Enroller.cs" t="Include" />
+          <e p="Inizialization" t="Include">
+            <e p="TechData.cs" t="Include" />
+          </e>
+          <e p="Person.cs" t="Include" />
+          <e p="Receipt.cs" t="Include" />
+          <e p="Reference.cs" t="Include" />
+          <e p="RequestForFix.cs" t="Include" />
+          <e p="RequestForFixArchive.cs" t="Include" />
+          <e p="Specialty.cs" t="Include" />
+          <e p="Status.cs" t="Include" />
+          <e p="ViewModels" t="Include">
+            <e p="AutoViewModel.cs" t="Include" />
+            <e p="ClientViewModel.cs" t="Include" />
+            <e p="EnrollerViewModel.cs" t="Include" />
+            <e p="FixRequestViewModel.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="BackEnd.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+      </e>
+    </e>
+    <e p="C:\Users\Mistake22\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Mistake22\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_BackEnd.424904681.00" t="ExcludeRecursive" />
+  </component>
+</project>

@@ -12,7 +12,7 @@ namespace BackEnd.Models.Inizialization
     {
         public static void Inizialization(TechDbContext context)
         {
-
+          
             List<Address> addresses=new List<Address>()
             {
                 new Address(){  Apartament = 646,Home = "дом 173m", Street ="ул.Хомутовский"},   
@@ -27,7 +27,7 @@ namespace BackEnd.Models.Inizialization
 
             context.Addresses.RemoveRange(context.Addresses);
             context.Addresses.AddRange(addresses);
-            context.SaveChanges();
+          
 
             List<Specialty> specialties=new List<Specialty>()
             {
@@ -42,7 +42,7 @@ namespace BackEnd.Models.Inizialization
           
             context.Specialties.AddRange(specialties);
            
-            context.SaveChanges();
+   
 
             List<Brand> brands=new List<Brand>()
             {
@@ -56,7 +56,7 @@ namespace BackEnd.Models.Inizialization
             };
             context.Brands.RemoveRange(context.Brands);
             context.Brands.AddRange(brands);
-            context.SaveChanges();
+            
             List<Person> persons=new List<Person>()
             {
                  new Person(){SurnameNP ="Котова Евдокия Данилевна",Passport = "FQ94951"},
@@ -76,7 +76,7 @@ namespace BackEnd.Models.Inizialization
 
             context.Persons.RemoveRange(context.Persons);
             context.Persons.AddRange(persons);
-            context.SaveChanges();
+          
             List<Status> statuses=new List<Status>()
             {
 
@@ -87,67 +87,72 @@ namespace BackEnd.Models.Inizialization
 
             context.Statuses.RemoveRange(context.Statuses);
             context.Statuses.AddRange(statuses);
-            context.SaveChanges();
+           
 
             List<Break> breaks=new List<Break>()
             {
 
-                new Break(){Id = 0,BreakName = "Поломан Двигатель", PeriodBreak = 37, Price = 1900},
-                new Break(){Id = 1,BreakName = "Поврежден бампер", PeriodBreak = 11, Price = 1000},
-                new Break(){Id=2,BreakName = "Поломка Руля", PeriodBreak = 5, Price = 800},
-                new Break(){Id=3,BreakName = "Пробито колесо", PeriodBreak = 1, Price = 500},
+                new Break(){BreakName = "Поломан Двигатель", PeriodBreak = 37, Price = 1900},
+                new Break(){BreakName = "Поврежден бампер", PeriodBreak = 11, Price = 1000},
+                new Break(){BreakName = "Поломка Руля", PeriodBreak = 5, Price = 800},
+                new Break(){BreakName = "Пробито колесо", PeriodBreak = 1, Price = 500},
+
+
+
 
             };
-            context.Breaks.RemoveRange(context.Breaks);
-            context.Breaks.AddRange(breaks);
-            context.SaveChanges();
+           
+
+            context.Break.RemoveRange(context.Break);
+            context.Break.AddRange(breaks);
+          
 
             List<Enroller> enrollers=new List<Enroller>()
             {
 
-                new Enroller(){IdPerson = context.Persons.First(p=> p.Passport=="RF32816").Id, IdSpecialty = context.Specialties.First(p=>p.TitleSpec=="Механик").Id, 
-                    idStatus = context.Statuses.FirstOrDefault(p=>p.status=="Свободен").Id, Level = "1", PeriodWork = "397"},
+                new Enroller(){Person = persons.First(p=> p.Passport=="RF32816"), Specialty = specialties.First(p=>p.TitleSpec=="Механик"), 
+                    Status = statuses.FirstOrDefault(p=>p.status=="Свободен"), Level = "1", PeriodWork = "397"},
 
 
             };
             context.Enrollers.RemoveRange(context.Enrollers);
             context.Enrollers.AddRange(enrollers);
-            context.SaveChanges();
+       
 
 
             List<Auto> autos = new List<Auto>()
             {
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="BMW").id, Color = "Red",DateStart = 2019, IdPerson = context.Persons.First(p=>p.Passport=="1432827").Id, RegNumer = "AK33BM", Breaks = context.Breaks.FirstOrDefault(p=>p.BreakName=="Поломан Двигатель")},
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Audi").id, Color = "Blue",DateStart = 2015, IdPerson = context.Persons.First(p=>p.Passport=="B179351").Id, RegNumer = "DT43DK", Breaks = context.Breaks.FirstOrDefault(p=>p.BreakName=="Пробито колесо")},
-                new Auto(){ IdBrand = context.Brands.First(p=>p.TitleBrand=="Bugatti").id, Color = "White",DateStart = 2017, IdPerson = context.Persons.First(p=>p.Passport=="9038745").Id, RegNumer = "AM53PL", Breaks = context.Breaks.FirstOrDefault(p=>p.BreakName=="Поломка Руля")},
+                new Auto(){ Brand = brands.First(p=>p.TitleBrand=="BMW"), Color = "Red",DateStart = 2019, Person = persons.First(p=>p.Passport=="1432827"), RegNumer = "AK33BM", Break = breaks.First(p=>p.Price==500),},
+                new Auto(){ Brand = brands.First(p=>p.TitleBrand=="Audi"), Color = "Blue",DateStart = 2015, Person = persons.First(p=>p.Passport=="B179351"), RegNumer = "DT43DK", Break =   breaks.First(p=>p.Price==800),},
+                new Auto(){ Brand = brands.First(p=>p.TitleBrand=="Bugatti"), Color = "White",DateStart = 2017, Person = persons.First(p=>p.Passport=="9038745"), RegNumer = "AM53PL", Break =  breaks.First(p=>p.Price==1900),},
 
 
             };
             context.Autos.RemoveRange(context.Autos);
        context.Autos.AddRange(autos);
-            context.SaveChanges();
+         
             
             List<Client> clients=new List<Client>()
             {
 
-                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==453).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="FQ94951").Id, PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==35).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="RJ24476").Id, PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==792).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="8J71375").Id, PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==760).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="Z392956").Id, PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), IdAddress = context.Addresses.FirstOrDefault(p=>p.Apartament==116).Id, IdPerson = context.Persons.FirstOrDefault(p=>p.Passport=="QX32591").Id, PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==453), Person = persons.FirstOrDefault(p=>p.Passport=="FQ94951"), PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==35), Person =persons.FirstOrDefault(p=>p.Passport=="RJ24476"), PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==792), Person = persons.FirstOrDefault(p=>p.Passport=="8J71375"), PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==760), Person = persons.FirstOrDefault(p=>p.Passport=="Z392956"), PhoneNumber = "341231"},
+                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==116), Person = persons.FirstOrDefault(p=>p.Passport=="QX32591"), PhoneNumber = "341231"},
 
             }; 
             context.Clients.RemoveRange(context.Clients);
             context.Clients.AddRange(clients);
-            context.SaveChanges();
+           
 
           
 
             context.Requests.RemoveRange(context.Requests);
             
             context.RequestForFixArchives.RemoveRange(context.RequestForFixArchives);
-            
             context.SaveChanges();
+
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BackEnd.InterTech;
 using BackEnd.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,19 +20,19 @@ namespace BackEnd.Controllers
 
         public ClientController(TechDbContext context)
         {
-            
-                dbcontext = context;
+
+            dbcontext = context;
 
         }
         // GET: api/<ClientController>
 
 
-        
+
 
         [HttpGet]
         public List<ClientViewModel> Get()
         {
-            List<ClientViewModel> viewModel= dbcontext.Clients.Select(p=>new ClientViewModel(){ id=p.Id, PhoneNumber = p.PhoneNumber, Date = p.DateBirth, SurnamePerson = dbcontext.Persons.FirstOrDefault(c=>c.Id==p.IdPerson).SurnameNP, TitleAddress = dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Street +", "+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Home + ","+ dbcontext.Addresses.FirstOrDefault(d=>d.Id==p.IdAddress).Apartament }).ToList();
+            List<ClientViewModel> viewModel = dbcontext.Clients.Include(p=>p.Person).Select(p => new ClientViewModel() { id = p.Id, PhoneNumber = p.PhoneNumber, Date = p.DateBirth, SurnamePerson =p.Person.SurnameNP, TitleAddress = p.Address.Street + ", " + p.Address.Home + "," + p.Address.Apartament }).ToList();
             return viewModel;
         }
 
@@ -56,32 +57,31 @@ namespace BackEnd.Controllers
 
         // POST api/<ClientController>
         [HttpPost]
-        public void Post([FromForm] string surnameNp, [FromForm] string passport, [FromForm]string street, [FromForm] string home, [FromForm] int apartametn, [FromForm]int year , [FromForm]int mounth, [FromForm]int day, [FromForm]string phonenumber)
+        public void Post([FromForm] string surnameNp, [FromForm] string passport, [FromForm] string street, [FromForm] string home, [FromForm] int apartametn, [FromForm] int year, [FromForm] int mounth, [FromForm] int day, [FromForm] string phonenumber)
         {
-            Person newPerson=new Person(){SurnameNP = surnameNp, Passport = passport};
-            Address newAddress= new Address() {Apartament = apartametn, Home = home, Street = street};
-            dbcontext.Persons.Add(new Person() {SurnameNP = surnameNp, Passport = passport});
-            dbcontext.Addresses.Add(new Address() {Apartament = apartametn, Home = home, Street = street});
+         
+            dbcontext.Persons.Add(new Person() { SurnameNP = surnameNp, Passport = passport });
+            dbcontext.Addresses.Add(new Address() { Apartament = apartametn, Home = home, Street = street });
             dbcontext.SaveChanges();
-            Client newClient=new Client(){ IdPerson = dbcontext.Persons.FirstOrDefault(p=>p.Passport==passport).Id, IdAddress = dbcontext.Addresses.FirstOrDefault(p => p.Street== street && p.Apartament==apartametn && p.Home==home ).Id, DateBirth = new DateTime(year, mounth, day),PhoneNumber = phonenumber};
+            Client newClient = new Client() { Person = dbcontext.Persons.FirstOrDefault(p => p.Passport == passport), Address = dbcontext.Addresses.FirstOrDefault(p => p.Street == street && p.Apartament == apartametn && p.Home == home), DateBirth = new DateTime(year, mounth, day), PhoneNumber = phonenumber };
             dbcontext.Clients.Add(newClient);
             dbcontext.SaveChanges();
         }
 
         // PUT api/<ClientController>/5
-        [HttpPut ("{id}")]
-        public void Put( int id, [FromForm] string surname, [FromForm] string phonenumber, [FromForm] DateTime dateofbirth, [FromForm] string address )
+        [HttpPut("{id}")]
+        public void Put(int id, [FromForm] string surname, [FromForm] string phonenumber, [FromForm] DateTime dateofbirth, [FromForm] string address)
         {
-            Client changeClient = dbcontext.Clients.FirstOrDefault(p => p.Id == id);
-            int idPerson= dbcontext.Persons.FirstOrDefault(p => p.Id==changeClient.IdPerson).Id;
+            Client changeClient = dbcontext.Clients.Include(p=>p.Person).Include(p=>p.Address).FirstOrDefault(p => p.Id == id);
+            int idPerson = dbcontext.Persons.FirstOrDefault(p => p.Id == changeClient.Person.Id).Id;
             var a = address.Split(',').ToArray();
-            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id==idPerson);
+            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == idPerson);
             changeperson.SurnameNP = surname;
             dbcontext.Persons.Update(changeperson);
-            int idAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == changeClient.IdAddress).Id;
-            
+            int idAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == changeClient.Address.Id).Id;
+
             Address changeAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == idAddress);
-            
+
             changeAddress.Street = a[0];
             changeAddress.Home = a[1];
             changeAddress.Apartament = int.Parse(a[2]);

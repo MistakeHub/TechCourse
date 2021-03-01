@@ -63,7 +63,6 @@ C:\Users\Mistake22\source\repos\BackEnd\Tech\obj\Debug\netcoreapp3.1\BackEnd.pdb
 C:\Users\Mistake22\source\repos\BackEnd\Tech\obj\Debug\netcoreapp3.1\BackEnd.genruntimeconfig.cache
 C:\TechCourse\TechCourse\Tech\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\TechCourse\TechCourse\Tech\bin\Debug\netcoreapp3.1\appsettings.json
-C:\TechCourse\TechCourse\Tech\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\TechCourse\TechCourse\Tech\bin\Debug\netcoreapp3.1\Tech.exe
 C:\TechCourse\TechCourse\Tech\bin\Debug\netcoreapp3.1\Tech.deps.json
 C:\TechCourse\TechCourse\Tech\bin\Debug\netcoreapp3.1\Tech.runtimeconfig.json
@@ -123,4 +122,5 @@ C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\Tech.pdb
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\BackEnd.genruntimeconfig.cache
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\BackEnd.csproj.CoreCompileInputs.cache
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\Tech.MvcApplicationPartsAssemblyInfo.cache
+C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\scopedcss\bundle\Tech.styles.css
 C:\TechCourse\TechCourse\Tech\obj\Debug\netcoreapp3.1\BackEnd.csprojAssemblyReference.cache

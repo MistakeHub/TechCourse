@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(TechDbContext))]
-    [Migration("20210123185908_Update4")]
-    partial class Update4
+    [Migration("20210228184748_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,10 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("BreaksId")
+                    b.Property<int?>("Brandid")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BreakId")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
@@ -58,10 +61,7 @@ namespace BackEnd.Migrations
                     b.Property<int>("DateStart")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdBrand")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPerson")
+                    b.Property<int>("PersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("RegNumer")
@@ -69,7 +69,11 @@ namespace BackEnd.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BreaksId");
+                    b.HasIndex("Brandid");
+
+                    b.HasIndex("BreakId");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Autos");
                 });
@@ -95,7 +99,9 @@ namespace BackEnd.Migrations
             modelBuilder.Entity("BackEnd.Models.Break", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("BreakName")
                         .HasColumnType("nvarchar(max)");
@@ -108,7 +114,7 @@ namespace BackEnd.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Breaks");
+                    b.ToTable("Break");
                 });
 
             modelBuilder.Entity("BackEnd.Models.Client", b =>
@@ -118,19 +124,23 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdAddress")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPerson")
+                    b.Property<int?>("PersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Clients");
                 });
@@ -142,22 +152,28 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("IdPerson")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdSpecialty")
-                        .HasColumnType("int");
-
                     b.Property<string>("Level")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PeriodWork")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("idStatus")
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SpecialtyId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("SpecialtyId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Enrollers");
                 });
@@ -187,8 +203,14 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("AutoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Breaks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateEnd")
                         .HasColumnType("datetime2");
@@ -196,13 +218,7 @@ namespace BackEnd.Migrations
                     b.Property<DateTime>("Daterequest")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdAuto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdClient")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEnroller")
+                    b.Property<int?>("EnrollerId")
                         .HasColumnType("int");
 
                     b.Property<double>("PriceBreak")
@@ -212,6 +228,12 @@ namespace BackEnd.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AutoId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("EnrollerId");
 
                     b.ToTable("Requests");
                 });
@@ -223,14 +245,14 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Auto")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("AutoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Breaks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Client")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateEnd")
                         .HasColumnType("datetime2");
@@ -238,28 +260,27 @@ namespace BackEnd.Migrations
                     b.Property<DateTime>("Daterequest")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Enroller")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdAuto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdClient")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEnroller")
+                    b.Property<int?>("EnrollerId")
                         .HasColumnType("int");
 
                     b.Property<double>("PriceBreak")
                         .HasColumnType("float");
 
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("StatusReady")
                         .HasColumnType("bit");
 
-                    b.Property<int>("idRequest")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AutoId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("EnrollerId");
+
+                    b.HasIndex("RequestId");
 
                     b.ToTable("RequestForFixArchives");
                 });
@@ -296,11 +317,114 @@ namespace BackEnd.Migrations
 
             modelBuilder.Entity("BackEnd.Models.Auto", b =>
                 {
-                    b.HasOne("BackEnd.Models.Break", "Breaks")
+                    b.HasOne("BackEnd.Models.Brand", "Brand")
                         .WithMany()
-                        .HasForeignKey("BreaksId");
+                        .HasForeignKey("Brandid");
 
-                    b.Navigation("Breaks");
+                    b.HasOne("BackEnd.Models.Break", "Break")
+                        .WithMany()
+                        .HasForeignKey("BreakId");
+
+                    b.HasOne("BackEnd.Models.Person", "Person")
+                        .WithMany("autos")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Break");
+
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.Client", b =>
+                {
+                    b.HasOne("BackEnd.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
+                    b.HasOne("BackEnd.Models.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.Enroller", b =>
+                {
+                    b.HasOne("BackEnd.Models.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.HasOne("BackEnd.Models.Specialty", "Specialty")
+                        .WithMany()
+                        .HasForeignKey("SpecialtyId");
+
+                    b.HasOne("BackEnd.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Specialty");
+
+                    b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.RequestForFix", b =>
+                {
+                    b.HasOne("BackEnd.Models.Auto", "Auto")
+                        .WithMany()
+                        .HasForeignKey("AutoId");
+
+                    b.HasOne("BackEnd.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("BackEnd.Models.Enroller", "Enroller")
+                        .WithMany()
+                        .HasForeignKey("EnrollerId");
+
+                    b.Navigation("Auto");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Enroller");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.RequestForFixArchive", b =>
+                {
+                    b.HasOne("BackEnd.Models.Auto", "Auto")
+                        .WithMany()
+                        .HasForeignKey("AutoId");
+
+                    b.HasOne("BackEnd.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("BackEnd.Models.Enroller", "Enroller")
+                        .WithMany()
+                        .HasForeignKey("EnrollerId");
+
+                    b.HasOne("BackEnd.Models.RequestForFix", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId");
+
+                    b.Navigation("Auto");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Enroller");
+
+                    b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.Person", b =>
+                {
+                    b.Navigation("autos");
                 });
 #pragma warning restore 612, 618
         }

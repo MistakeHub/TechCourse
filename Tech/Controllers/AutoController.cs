@@ -29,8 +29,8 @@ namespace BackEnd.Controllers
         [HttpGet]
         public List<AutoViewModel> Get()
         {
-            List<AutoViewModel> autoViewModel=dbcontext.Autos.Include(p=>p.Breaks).Select(p=>new AutoViewModel(){Id = p.Id, Person = dbcontext.Persons.FirstOrDefault(d=>d.Id==p.IdPerson).SurnameNP, Brand = dbcontext.Brands.FirstOrDefault(d=>d.id==p.IdBrand).TitleBrand, Color = p.Color, DateStart = p.DateStart, RegNumer = p.RegNumer, Breaks =string.Join(',', p.Breaks.BreakName)}).ToList();
-           
+            List<AutoViewModel> autoViewModel = dbcontext.Autos.Include(p => p.Break).Select(p => new AutoViewModel() { Id = p.Id, Person =p.Person.SurnameNP, Brand = p.Brand.TitleBrand, Color = p.Color, DateStart = p.DateStart, RegNumer = p.RegNumer, Breaks = string.Join(',', p.Break.BreakName) }).ToList();
+
             return autoViewModel;
         }
 
@@ -38,7 +38,7 @@ namespace BackEnd.Controllers
         public List<Break> GetBreaks()
         {
 
-            return dbcontext.Breaks.ToList();
+            return dbcontext.Break.ToList();
 
         }
 
@@ -46,31 +46,31 @@ namespace BackEnd.Controllers
 
         // POST api/<AutoController>
         [HttpPost]
-        public void Post([FromForm] string titlebrand, [FromForm]string model, [FromForm] int idperson, [FromForm]string regNumber, [FromForm]string color, [FromForm] int dateStart, [FromForm] string Breaks  )
+        public void Post([FromForm] string titlebrand, [FromForm] string model, [FromForm] int idperson, [FromForm] string regNumber, [FromForm] string color, [FromForm] int dateStart, [FromForm] string Breaks)
         {
-         
-            dbcontext.Brands.Add(new Brand() {Model = model, TitleBrand = titlebrand});
-         
+
+            dbcontext.Brands.Add(new Brand() { Model = model, TitleBrand = titlebrand });
+
             dbcontext.SaveChanges();
             int IdBrand = dbcontext.Brands.FirstOrDefault(p => p.Model == model && p.TitleBrand == titlebrand).id;
-               int IPerson=dbcontext.Persons.FirstOrDefault(p => p.Id == idperson).Id;
-               
             
-            
-            Auto auto =new Auto(){};
 
-            auto.IdBrand = IdBrand;
-            auto.IdPerson = IPerson;
+
+
+            Auto auto = new Auto() { };
+
+            auto.Brand = dbcontext.Brands.FirstOrDefault(p=>p.id==IdBrand);
+            auto.Person = dbcontext.Persons.FirstOrDefault(p=>p.Id==idperson);
             auto.Color = color;
             auto.RegNumer = regNumber;
             auto.DateStart = dateStart;
-            auto.Breaks = dbcontext.Breaks.FirstOrDefault(p => p.BreakName == Breaks);
-           
-           
-         
-           dbcontext.Breaks.UpdateRange(dbcontext.Breaks);
+            auto.Break = dbcontext.Break.FirstOrDefault(p => p.BreakName == Breaks);
+
+
+
+            dbcontext.Break.UpdateRange(dbcontext.Break);
             dbcontext.Autos.Add(auto);
-           
+
             dbcontext.SaveChanges();
 
 
@@ -78,27 +78,27 @@ namespace BackEnd.Controllers
 
         // PUT api/<AutoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromForm] string brand, [FromForm] string person, [FromForm] string regnumber, [FromForm] string color, [FromForm] int datestart,[FromForm] string breaks)
+        public void Put(int id, [FromForm] string brand, [FromForm] string person, [FromForm] string regnumber, [FromForm] string color, [FromForm] int datestart, [FromForm] string breaks)
         {
-            Auto auto = dbcontext.Autos.Include(p=>p.Breaks).FirstOrDefault(p => p.Id == id);
-            Brand brands = dbcontext.Brands.FirstOrDefault(p => p.id == auto.IdBrand);
-            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == auto.IdPerson);
-            
+            Auto auto = dbcontext.Autos.Include(p => p.Break).Include(p=>p.Person).Include(p=>p.Brand).FirstOrDefault(p => p.Id == id);
+            Brand brands = dbcontext.Brands.FirstOrDefault(p => p.id == auto.Brand.id);
+            Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == auto.Person.Id);
+
             changeperson.SurnameNP = person;
 
             brands.TitleBrand = brand;
             dbcontext.Brands.Update(brands);
             dbcontext.Persons.Update(changeperson);
             dbcontext.SaveChanges();
-            auto.IdBrand = dbcontext.Brands.FirstOrDefault(p => p.TitleBrand == brand).id;
-            auto.IdPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == person).Id;
+            auto.Brand = dbcontext.Brands.FirstOrDefault(p => p.TitleBrand == brand);
+            auto.Person = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == person);
             auto.RegNumer = regnumber;
             auto.Color = color;
             auto.DateStart = datestart;
-            
-                auto.Breaks= dbcontext.Breaks.FirstOrDefault(p => p.BreakName == breaks);
 
-            
+            auto.Break = dbcontext.Break.FirstOrDefault(p => p.BreakName == breaks);
+
+
             dbcontext.Autos.Update(auto);
             dbcontext.SaveChanges();
 

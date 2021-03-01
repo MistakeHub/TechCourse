@@ -3,11 +3,14 @@
     public class Enroller
     {
         public int Id { get; set; }
-        public int IdSpecialty { get; set; }
-        public int IdPerson { get; set; }
+       
         public string Level { get; set; }
         public string PeriodWork { get; set; }
-        public int idStatus { get; set; }
+      
+
+        public Person Person { get; set; }
+        public Specialty Specialty { get; set; }
+        public Status Status { get; set; }
 
     }
 }

@@ -6,6 +6,7 @@ using BackEnd.InterTech;
 using BackEnd.Models;
 using BackEnd.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,8 +30,9 @@ namespace BackEnd.Controllers
      
         public List<ClientViewModel> Get(string regnumber )
         {
-            int idClient = dbcontext.Autos.FirstOrDefault(p => p.RegNumer == regnumber).IdPerson-5;
-            List<ClientViewModel> viewModel = dbcontext.Clients.Where(d=>d.IdPerson==idClient).Select(p => new ClientViewModel() { id = p.Id, PhoneNumber = p.PhoneNumber, Date = p.DateBirth, SurnamePerson = dbcontext.Persons.FirstOrDefault(c => c.Id == p.IdPerson).SurnameNP, TitleAddress = dbcontext.Addresses.FirstOrDefault(d => d.Id == p.IdAddress).Street + ", " + dbcontext.Addresses.FirstOrDefault(d => d.Id == p.IdAddress).Home + "," + dbcontext.Addresses.FirstOrDefault(d => d.Id == p.IdAddress).Apartament }).ToList();
+            int idClient = dbcontext.Autos.Include(p=>p.Person).FirstOrDefault(p => p.RegNumer == regnumber).Person.Id;
+            Client client= dbcontext.Clients.Include(p => p.Person).Include(p=>p.Address).FirstOrDefault(p => p.Person.Id == idClient );
+            List<ClientViewModel> viewModel = dbcontext.Persons.Where(d=>d.Id==idClient).Select(p => new ClientViewModel() { id = p.Id, SurnamePerson = p.SurnameNP}).ToList();
             return viewModel;
         }
 
@@ -39,7 +41,7 @@ namespace BackEnd.Controllers
         public List<AutoViewModel> Get2(string surname)
         {
             int idPerson = dbcontext.Persons.FirstOrDefault(p => p.SurnameNP == surname).Id;
-            List<AutoViewModel> viewModel = dbcontext.Autos.Where(d => d.IdPerson == idPerson).Select(p => new AutoViewModel(){Id=p.Id,Brand = dbcontext.Brands.FirstOrDefault(d=>d.id==p.IdBrand).TitleBrand,  DateStart = p.DateStart}).ToList();
+            List<AutoViewModel> viewModel = dbcontext.Autos.Where(d => d.Person.Id == idPerson).Select(p => new AutoViewModel(){Id=p.Id, Brand = p.Brand.TitleBrand, DateStart = p.DateStart}).ToList();
             return viewModel;
         }
 
@@ -47,8 +49,8 @@ namespace BackEnd.Controllers
         public AutoViewModel Get3(string surname)
         {
             Person client = dbcontext.Persons.FirstOrDefault(p=>p.SurnameNP==surname);
-            var breaks = dbcontext.RequestForFixArchives.FirstOrDefault(p =>
-                dbcontext.Clients.FirstOrDefault(d => d.Id == p.IdClient).IdPerson == client.Id).Breaks;
+            var breaks = dbcontext.RequestForFixArchives.Include(p=>p.Client).ThenInclude(p=>p.Person).FirstOrDefault(p =>
+                p.Client.Person.Id == client.Id).Breaks;
             return new AutoViewModel(){ Person = client.SurnameNP, Breaks = breaks };
         }
 
@@ -56,8 +58,8 @@ namespace BackEnd.Controllers
         [HttpGet("Query4/{surname}/{breaks}")]
         public FixRequestViewModel Get4(string surname,string breaks )
         {
-            RequestForFixArchive request= dbcontext.RequestForFixArchives.FirstOrDefault(p => p.IdClient == dbcontext.Clients.FirstOrDefault(d=>d.IdPerson==dbcontext.Persons.FirstOrDefault(c=>c.SurnameNP==surname).Id).Id && p.Breaks == breaks);
-            return new FixRequestViewModel() { Enroller =dbcontext.Persons.FirstOrDefault(p=>p.Id==dbcontext.Enrollers.FirstOrDefault(d=>d.Id==request.IdEnroller).IdPerson).SurnameNP, Daterequest =request.Daterequest, DateEnd = request.DateEnd};
+            RequestForFixArchive request= dbcontext.RequestForFixArchives.Include(p=>p.Client).ThenInclude(p=>p.Person).Include(p=>p.Auto).Include(p=>p.Enroller).ThenInclude(p=>p.Person).Include(p=>p.Enroller).Include(p=>p.Auto).ThenInclude(p=>p.Break).FirstOrDefault(p => p.Client.Person.SurnameNP == surname  && p.Breaks == breaks);
+            return new FixRequestViewModel() { Enroller =request.Enroller.Person.SurnameNP, Daterequest =request.Daterequest, DateEnd = request.DateEnd};
         }
 
 
@@ -65,14 +67,14 @@ namespace BackEnd.Controllers
         public List<ClientViewModel> Get5( string breaks)
         {
  
-            return dbcontext.Requests.Where(p => p.Breaks == breaks).Select(p => new ClientViewModel() { SurnamePerson = dbcontext.Persons.FirstOrDefault(d => d.Id == dbcontext.Clients.FirstOrDefault(c => c.Id == p.IdClient).IdPerson).SurnameNP }).ToList(); ;
+            return dbcontext.Requests.Where(p => p.Breaks == breaks).Select(p => new ClientViewModel() { SurnamePerson = dbcontext.Persons.FirstOrDefault(d => d.Id == dbcontext.Clients.FirstOrDefault(c => c.Id == p.Client.Id).Person.Id).SurnameNP }).ToList(); ;
         }
 
         [HttpGet("Query6/{auto}")]
         public IQueryable Get6( string auto)
         {
             var Auto = dbcontext.Brands.FirstOrDefault(d => d.TitleBrand == auto).TitleBrand;
-            var Group = dbcontext.Autos.Where(d => dbcontext.Brands.FirstOrDefault(c=>c.id==d.IdBrand).TitleBrand == Auto).GroupBy(c => c.Breaks.BreakName).Select(p=>new {breaks=p.Key, count=p.Count()});
+            var Group = dbcontext.Autos.Where(d => dbcontext.Brands.FirstOrDefault(c=>c.id==d.Brand.id).TitleBrand == Auto).GroupBy(c => c.Break.BreakName).Select(p=>new {breaks=p.Key, count=p.Count()});
             return Group;
         }
 
@@ -80,7 +82,7 @@ namespace BackEnd.Controllers
         [HttpGet("Query7")]
         public IQueryable Get7()
         {
-            var groups = dbcontext.Enrollers.GroupBy(u=>u.IdSpecialty).Select(g=>new { dbcontext.Specialties.FirstOrDefault(p => p.Id == g.Key).TitleSpec, Count =g.Count()});
+            var groups = dbcontext.Enrollers.GroupBy(u=>u.Specialty.Id).Select(g=>new { dbcontext.Specialties.FirstOrDefault(p => p.Id == g.Key).TitleSpec, Count =g.Count()});
 
             return groups;
         }
@@ -88,7 +90,7 @@ namespace BackEnd.Controllers
         [HttpGet("Reference")]
         public Reference Get8()
         {
-            return new Reference(){Countauto = dbcontext.Autos.Count(), NotBusyEnroller = dbcontext.Enrollers.Count(x=>dbcontext.Statuses.FirstOrDefault(d=>x.idStatus==d.Id).status=="Свободен")};
+            return new Reference(){Countauto = dbcontext.Autos.Count(), NotBusyEnroller = dbcontext.Enrollers.Count(x=>dbcontext.Statuses.FirstOrDefault(d=>x.Status.Id==d.Id).status=="Свободен")};
 
         }
 
@@ -103,7 +105,7 @@ namespace BackEnd.Controllers
             {
                 CountCompleted = dbcontext.RequestForFixArchives.Count(),
                 Sum = dbcontext.RequestForFixArchives.Sum(p => p.PriceBreak),
-                AutoNotCompleted = string.Join(',', dbcontext.Requests.Select(d => new { auto = dbcontext.Brands.FirstOrDefault(c => c.id == dbcontext.Autos.FirstOrDefault(p => p.Id == d.IdAuto).IdBrand).Model, })),
+                AutoNotCompleted = string.Join(',', dbcontext.Requests.Select(d => new { auto = dbcontext.Brands.FirstOrDefault(c => c.id == dbcontext.Autos.FirstOrDefault(p => p.Id == d.Auto.Id).Brand.id).Model, })),
                 AutoCompleted = string.Join(',',
                     dbcontext.RequestForFixArchives.Select(d => new
                     {

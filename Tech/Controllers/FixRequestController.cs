@@ -14,8 +14,10 @@ namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FixRequestController : ControllerBase
     {
+        
         // GET: api/<FixRequestController>
         private TechDbContext dbContext;
 
@@ -31,10 +33,11 @@ namespace BackEnd.Controllers
 
             
 
-            return dbContext.Requests.Select(p=> new FixRequestViewModel(){Id = p.Id,Client =dbContext.Persons.FirstOrDefault(d=>d.Id==dbContext.Clients.FirstOrDefault(c=>c.Id==p.IdClient).IdPerson).SurnameNP , Enroller 
-                = dbContext.Persons.FirstOrDefault(d => d.Id == dbContext.Enrollers.FirstOrDefault(c => c.Id == p.IdEnroller).IdPerson).SurnameNP,
-                Auto = dbContext.Brands.FirstOrDefault(d => d.id == dbContext.Autos.FirstOrDefault(c => c.Id == p.IdAuto).IdBrand).TitleBrand+", "+ dbContext.Brands.FirstOrDefault(d => d.id == dbContext.Autos.FirstOrDefault(c => c.Id == p.IdAuto).IdBrand).Model, 
-                DateEnd = p.DateEnd,Daterequest = p.Daterequest, StatusReady = p.StatusReady, PriceBreak = p.PriceBreak}).ToList();
+           return dbContext.Requests.Select(p=> new FixRequestViewModel(){Id = p.Id,Client =p.Client.Person.SurnameNP , Enroller 
+                = p.Enroller.Person.SurnameNP,
+                Auto = p.Auto.Brand.TitleBrand+", "+ p.Auto.Brand.Model, 
+          
+            DateEnd = p.DateEnd,Daterequest = p.Daterequest, StatusReady = p.StatusReady, PriceBreak = p.PriceBreak}).ToList();
         }
 
 
@@ -44,9 +47,9 @@ namespace BackEnd.Controllers
         public void Post([FromForm] int client, [FromForm] int enroller, [FromForm] string regnumber, [FromForm] DateTime datestart, [FromForm] DateTime dateEnd )
         {
 
-            Auto newAuto = dbContext.Autos.Include(p=>p.Breaks).FirstOrDefault(p => p.RegNumer == regnumber);
+            Auto newAuto = dbContext.Autos.Include(p=>p.Break).Include(p=>p.Brand).FirstOrDefault(p => p.RegNumer == regnumber);
             Enroller newEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == enroller);
-            newEnroller.idStatus = dbContext.Statuses.FirstOrDefault(p => p.status == "Занят").Id;
+            newEnroller.Status = dbContext.Statuses.FirstOrDefault(p => p.status == "Занят");
            
             
             dbContext.Enrollers.Update(newEnroller);
@@ -55,14 +58,14 @@ namespace BackEnd.Controllers
             RequestForFix newRequestForFix = new RequestForFix();
             
 
-           newRequestForFix.IdAuto = newAuto.Id;
-           newRequestForFix.IdClient = dbContext.Clients.FirstOrDefault(p => p.Id == client).Id;
-           newRequestForFix.IdEnroller = newEnroller.Id;
+           newRequestForFix.Auto = newAuto;
+           newRequestForFix.Client = dbContext.Clients.FirstOrDefault(p => p.Id == client);
+           newRequestForFix.Enroller = newEnroller;
            newRequestForFix.Daterequest = datestart;
            newRequestForFix.DateEnd = dateEnd;
-           newRequestForFix.PriceBreak += newAuto.Breaks.Price;
+           newRequestForFix.PriceBreak += newAuto.Break.Price;
            newRequestForFix.StatusReady = false;
-           newRequestForFix.Breaks = string.Join(',', dbContext.Autos.FirstOrDefault(p => p.RegNumer == regnumber).Breaks.BreakName);
+           newRequestForFix.Breaks = string.Join(',', dbContext.Autos.FirstOrDefault(p => p.RegNumer == regnumber).Break.BreakName);
            dbContext.Requests.Add(newRequestForFix);
 
             dbContext.SaveChanges();
@@ -70,44 +73,45 @@ namespace BackEnd.Controllers
 
         }
 
-        
-        
 
+
+         
         // DELETE api/<FixRequestController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
 
-            RequestForFix request = dbContext.Requests.FirstOrDefault(p => p.Id == id);
+            RequestForFix request = dbContext.Requests.Include(p=>p.Enroller).ThenInclude(p=>p.Status).Include(p=>p.Auto).Include(p=>p.Client).ThenInclude(p=>p.Person).FirstOrDefault(p => p.Id == id);
 
             request.StatusReady = true;
-            Enroller newEnroller = dbContext.Enrollers.FirstOrDefault(p => p.Id == request.IdEnroller);
-            newEnroller.idStatus = dbContext.Statuses.FirstOrDefault(p => p.status =="Свободен").Id;
+            Enroller newEnroller = dbContext.Enrollers.Include(p=>p.Person).FirstOrDefault(p => p.Id == request.Enroller.Id);
+            newEnroller.Status.status= dbContext.Statuses.FirstOrDefault(p => p.status =="Свободен").status;
            
 
             dbContext.Enrollers.Update(newEnroller);
-         
+       
             dbContext.RequestForFixArchives.Add(new RequestForFixArchive()
                 {
-                    idRequest = request.Id, Daterequest = request.Daterequest, DateEnd = request.DateEnd,
-                    IdAuto = request.IdAuto, IdClient = request.IdClient, IdEnroller = request.IdEnroller,
-                    PriceBreak = request.PriceBreak, StatusReady = request.StatusReady, Breaks = request.Breaks,Auto = string.Join(',',dbContext.Brands.FirstOrDefault(c=>dbContext.Autos.FirstOrDefault(d => d.Id == request.IdAuto).IdBrand==c.id).Model), Client =  string.Join(',', dbContext.Persons.FirstOrDefault(c => dbContext.Clients.FirstOrDefault(d => d.Id == request.IdClient).IdPerson == c.Id).SurnameNP), Enroller = string.Join(',', dbContext.Persons.FirstOrDefault(c => dbContext.Enrollers.FirstOrDefault(d => d.Id == request.IdEnroller).IdPerson == c.Id).SurnameNP), 
+                    Request = request, Daterequest = request.Daterequest, DateEnd = request.DateEnd,
+                    Auto = request.Auto, Client = request.Client, Enroller = request.Enroller,
+                    PriceBreak = request.PriceBreak, StatusReady = request.StatusReady, Breaks = request.Breaks
             }
             );
-
-            Auto auto = dbContext.Autos.FirstOrDefault(p => p.Id == request.IdAuto);
+         
+            Auto auto = dbContext.Autos.Include(p=>p.Break).FirstOrDefault(p => p.Id == request.Auto.Id);
             dbContext.Autos.Remove(auto);
             dbContext.Requests.Remove(request);
-            dbContext.Breaks.UpdateRange(dbContext.Breaks);
+            dbContext.Break.UpdateRange(dbContext.Break);
             dbContext.SaveChanges();
 
         }
-
+         
         [HttpGet("Archive")]
         public List<RequestForFixArchive> Get2()
         {
             return dbContext.RequestForFixArchives.ToList();
 
         }
+    
     }
 }
