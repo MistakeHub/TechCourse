@@ -122,21 +122,13 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("PersonId")
+                    b.Property<int>("PersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("PersonId");
 
@@ -183,6 +175,12 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateBirth")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Passport")
                         .HasColumnType("nvarchar(max)");
 
@@ -190,6 +188,8 @@ namespace BackEnd.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Persons");
                 });
@@ -338,15 +338,11 @@ namespace BackEnd.Migrations
 
             modelBuilder.Entity("BackEnd.Models.Client", b =>
                 {
-                    b.HasOne("BackEnd.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.HasOne("BackEnd.Models.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("PersonId");
-
-                    b.Navigation("Address");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Person");
                 });
@@ -370,6 +366,17 @@ namespace BackEnd.Migrations
                     b.Navigation("Specialty");
 
                     b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("BackEnd.Models.Person", b =>
+                {
+                    b.HasOne("BackEnd.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("BackEnd.Models.RequestForFix", b =>

@@ -31,8 +31,8 @@ namespace BackEnd.Controllers
         public List<ClientViewModel> Get(string regnumber )
         {
             int idClient = dbcontext.Autos.Include(p=>p.Person).FirstOrDefault(p => p.RegNumer == regnumber).Person.Id;
-            Client client= dbcontext.Clients.Include(p => p.Person).Include(p=>p.Address).FirstOrDefault(p => p.Person.Id == idClient );
-            List<ClientViewModel> viewModel = dbcontext.Persons.Where(d=>d.Id==idClient).Select(p => new ClientViewModel() { id = p.Id, SurnamePerson = p.SurnameNP}).ToList();
+            
+            List<ClientViewModel> viewModel = dbcontext.Persons.Include(p=>p.Address).Where(d=>d.Id==idClient).Select(p => new ClientViewModel() { id = p.Id, SurnamePerson = p.SurnameNP,TitleAddress =p.Address.Street+", "+ p.Address.Home + ", " + p.Address.Apartament + ", " }).ToList();
             return viewModel;
         }
 

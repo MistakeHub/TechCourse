@@ -20,7 +20,12 @@ namespace BackEnd.Models.Inizialization
                 new Address(){  Apartament = 453,Home = "дом 112d", Street = "ул.Берзарина"},
                 new Address(){  Apartament = 35,Home = "дом 78c", Street = "ул.Дамба"},
                 new Address(){  Apartament = 792,Home = "дом 16b", Street = "ул.Люботинский"}, 
-                new Address(){  Apartament = 760,Home = "дом 53n", Street = "ул.Попова,"},
+                new Address(){  Apartament = 333,Home = "дом 25a", Street = "ул.Попова,"},
+                new Address(){  Apartament = 924,Home = "дом 36d", Street = "ул.Детрова,"},
+                new Address(){  Apartament = 543,Home = "дом 98o", Street = "ул.Пушкина,"},
+                new Address(){  Apartament =313,Home = "дом 55v", Street = "ул.Ильича,"},
+                new Address(){  Apartament = 765,Home = "дом 11s", Street = "ул.Артёма,"},
+
 
 
             };
@@ -59,20 +64,23 @@ namespace BackEnd.Models.Inizialization
             
             List<Person> persons=new List<Person>()
             {
-                 new Person(){SurnameNP ="Котова Евдокия Данилевна",Passport = "FQ94951"},
-                 new Person(){SurnameNP ="Ильясова Ирина Данииловна",Passport = "RF32816"},
-                 new Person(){SurnameNP ="Церетели Лаврентий Михаилович",Passport = "QX32591"},
-                 new Person(){SurnameNP ="Углицкий Вацлав Прохорович",Passport = "Z392956"},
-                 new Person(){SurnameNP ="Стеблева Агафья Юлиевна",Passport = "9038745"},
-                 new Person(){SurnameNP ="Гершельман Семён Святославович",Passport = "8J71375"},
-                 new Person(){SurnameNP ="Венедиктов Артём Леонидович",Passport = "1432827"},
-                 new Person(){SurnameNP ="Клюкин Кирилл Глебович",Passport = "RJ24476"},
-                 new Person(){SurnameNP ="Бугакова Людмила Никитевна",Passport = "B179351"},
-                 new Person(){SurnameNP ="Шандаров Вячеслав Агапович",Passport = "8153437"},
+                 new Person(){SurnameNP ="Котова Евдокия Данилевна",Passport = "FQ94951",Address = addresses.FirstOrDefault(p => p.Apartament == 333), DateBirth =  new DateTime(1990, 5,31)},
+                 new Person(){SurnameNP ="Ильясова Ирина Данииловна",Passport = "RF32816",Address = addresses.FirstOrDefault(p => p.Apartament == 924),DateBirth =  new DateTime(1988, 3,31)},
+                 new Person(){SurnameNP ="Церетели Лаврентий Михаилович",Passport = "QX32591",Address = addresses.FirstOrDefault(p => p.Apartament == 543),DateBirth = new DateTime(1970, 12,31) },
+                 new Person(){SurnameNP ="Углицкий Вацлав Прохорович",Passport = "Z392956",Address = addresses.FirstOrDefault(p => p.Apartament == 313),DateBirth = new DateTime(1960, 12,31) },
+                 new Person(){SurnameNP ="Стеблева Агафья Юлиевна",Passport = "9038745"   ,    Address = addresses.FirstOrDefault(p => p.Apartament == 765),DateBirth =  new DateTime(1966, 12,31)},
+                 new Person(){SurnameNP ="Гершельман Семён Святославович",Passport = "8J71375",       Address = addresses.FirstOrDefault(p => p.Apartament == 116),DateBirth = new DateTime(1955, 12,31) },
+                 new Person(){SurnameNP ="Венедиктов Артём Леонидович",Passport = "1432827",  Address = addresses.FirstOrDefault(p => p.Apartament == 646),DateBirth = new DateTime(1978, 12,31) },
+                 new Person(){SurnameNP ="Клюкин Кирилл Глебович",Passport = "RJ24476", Address = addresses.FirstOrDefault(p => p.Apartament == 792),DateBirth =  new DateTime(1993, 12,31)},
+                 new Person(){SurnameNP ="Бугакова Людмила Никитевна",Passport = "B179351",    Address = addresses.FirstOrDefault(p => p.Apartament == 35),DateBirth =  new DateTime(1967, 12,31)},
+                 new Person(){SurnameNP ="Шандаров Вячеслав Агапович",Passport = "8153437",    Address = addresses.FirstOrDefault(p => p.Apartament == 453),DateBirth =  new DateTime(1989, 12,31)},
 
 
 
             };
+
+    
+     
 
             context.Persons.RemoveRange(context.Persons);
             context.Persons.AddRange(persons);
@@ -135,11 +143,11 @@ namespace BackEnd.Models.Inizialization
             List<Client> clients=new List<Client>()
             {
 
-                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==453), Person = persons.FirstOrDefault(p=>p.Passport=="FQ94951"), PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==35), Person =persons.FirstOrDefault(p=>p.Passport=="RJ24476"), PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==792), Person = persons.FirstOrDefault(p=>p.Passport=="8J71375"), PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==760), Person = persons.FirstOrDefault(p=>p.Passport=="Z392956"), PhoneNumber = "341231"},
-                new Client(){ DateBirth = new DateTime(1990, 12,31), Address = addresses.FirstOrDefault(p=>p.Apartament==116), Person = persons.FirstOrDefault(p=>p.Passport=="QX32591"), PhoneNumber = "341231"},
+                new Client(){  Person = persons.FirstOrDefault(p=>p.Passport=="FQ94951"), PhoneNumber = "341231"},
+                new Client(){   Person = persons.FirstOrDefault(p=>p.Passport=="RJ24476"),   PhoneNumber = "341231"},
+                new Client(){  Person = persons.FirstOrDefault(p=>p.Passport=="8J71375"), PhoneNumber = "341231"},
+                new Client(){  Person = persons.FirstOrDefault(p=>p.Passport=="Z392956"), PhoneNumber = "341231"},
+                new Client(){  Person = persons.FirstOrDefault(p=>p.Passport=="QX32591"), PhoneNumber = "341231"},
 
             }; 
             context.Clients.RemoveRange(context.Clients);

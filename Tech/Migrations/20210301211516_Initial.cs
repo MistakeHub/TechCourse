@@ -52,20 +52,6 @@ namespace BackEnd.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Persons",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SurnameNP = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Passport = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Specialties",
                 columns: table => new
                 {
@@ -89,6 +75,28 @@ namespace BackEnd.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Statuses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Persons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SurnameNP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Passport = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    DateBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Persons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Persons_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,26 +141,18 @@ namespace BackEnd.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PersonId = table.Column<int>(type: "int", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: true),
-                    DateBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PersonId = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Clients_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Clients_Persons_PersonId",
                         column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -289,11 +289,6 @@ namespace BackEnd.Migrations
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clients_AddressId",
-                table: "Clients",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Clients_PersonId",
                 table: "Clients",
                 column: "PersonId");
@@ -312,6 +307,11 @@ namespace BackEnd.Migrations
                 name: "IX_Enrollers_StatusId",
                 table: "Enrollers",
                 column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persons_AddressId",
+                table: "Persons",
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RequestForFixArchives_AutoId",
@@ -373,9 +373,6 @@ namespace BackEnd.Migrations
                 name: "Break");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
                 name: "Persons");
 
             migrationBuilder.DropTable(
@@ -383,6 +380,9 @@ namespace BackEnd.Migrations
 
             migrationBuilder.DropTable(
                 name: "Statuses");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }

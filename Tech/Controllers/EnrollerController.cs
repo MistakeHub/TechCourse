@@ -66,9 +66,9 @@ namespace BackEnd.Controllers
         // POST api/<EnrollerController>
         [HttpPost]
 
-        public void Post([FromForm] string surnameNP, [FromForm] string passport, [FromForm] string Speciality, [FromForm] string level, [FromForm] string periodWork)
+        public void Post([FromForm] string surnameNP, [FromForm] string passport, [FromForm] string Speciality, [FromForm] string level, [FromForm] string periodWork, [FromForm] string street, [FromForm] int apartament, [FromForm] string home, [FromForm] DateTime date)
         {
-            dbcontext.Persons.Add(new Person() { SurnameNP = surnameNP, Passport = passport });
+            dbcontext.Persons.Add(new Person() { SurnameNP = surnameNP, Passport = passport , Address = new Address() { Apartament = apartament, Home = home, Street = street}, DateBirth = date});
             dbcontext.SaveChanges();
           
           

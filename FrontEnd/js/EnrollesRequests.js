@@ -25,13 +25,17 @@ function AddWorker() {
     var surnamenp = document.getElementById("surnameNP").value;
     var passport = document.getElementById("passport").value;
     var specialty = $('#specialty option:selected').val();
-    let discharge = $('#discharge option:selected').val();
+    var discharge = $('#discharge option:selected').val();
+    var apartament=document.getElementById("apartment").value;
+    var home=document.getElementById("home").value;
+    var street=document.getElementById("street").value;
+    var date=document.getElementById("date").value;
 
     var experience = document.getElementById("experience").value;
     $.ajax({
         url: "https://localhost:44354/api/Enroller",
         type: 'POST',
-        data: {surnameNP:surnamenp, passport:passport, speciality:specialty, level:discharge, periodWork:experience},
+        data: {surnameNP:surnamenp, passport:passport, speciality:specialty, level:discharge, periodWork:experience, apartament:apartament, street:street, home:home,date:date},
         success: (response) => alert("Работник добавлен"),
     })
 }

@@ -32,7 +32,7 @@ namespace BackEnd.Controllers
         [HttpGet]
         public List<ClientViewModel> Get()
         {
-            List<ClientViewModel> viewModel = dbcontext.Clients.Include(p=>p.Person).Select(p => new ClientViewModel() { id = p.Id, PhoneNumber = p.PhoneNumber, Date = p.DateBirth, SurnamePerson =p.Person.SurnameNP, TitleAddress = p.Address.Street + ", " + p.Address.Home + "," + p.Address.Apartament }).ToList();
+            List<ClientViewModel> viewModel = dbcontext.Clients.Include(p=>p.Person).Select(p => new ClientViewModel() { id = p.Id, PhoneNumber = p.PhoneNumber, Date = p.Person.DateBirth, SurnamePerson =p.Person.SurnameNP, TitleAddress = p.Person.Address.Street + ", " + p.Person.Address.Home + "," + p.Person.Address.Apartament }).ToList();
             return viewModel;
         }
 
@@ -57,13 +57,14 @@ namespace BackEnd.Controllers
 
         // POST api/<ClientController>
         [HttpPost]
-        public void Post([FromForm] string surnameNp, [FromForm] string passport, [FromForm] string street, [FromForm] string home, [FromForm] int apartametn, [FromForm] int year, [FromForm] int mounth, [FromForm] int day, [FromForm] string phonenumber)
+        public void Post([FromForm] string surnameNp, [FromForm] string passport, [FromForm] string street, [FromForm] string home, [FromForm] int apartametn, [FromForm] int year, [FromForm] int mounth, [FromForm] int day, [FromForm] string phonenumber, [FromForm] DateTime date)
         {
-         
-            dbcontext.Persons.Add(new Person() { SurnameNP = surnameNp, Passport = passport });
+        
+            dbcontext.Persons.Add(new Person() { SurnameNP = surnameNp, Passport = passport, Address = new Address() { Apartament = apartametn, Home = home, Street = street }, DateBirth = new DateTime(year, mounth, day) });
             dbcontext.Addresses.Add(new Address() { Apartament = apartametn, Home = home, Street = street });
             dbcontext.SaveChanges();
-            Client newClient = new Client() { Person = dbcontext.Persons.FirstOrDefault(p => p.Passport == passport), Address = dbcontext.Addresses.FirstOrDefault(p => p.Street == street && p.Apartament == apartametn && p.Home == home), DateBirth = new DateTime(year, mounth, day), PhoneNumber = phonenumber };
+            Client newClient = new Client() { Person = dbcontext.Persons.FirstOrDefault(p => p.Passport == passport),    PhoneNumber = phonenumber };
+            
             dbcontext.Clients.Add(newClient);
             dbcontext.SaveChanges();
         }
@@ -72,20 +73,20 @@ namespace BackEnd.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromForm] string surname, [FromForm] string phonenumber, [FromForm] DateTime dateofbirth, [FromForm] string address)
         {
-            Client changeClient = dbcontext.Clients.Include(p=>p.Person).Include(p=>p.Address).FirstOrDefault(p => p.Id == id);
+            Client changeClient = dbcontext.Clients.Include(p=>p.Person).ThenInclude(p=>p.Address).FirstOrDefault(p => p.Id == id);
             int idPerson = dbcontext.Persons.FirstOrDefault(p => p.Id == changeClient.Person.Id).Id;
             var a = address.Split(',').ToArray();
             Person changeperson = dbcontext.Persons.FirstOrDefault(p => p.Id == idPerson);
             changeperson.SurnameNP = surname;
             dbcontext.Persons.Update(changeperson);
-            int idAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == changeClient.Address.Id).Id;
+            int idAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == changeClient.Person.Address.Id).Id;
 
             Address changeAddress = dbcontext.Addresses.FirstOrDefault(p => p.Id == idAddress);
 
             changeAddress.Street = a[0];
             changeAddress.Home = a[1];
             changeAddress.Apartament = int.Parse(a[2]);
-            changeClient.DateBirth = dateofbirth;
+            changeClient.Person.DateBirth = dateofbirth;
             dbcontext.Addresses.Update(changeAddress);
             changeClient.PhoneNumber = phonenumber;
             dbcontext.Clients.Update(changeClient);
